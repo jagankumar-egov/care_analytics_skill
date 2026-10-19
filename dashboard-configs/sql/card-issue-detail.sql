@@ -9,7 +9,6 @@
 --               specific to this product AND this location)
 --   catalogue - care_dvdms_dvdmsproductmapping for the product knowledge, used
 --               when there is no DVDMS receipt behind the stock
--- "Drug Source" reports which one answered, or 'unmapped' if neither.
 WITH
   w AS (
     SELECT
@@ -37,12 +36,7 @@ SELECT
     rcpt.expiry_date
   )                                            AS "Expiry",
   COALESCE(rcpt.drug_id, map.drug_id)          AS "Drug ID",
-  COALESCE(rcpt.brand_id, map.brand_id)        AS "Drug Brand ID",
-  CASE
-    WHEN rcpt.drug_id IS NOT NULL THEN 'receipt'
-    WHEN map.drug_id IS NOT NULL THEN 'catalogue'
-    ELSE 'unmapped'
-  END                                          AS "Drug Source"
+  COALESCE(rcpt.brand_id, map.brand_id)        AS "Drug Brand ID"
 FROM
   w
   CROSS JOIN emr_medicationdispense md
