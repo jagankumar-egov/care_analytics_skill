@@ -8,17 +8,17 @@ WITH
       END AS d
   )
 SELECT
-  loc.name AS "STORE_NAME",
-  dvdms.eaushadhi_issue_no AS "HSTNUM_ISSUE_NO",
-  dvdms.drug_id AS "HSTNUM_ITEM_ID",
-  dvdms.brand_id AS "HSTNUM_ITEMBRAND_ID",
-  COALESCE(dvdms.batch, p2.batch ->> 'lot_number') AS "HSTSTR_BATCH_SL_NO",
-  md.quantity AS "HSTNUM_ISSUE_QTY",
+  loc.name AS store_name,
+  dvdms.eaushadhi_issue_no AS hstnum_issue_no,
+  dvdms.drug_id AS hstnum_item_id,
+  dvdms.brand_id AS hstnum_itembrand_id,
+  COALESCE(dvdms.batch, p2.batch ->> 'lot_number') AS hststr_batch_sl_no,
+  md.quantity AS hstnum_issue_qty,
   COALESCE(
     dvdms.expiry_date,
     (p2.expiration_date AT TIME ZONE 'Asia/Kolkata')::date
-  ) AS "HSTDT_EXPIRY_DATE",
-  pat.external_id AS "HRGNUM_PUK"
+  ) AS hstdt_expiry_date,
+  pat.external_id AS hrgnum_puk
 FROM
   p,
   emr_medicationdispense md

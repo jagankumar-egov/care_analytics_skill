@@ -23,21 +23,21 @@ WITH
       END AS end_date
   )
 SELECT
-  (sd.created_date AT TIME ZONE 'Asia/Kolkata')::date AS "Transfer Date",
-  orig.external_id                             AS "From Store ID",
-  COALESCE(orig.name, sup.name)                AS "From Store",
-  dest.external_id                             AS "To Store ID",
-  dest.name                                    AS "To Store",
-  pk.name                                      AS "Product",
-  COALESCE(d.name, map.drug_name)              AS "Drug Name",
-  sd.supplied_item_quantity                    AS "Quantity",
-  COALESCE(prod.batch ->> 'lot_number', iir.batch) AS "Batch No",
+  (sd.created_date AT TIME ZONE 'Asia/Kolkata')::date AS transfer_date,
+  orig.external_id                             AS from_store_id,
+  COALESCE(orig.name, sup.name)                AS from_store,
+  dest.external_id                             AS to_store_id,
+  dest.name                                    AS to_store,
+  pk.name                                      AS product,
+  COALESCE(d.name, map.drug_name)              AS drug_name,
+  sd.supplied_item_quantity                    AS quantity,
+  COALESCE(prod.batch ->> 'lot_number', iir.batch) AS batch_no,
   COALESCE(
     (prod.expiration_date AT TIME ZONE 'Asia/Kolkata')::date,
     iir.expiry_date
-  )                                            AS "Expiry",
-  COALESCE(d.drug_id, map.drug_id)             AS "Drug ID",
-  COALESCE(d.brand_id, map.brand_id)           AS "Drug Brand ID"
+  )                                            AS expiry,
+  COALESCE(d.drug_id, map.drug_id)             AS drug_id,
+  COALESCE(d.brand_id, map.brand_id)           AS drug_brand_id
 FROM
   w
   CROSS JOIN facility_facility f

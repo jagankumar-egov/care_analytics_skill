@@ -19,476 +19,7 @@
         "collection_position": null,
         "source_card_id": null,
         "table_id": null,
-        "result_metadata": [
-          {
-            "database_type": "uuid",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Facility ID",
-            "lib/original-name": "Facility ID",
-            "name": "Facility ID",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Facility ID",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Facility ID",
-              {
-                "base-type": "type/UUID"
-              }
-            ],
-            "effective_type": "type/UUID",
-            "lib/desired-column-alias": "Facility ID",
-            "display_name": "Facility ID",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 8,
-                "nil%": 0
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0,
-                  "average-length": 36,
-                  "mode-fraction": 0.125,
-                  "top-3-fraction": 0.375
-                }
-              }
-            },
-            "base_type": "type/UUID"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Facility Name",
-            "lib/original-name": "Facility Name",
-            "name": "Facility Name",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Facility Name",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Facility Name",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Facility Name",
-            "display_name": "Facility Name",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 8,
-                "nil%": 0
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0,
-                  "average-length": 26.75,
-                  "mode-fraction": 0.125,
-                  "top-3-fraction": 0.375
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Geo Organization",
-            "lib/original-name": "Geo Organization",
-            "name": "Geo Organization",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Geo Organization",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Geo Organization",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Geo Organization",
-            "display_name": "Geo Organization",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 5,
-                "nil%": 0
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0,
-                  "average-length": 10.75,
-                  "mode-fraction": 0.375,
-                  "top-3-fraction": 0.75
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Institute ID",
-            "lib/original-name": "Institute ID",
-            "name": "Institute ID",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Institute ID",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Institute ID",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Institute ID",
-            "display_name": "Institute ID",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 2,
-                "nil%": 0.875
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0.875,
-                  "average-length": 0.375,
-                  "mode-fraction": 0.875,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Institute Name",
-            "lib/original-name": "Institute Name",
-            "name": "Institute Name",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Institute Name",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Institute Name",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Institute Name",
-            "display_name": "Institute Name",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 2,
-                "nil%": 0.875
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0.875,
-                  "average-length": 1.25,
-                  "mode-fraction": 0.875,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Store ID",
-            "lib/original-name": "Store ID",
-            "name": "Store ID",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Store ID",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Store ID",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Store ID",
-            "display_name": "Store ID",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 2,
-                "nil%": 0.875
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0.875,
-                  "average-length": 1,
-                  "mode-fraction": 0.875,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Store Name",
-            "lib/original-name": "Store Name",
-            "name": "Store Name",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Store Name",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Store Name",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Store Name",
-            "display_name": "Store Name",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 2,
-                "nil%": 0.875
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0.875,
-                  "average-length": 1.25,
-                  "mode-fraction": 0.875,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Store Location",
-            "lib/original-name": "Store Location",
-            "name": "Store Location",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Store Location",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Store Location",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Store Location",
-            "display_name": "Store Location",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 2,
-                "nil%": 0.875
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0.875,
-                  "average-length": 1.25,
-                  "mode-fraction": 0.875,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Supplier ID",
-            "lib/original-name": "Supplier ID",
-            "name": "Supplier ID",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Supplier ID",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Supplier ID",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Supplier ID",
-            "display_name": "Supplier ID",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 2,
-                "nil%": 0.875
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0.875,
-                  "average-length": 1,
-                  "mode-fraction": 0.875,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Supplier Name",
-            "lib/original-name": "Supplier Name",
-            "name": "Supplier Name",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Supplier Name",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Supplier Name",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Supplier Name",
-            "display_name": "Supplier Name",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 2,
-                "nil%": 0.875
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0.875,
-                  "average-length": 1.375,
-                  "mode-fraction": 0.875,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Supplier Organization",
-            "lib/original-name": "Supplier Organization",
-            "name": "Supplier Organization",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Supplier Organization",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Supplier Organization",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Supplier Organization",
-            "display_name": "Supplier Organization",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 2,
-                "nil%": 0.875
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0.875,
-                  "average-length": 1,
-                  "mode-fraction": 0.875,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "text",
-            "semantic_type": null,
-            "lib/deduplicated-name": "DVDMS Status",
-            "lib/original-name": "DVDMS Status",
-            "name": "DVDMS Status",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "DVDMS Status",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "DVDMS Status",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "DVDMS Status",
-            "display_name": "DVDMS Status",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 2,
-                "nil%": 0
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0,
-                  "average-length": 12.625,
-                  "mode-fraction": 0.875,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Text"
-          }
-        ],
+        "result_metadata": [],
         "embedding_type": null,
         "initially_published_at": null,
         "can_write": true,
@@ -514,7 +45,7 @@
         "dataset_query": {
           "stages": [
             {
-              "native": "SELECT\n  f.external_id                 AS \"Facility ID\",\n  f.name                        AS \"Facility Name\",\n  geo.name                      AS \"Geo Organization\",\n  inst.eaushadhi_institute_id   AS \"Institute ID\",\n  inst.eaushadhi_institute_name AS \"Institute Name\",\n  st.eaushadhi_store_id         AS \"Store ID\",\n  st.eaushadhi_store_name       AS \"Store Name\",\n  stloc.name                    AS \"Store Location\",\n  sp.eaushadhi_warehouse_id     AS \"Supplier ID\",\n  sp.eaushadhi_warehouse_name   AS \"Supplier Name\",\n  sporg.name                    AS \"Supplier Organization\",\n  CASE\n    WHEN inst.id IS NULL THEN 'Not onboarded'\n    WHEN st.id IS NULL\n      OR sp.id IS NULL THEN 'Incomplete mapping'\n    ELSE 'Configured'\n  END                           AS \"DVDMS Status\"\nFROM\n  facility_facility f\n  LEFT JOIN emr_organization geo ON geo.id = f.geo_organization_id\n  AND geo.deleted = FALSE\n  LEFT JOIN care_dvdms_dvdmsinstitute inst ON inst.facility_id = f.id\n  AND inst.deleted = FALSE\n  -- One store / one supplier per institute is enforced in the UI, not in the\n  -- database (the only DB constraint is one *default* per institute). LATERAL\n  -- + LIMIT 1 keeps this one row per facility even if that invariant slips.\n  LEFT JOIN LATERAL (\n    SELECT\n      s2.id,\n      s2.eaushadhi_store_id,\n      s2.eaushadhi_store_name,\n      s2.location_id\n    FROM\n      care_dvdms_dvdmsstore s2\n    WHERE\n      s2.institute_id = inst.id\n      AND s2.deleted = FALSE\n    ORDER BY\n      s2.is_default DESC,\n      s2.id\n    LIMIT\n      1\n  ) st ON TRUE\n  LEFT JOIN emr_facilitylocation stloc ON stloc.id = st.location_id\n  AND stloc.deleted = FALSE\n  LEFT JOIN LATERAL (\n    SELECT\n      p2.id,\n      p2.eaushadhi_warehouse_id,\n      p2.eaushadhi_warehouse_name,\n      p2.supplier_id\n    FROM\n      care_dvdms_dvdmssupplier p2\n    WHERE\n      p2.institute_id = inst.id\n      AND p2.deleted = FALSE\n    ORDER BY\n      p2.is_default DESC,\n      p2.id\n    LIMIT\n      1\n  ) sp ON TRUE\n  LEFT JOIN emr_organization sporg ON sporg.id = sp.supplier_id\n  AND sporg.deleted = FALSE\nWHERE\n  f.deleted = FALSE\n  AND f.is_active = TRUE\n  -- Inherited from the original card. Drop this line to also list facilities\n  -- that are not flagged public (is_public defaults to FALSE).\n  AND f.is_public = TRUE\n  [[AND f.external_id = {{facility_id}}::UUID]]\nORDER BY\n  f.name;\n",
+              "native": "SELECT\n  f.external_id                 AS facility_id,\n  f.name                        AS facility_name,\n  geo.name                      AS geo_organization,\n  inst.eaushadhi_institute_id   AS institute_id,\n  inst.eaushadhi_institute_name AS institute_name,\n  st.eaushadhi_store_id         AS store_id,\n  st.eaushadhi_store_name       AS store_name,\n  stloc.name                    AS store_location,\n  sp.eaushadhi_warehouse_id     AS supplier_id,\n  sp.eaushadhi_warehouse_name   AS supplier_name,\n  sporg.name                    AS supplier_organization,\n  CASE\n    WHEN inst.id IS NULL THEN 'Not onboarded'\n    WHEN st.id IS NULL\n      OR sp.id IS NULL THEN 'Incomplete mapping'\n    ELSE 'Configured'\n  END                           AS dvdms_status\nFROM\n  facility_facility f\n  LEFT JOIN emr_organization geo ON geo.id = f.geo_organization_id\n  AND geo.deleted = FALSE\n  LEFT JOIN care_dvdms_dvdmsinstitute inst ON inst.facility_id = f.id\n  AND inst.deleted = FALSE\n  -- One store / one supplier per institute is enforced in the UI, not in the\n  -- database (the only DB constraint is one *default* per institute). LATERAL\n  -- + LIMIT 1 keeps this one row per facility even if that invariant slips.\n  LEFT JOIN LATERAL (\n    SELECT\n      s2.id,\n      s2.eaushadhi_store_id,\n      s2.eaushadhi_store_name,\n      s2.location_id\n    FROM\n      care_dvdms_dvdmsstore s2\n    WHERE\n      s2.institute_id = inst.id\n      AND s2.deleted = FALSE\n    ORDER BY\n      s2.is_default DESC,\n      s2.id\n    LIMIT\n      1\n  ) st ON TRUE\n  LEFT JOIN emr_facilitylocation stloc ON stloc.id = st.location_id\n  AND stloc.deleted = FALSE\n  LEFT JOIN LATERAL (\n    SELECT\n      p2.id,\n      p2.eaushadhi_warehouse_id,\n      p2.eaushadhi_warehouse_name,\n      p2.supplier_id\n    FROM\n      care_dvdms_dvdmssupplier p2\n    WHERE\n      p2.institute_id = inst.id\n      AND p2.deleted = FALSE\n    ORDER BY\n      p2.is_default DESC,\n      p2.id\n    LIMIT\n      1\n  ) sp ON TRUE\n  LEFT JOIN emr_organization sporg ON sporg.id = sp.supplier_id\n  AND sporg.deleted = FALSE\nWHERE\n  f.deleted = FALSE\n  AND f.is_active = TRUE\n  -- Inherited from the original card. Drop this line to also list facilities\n  -- that are not flagged public (is_public defaults to FALSE).\n  AND f.is_public = TRUE\n  [[AND f.external_id = {{facility_id}}::UUID]]\nORDER BY\n  f.name;\n",
               "lib/type": "mbql.stage/native",
               "template-tags": [
                 {
@@ -538,10 +69,10 @@
         "entity_id": "1eniS7sXKXaGM8l8zGLPB",
         "collection_preview": true,
         "visualization_settings": {
-          "table.pivot_column": "Geo Organization",
-          "table.cell_column": "Facility Name",
+          "table.pivot_column": "geo_organization",
+          "table.cell_column": "facility_name",
           "column_settings": {
-            "[\"name\",\"Facility ID\"]": {
+            "[\"name\",\"facility_id\"]": {
               "view_as": "auto"
             }
           }
@@ -587,15 +118,15 @@
       "entity_id": "sZ90sAWjd3jSR_3jo1Iwy",
       "visualization_settings": {
         "column_settings": {
-          "[\"name\",\"Facility ID\"]": {
+          "[\"name\",\"facility_id\"]": {
             "click_behavior": {
               "type": "crossfilter",
               "parameterMapping": {
                 "58c3c149": {
                   "source": {
                     "type": "column",
-                    "id": "Facility ID",
-                    "name": "Facility ID"
+                    "id": "facility_id",
+                    "name": "facility_id"
                   },
                   "target": {
                     "type": "parameter",
@@ -628,244 +159,7 @@
         "collection_position": null,
         "source_card_id": null,
         "table_id": null,
-        "result_metadata": [
-          {
-            "database_type": "uuid",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Location ID",
-            "lib/original-name": "Location ID",
-            "name": "Location ID",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Location ID",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Location ID",
-              {
-                "base-type": "type/UUID"
-              }
-            ],
-            "effective_type": "type/UUID",
-            "lib/desired-column-alias": "Location ID",
-            "display_name": "Location ID",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 3,
-                "nil%": 0
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0,
-                  "average-length": 36,
-                  "mode-fraction": 0.3333333333333333,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/UUID"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "DDC",
-            "lib/original-name": "DDC",
-            "name": "DDC",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "DDC",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "DDC",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "DDC",
-            "display_name": "DDC",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 3,
-                "nil%": 0
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0,
-                  "average-length": 12,
-                  "mode-fraction": 0.3333333333333333,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Location Status",
-            "lib/original-name": "Location Status",
-            "name": "Location Status",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Location Status",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Location Status",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Location Status",
-            "display_name": "Location Status",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 1,
-                "nil%": 0
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0,
-                  "average-length": 6,
-                  "mode-fraction": 1,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "date",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Last Dispense",
-            "lib/original-name": "Last Dispense",
-            "name": "Last Dispense",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Last Dispense",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Last Dispense",
-              {
-                "base-type": "type/Date"
-              }
-            ],
-            "effective_type": "type/Date",
-            "lib/desired-column-alias": "Last Dispense",
-            "display_name": "Last Dispense",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 2,
-                "nil%": 0
-              },
-              "type": {
-                "type/DateTime": {
-                  "earliest": "2026-10-06",
-                  "latest": "2026-10-09",
-                  "mode-fraction": 0.6666666666666666,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Date"
-          },
-          {
-            "database_type": "int4",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Days Since Last Dispense",
-            "lib/original-name": "Days Since Last Dispense",
-            "name": "Days Since Last Dispense",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Days Since Last Dispense",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Days Since Last Dispense",
-              {
-                "base-type": "type/Integer"
-              }
-            ],
-            "effective_type": "type/Integer",
-            "lib/desired-column-alias": "Days Since Last Dispense",
-            "display_name": "Days Since Last Dispense",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 2,
-                "nil%": 0
-              },
-              "type": {
-                "type/Number": {
-                  "skewness": 1.7320508075688774,
-                  "min": 0,
-                  "q1": 0,
-                  "q3": 3,
-                  "excess-kurtosis": null,
-                  "zero-fraction": 0.6666666666666667,
-                  "mode-fraction": 0.6666666666666666,
-                  "top-3-fraction": 1,
-                  "max": 3,
-                  "sd": 1.7320508075688772,
-                  "avg": 1
-                }
-              }
-            },
-            "base_type": "type/Integer"
-          },
-          {
-            "database_type": "int8",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Dispenses (7d)",
-            "lib/original-name": "Dispenses (7d)",
-            "name": "Dispenses (7d)",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Dispenses (7d)",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Dispenses (7d)",
-              {
-                "base-type": "type/BigInteger"
-              }
-            ],
-            "effective_type": "type/BigInteger",
-            "lib/desired-column-alias": "Dispenses (7d)",
-            "display_name": "Dispenses (7d)",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 2,
-                "nil%": 0
-              },
-              "type": {
-                "type/Number": {
-                  "skewness": -1.7320508075688772,
-                  "min": 1,
-                  "q1": 1,
-                  "q3": 3,
-                  "excess-kurtosis": null,
-                  "zero-fraction": 0,
-                  "mode-fraction": 0.6666666666666666,
-                  "top-3-fraction": 1,
-                  "max": 3,
-                  "sd": 1.1547005383792515,
-                  "avg": 2.3333333333333335
-                }
-              }
-            },
-            "base_type": "type/BigInteger"
-          }
-        ],
+        "result_metadata": [],
         "embedding_type": null,
         "initially_published_at": null,
         "can_write": true,
@@ -894,7 +188,7 @@
           "stages": [
             {
               "lib/type": "mbql.stage/native",
-              "native": "-- DDC Activity (7 days)\n-- One row per DDC (a facility location attached to a `pharmacy` healthcare\n-- service). \"Dispenses (7d)\" counts completed patient dispenses in the 7-day\n-- window ending on the dashboard's Date filter (inclusive, Asia/Kolkata);\n-- 0 means the DDC saw no dispensing activity in that window.\nWITH\n  w AS (\n    SELECT\n      CASE LOWER(TRIM({{issue_date}}))\n        WHEN 'today' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date\n        WHEN 'yesterday' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date - 1\n        ELSE {{issue_date}}::date\n      END AS end_date\n  )\nSELECT\n  loc.external_id                            AS \"Location ID\",\n  loc.name                                   AS \"DDC\",\n  loc.status                                 AS \"Location Status\",\n  t.last_dispense_date                       AS \"Last Dispense\",\n  (w.end_date - t.last_dispense_date)        AS \"Days Since Last Dispense\",\n  COALESCE(t.dispenses_7d, 0)                AS \"Dispenses (7d)\"\nFROM\n  w\n  CROSS JOIN facility_facility f\n  JOIN emr_facilitylocation loc ON loc.facility_id = f.id\n  AND loc.deleted = FALSE\n  LEFT JOIN LATERAL (\n    SELECT\n      MAX(\n        (\n          COALESCE(md.when_handed_over, md.when_prepared, md.created_date)\n          AT TIME ZONE 'Asia/Kolkata'\n        )::date\n      ) AS last_dispense_date,\n      COUNT(*) FILTER (\n        WHERE\n          (\n            COALESCE(md.when_handed_over, md.when_prepared, md.created_date)\n            AT TIME ZONE 'Asia/Kolkata'\n          )::date BETWEEN (w.end_date - 6) AND w.end_date\n      ) AS dispenses_7d\n    FROM\n      emr_medicationdispense md\n    WHERE\n      md.location_id = loc.id\n      AND md.deleted = FALSE\n      AND md.status = 'completed'\n      AND (\n        COALESCE(md.when_handed_over, md.when_prepared, md.created_date)\n        AT TIME ZONE 'Asia/Kolkata'\n      )::date <= w.end_date\n  ) t ON TRUE\nWHERE\n  f.deleted = FALSE\n  AND f.external_id = {{facility_id}}::UUID\n  AND EXISTS (\n    SELECT\n      1\n    FROM\n      emr_healthcareservice hs\n    WHERE\n      loc.id = ANY (hs.locations)\n      AND hs.deleted = FALSE\n      AND hs.internal_type = 'pharmacy'\n  )\nORDER BY\n  COALESCE(t.dispenses_7d, 0) DESC,\n  loc.name;\n",
+              "native": "-- DDC Activity (7 days)\n-- One row per DDC (a facility location attached to a `pharmacy` healthcare\n-- service). \"Dispenses (7d)\" counts completed patient dispenses in the 7-day\n-- window ending on the dashboard's Date filter (inclusive, Asia/Kolkata);\n-- 0 means the DDC saw no dispensing activity in that window.\nWITH\n  w AS (\n    SELECT\n      CASE LOWER(TRIM({{issue_date}}))\n        WHEN 'today' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date\n        WHEN 'yesterday' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date - 1\n        ELSE {{issue_date}}::date\n      END AS end_date\n  )\nSELECT\n  loc.external_id                            AS location_id,\n  loc.name                                   AS ddc,\n  loc.status                                 AS location_status,\n  t.last_dispense_date                       AS last_dispense,\n  (w.end_date - t.last_dispense_date)        AS days_since_last_dispense,\n  COALESCE(t.dispenses_7d, 0)                AS dispenses_7d\nFROM\n  w\n  CROSS JOIN facility_facility f\n  JOIN emr_facilitylocation loc ON loc.facility_id = f.id\n  AND loc.deleted = FALSE\n  LEFT JOIN LATERAL (\n    SELECT\n      MAX(\n        (\n          COALESCE(md.when_handed_over, md.when_prepared, md.created_date)\n          AT TIME ZONE 'Asia/Kolkata'\n        )::date\n      ) AS last_dispense_date,\n      COUNT(*) FILTER (\n        WHERE\n          (\n            COALESCE(md.when_handed_over, md.when_prepared, md.created_date)\n            AT TIME ZONE 'Asia/Kolkata'\n          )::date BETWEEN (w.end_date - 6) AND w.end_date\n      ) AS dispenses_7d\n    FROM\n      emr_medicationdispense md\n    WHERE\n      md.location_id = loc.id\n      AND md.deleted = FALSE\n      AND md.status = 'completed'\n      AND (\n        COALESCE(md.when_handed_over, md.when_prepared, md.created_date)\n        AT TIME ZONE 'Asia/Kolkata'\n      )::date <= w.end_date\n  ) t ON TRUE\nWHERE\n  f.deleted = FALSE\n  AND f.external_id = {{facility_id}}::UUID\n  AND EXISTS (\n    SELECT\n      1\n    FROM\n      emr_healthcareservice hs\n    WHERE\n      loc.id = ANY (hs.locations)\n      AND hs.deleted = FALSE\n      AND hs.internal_type = 'pharmacy'\n  )\nORDER BY\n  COALESCE(t.dispenses_7d, 0) DESC,\n  loc.name;\n",
               "template-tags": [
                 {
                   "id": "783bb8b4-f272-47fc-ad75-860bf6e19a41",
@@ -921,8 +215,8 @@
         "entity_id": "C_6DODWq-7zwSyFpHlZkH",
         "collection_preview": true,
         "visualization_settings": {
-          "table.pivot_column": "Location Status",
-          "table.cell_column": "Days Since Last Dispense"
+          "table.pivot_column": "location_status",
+          "table.cell_column": "days_since_last_dispense"
         },
         "metabase_version": "v0.63.16.8 (f4eec95)",
         "parameters": [
@@ -990,15 +284,15 @@
       "entity_id": "fGBIDpIthFJSF2YCEmzAq",
       "visualization_settings": {
         "column_settings": {
-          "[\"name\",\"Location ID\"]": {
+          "[\"name\",\"location_id\"]": {
             "click_behavior": {
               "type": "crossfilter",
               "parameterMapping": {
                 "ead633ad": {
                   "source": {
                     "type": "column",
-                    "id": "Location ID",
-                    "name": "Location ID"
+                    "id": "location_id",
+                    "name": "location_id"
                   },
                   "target": {
                     "type": "parameter",
@@ -1031,7 +325,7 @@
         "collection_position": null,
         "source_card_id": null,
         "table_id": null,
-        "result_metadata": null,
+        "result_metadata": [],
         "embedding_type": null,
         "initially_published_at": null,
         "can_write": true,
@@ -1060,7 +354,7 @@
           "stages": [
             {
               "lib/type": "mbql.stage/native",
-              "native": "-- Issues to Patient (per location)\n-- One row per issue. An \"issue\" is a DispenseOrder: a dispensing event for one\n-- patient at one location, grouping N MedicationDispense line items.\n-- Filters: Issue Date (single day, Asia/Kolkata), Facility ID, Location ID.\n-- Location ID is optional - leave it blank for all DDCs in the facility.\nWITH\n  w AS (\n    SELECT\n      CASE LOWER(TRIM({{issue_date}}))\n        WHEN 'today' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date\n        WHEN 'yesterday' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date - 1\n        ELSE {{issue_date}}::date\n      END AS end_date\n  ),\n  dispensed AS (\n    SELECT\n      -- DispenseOrder is nullable on a dispense. Orderless dispenses get their\n      -- own negative key so each stands alone instead of collapsing together.\n      COALESCE(dord.id, -md.id)                 AS issue_key,\n      COALESCE(dord.external_id, md.external_id) AS issue_id,\n      loc.external_id                           AS location_uuid,\n      loc.name                                  AS location_name,\n      pat.external_id                           AS patient_uuid,\n      (\n        COALESCE(md.when_handed_over, md.when_prepared, md.created_date)\n        AT TIME ZONE 'Asia/Kolkata'\n      )::date                                   AS issued_on,\n      md.quantity                               AS quantity\n    FROM\n      w\n      CROSS JOIN emr_medicationdispense md\n      JOIN emr_facilitylocation loc ON loc.id = md.location_id\n      AND loc.deleted = FALSE\n      JOIN facility_facility f ON f.id = loc.facility_id\n      AND f.deleted = FALSE\n      JOIN emr_patient pat ON pat.id = md.patient_id\n      AND pat.deleted = FALSE\n      LEFT JOIN emr_dispenseorder dord ON dord.id = md.order_id\n      AND dord.deleted = FALSE\n    WHERE\n      md.deleted = FALSE\n      AND md.status = 'completed'\n      AND f.external_id = {{facility_id}}::UUID\n      AND (\n        COALESCE(md.when_handed_over, md.when_prepared, md.created_date)\n        AT TIME ZONE 'Asia/Kolkata'\n      )::date = w.end_date\n      AND EXISTS (\n        SELECT\n          1\n        FROM\n          emr_healthcareservice hs\n        WHERE\n          loc.id = ANY (hs.locations)\n          AND hs.deleted = FALSE\n          AND hs.internal_type = 'pharmacy'\n      )\n      [[AND loc.external_id = {{location_id}}::UUID]]\n  )\nSELECT\n  issue_id        AS \"Issue ID\",\n  issued_on       AS \"Issue Date\",\n  location_uuid   AS \"Location ID\",\n  location_name   AS \"DDC\",\n  patient_uuid    AS \"Patient ID\",\n  COUNT(*)        AS \"No of Items\",\n  SUM(quantity)   AS \"Total Quantity\"\nFROM\n  dispensed\nGROUP BY\n  issue_key,\n  issued_on,\n  location_uuid,\n  location_name,\n  issue_id,\n  patient_uuid\nORDER BY\n  location_name,\n  issue_id;\n",
+              "native": "-- Issues to Patient (per location)\n-- One row per issue. An \"issue\" is a DispenseOrder: a dispensing event for one\n-- patient at one location, grouping N MedicationDispense line items.\n-- Filters: Issue Date (single day, Asia/Kolkata), Facility ID, Location ID.\n-- Location ID is optional - leave it blank for all DDCs in the facility.\nWITH\n  w AS (\n    SELECT\n      CASE LOWER(TRIM({{issue_date}}))\n        WHEN 'today' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date\n        WHEN 'yesterday' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date - 1\n        ELSE {{issue_date}}::date\n      END AS end_date\n  ),\n  dispensed AS (\n    SELECT\n      -- DispenseOrder is nullable on a dispense. Orderless dispenses get their\n      -- own negative key so each stands alone instead of collapsing together.\n      COALESCE(dord.id, -md.id)                 AS issue_key,\n      COALESCE(dord.external_id, md.external_id) AS issue_id,\n      loc.external_id                           AS location_uuid,\n      loc.name                                  AS location_name,\n      pat.external_id                           AS patient_uuid,\n      (\n        COALESCE(md.when_handed_over, md.when_prepared, md.created_date)\n        AT TIME ZONE 'Asia/Kolkata'\n      )::date                                   AS issued_on,\n      md.quantity                               AS quantity\n    FROM\n      w\n      CROSS JOIN emr_medicationdispense md\n      JOIN emr_facilitylocation loc ON loc.id = md.location_id\n      AND loc.deleted = FALSE\n      JOIN facility_facility f ON f.id = loc.facility_id\n      AND f.deleted = FALSE\n      JOIN emr_patient pat ON pat.id = md.patient_id\n      AND pat.deleted = FALSE\n      LEFT JOIN emr_dispenseorder dord ON dord.id = md.order_id\n      AND dord.deleted = FALSE\n    WHERE\n      md.deleted = FALSE\n      AND md.status = 'completed'\n      AND f.external_id = {{facility_id}}::UUID\n      AND (\n        COALESCE(md.when_handed_over, md.when_prepared, md.created_date)\n        AT TIME ZONE 'Asia/Kolkata'\n      )::date = w.end_date\n      AND EXISTS (\n        SELECT\n          1\n        FROM\n          emr_healthcareservice hs\n        WHERE\n          loc.id = ANY (hs.locations)\n          AND hs.deleted = FALSE\n          AND hs.internal_type = 'pharmacy'\n      )\n      [[AND loc.external_id = {{location_id}}::UUID]]\n  )\nSELECT\n  issue_id        AS issue_id,\n  issued_on       AS issue_date,\n  location_uuid   AS location_id,\n  location_name   AS ddc,\n  patient_uuid    AS patient_id,\n  COUNT(*)        AS no_of_items,\n  SUM(quantity)   AS total_quantity\nFROM\n  dispensed\nGROUP BY\n  issue_key,\n  issued_on,\n  location_uuid,\n  location_name,\n  issue_id,\n  patient_uuid\nORDER BY\n  location_name,\n  issue_id;\n",
               "template-tags": [
                 {
                   "type": "text",
@@ -1093,8 +387,8 @@
         "entity_id": "cTKokrkB6hN5JmPW4vIkM",
         "collection_preview": true,
         "visualization_settings": {
-          "table.pivot_column": "Issue Date",
-          "table.cell_column": "No of Items"
+          "table.pivot_column": "issue_date",
+          "table.cell_column": "no_of_items"
         },
         "metabase_version": "v0.63.16.8 (f4eec95)",
         "parameters": [
@@ -1187,15 +481,15 @@
       "entity_id": "ezyyTs_Exij8ssKrvmbAy",
       "visualization_settings": {
         "column_settings": {
-          "[\"name\",\"Issue ID\"]": {
+          "[\"name\",\"issue_id\"]": {
             "click_behavior": {
               "type": "crossfilter",
               "parameterMapping": {
                 "4d7c274": {
                   "source": {
                     "type": "column",
-                    "id": "Issue ID",
-                    "name": "Issue ID"
+                    "id": "issue_id",
+                    "name": "issue_id"
                   },
                   "target": {
                     "type": "parameter",
@@ -1228,7 +522,7 @@
         "collection_position": null,
         "source_card_id": null,
         "table_id": null,
-        "result_metadata": null,
+        "result_metadata": [],
         "embedding_type": null,
         "initially_published_at": null,
         "can_write": true,
@@ -1256,7 +550,7 @@
           "lib/type": "mbql/query",
           "stages": [
             {
-              "native": "-- Issue Detail (line items)\n-- One row per dispensed line item. Drills into the Issue Summary card:\n-- Issue Date + Facility ID are required; Location ID and Issue ID are optional\n-- (blank = all DDCs / all issues for that day).\n--\n-- DVDMS drug identity is resolved from two sources, in order:\n--   receipt   - the DVDMS inward item actually delivered into this inventory\n--               item (exact: matches on supplied_inventory_item_id, so it is\n--               specific to this product AND this location)\n--   catalogue - care_dvdms_dvdmsproductmapping for the product knowledge, used\n--               when there is no DVDMS receipt behind the stock\nWITH\n  w AS (\n    SELECT\n      CASE LOWER(TRIM({{issue_date}}))\n        WHEN 'today' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date\n        WHEN 'yesterday' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date - 1\n        ELSE {{issue_date}}::date\n      END AS end_date\n  )\nSELECT\n  (\n    COALESCE(md.when_handed_over, md.when_prepared, md.created_date)\n    AT TIME ZONE 'Asia/Kolkata'\n  )::date                                      AS \"Issue Date\",\n  loc.external_id                              AS \"Location ID\",\n  loc.name                                     AS \"Store\",\n  COALESCE(dord.external_id, md.external_id)   AS \"Issue ID\",\n  pat.external_id                              AS \"Patient ID\",\n  pk.name                                      AS \"Product\",\n  COALESCE(rcpt.drug_name, map.drug_name)      AS \"Drug Name\",\n  md.quantity                                  AS \"Quantity\",\n  COALESCE(prod.batch ->> 'lot_number', rcpt.batch) AS \"Batch No\",\n  COALESCE(\n    (prod.expiration_date AT TIME ZONE 'Asia/Kolkata')::date,\n    rcpt.expiry_date\n  )                                            AS \"Expiry\",\n  COALESCE(rcpt.drug_id, map.drug_id)          AS \"Drug ID\",\n  COALESCE(rcpt.brand_id, map.brand_id)        AS \"Drug Brand ID\"\nFROM\n  w\n  CROSS JOIN emr_medicationdispense md\n  JOIN emr_facilitylocation loc ON loc.id = md.location_id\n  AND loc.deleted = FALSE\n  JOIN facility_facility f ON f.id = loc.facility_id\n  AND f.deleted = FALSE\n  JOIN emr_patient pat ON pat.id = md.patient_id\n  AND pat.deleted = FALSE\n  JOIN emr_inventoryitem ii ON ii.id = md.item_id\n  AND ii.deleted = FALSE\n  JOIN emr_product prod ON prod.id = ii.product_id\n  AND prod.deleted = FALSE\n  JOIN emr_productknowledge pk ON pk.id = prod.product_knowledge_id\n  AND pk.deleted = FALSE\n  LEFT JOIN emr_dispenseorder dord ON dord.id = md.order_id\n  AND dord.deleted = FALSE\n  -- Provenance: the DVDMS inward item delivered into THIS inventory item.\n  LEFT JOIN LATERAL (\n    SELECT\n      d.drug_id,\n      d.brand_id,\n      d.name AS drug_name,\n      iir.batch,\n      iir.expiry_date\n    FROM\n      emr_supplydelivery sd\n      JOIN care_dvdms_dvdmsrecorditemdelivery rid ON rid.supply_delivery_id = sd.id\n      AND rid.deleted = FALSE\n      AND rid.status <> 'REVERSED'\n      JOIN care_dvdms_dvdmsinwarditemrecord iir ON iir.id = rid.inward_record_item_id\n      AND iir.deleted = FALSE\n      LEFT JOIN care_dvdms_dvdmsrecorditemorder rio ON rio.id = iir.record_order_item_id\n      AND rio.deleted = FALSE\n      LEFT JOIN care_dvdms_dvdmsdrug d ON d.id = rio.drug_id\n      AND d.deleted = FALSE\n    WHERE\n      sd.supplied_inventory_item_id = md.item_id\n      AND sd.deleted = FALSE\n      AND sd.status = 'completed'\n      AND sd.created_date <= COALESCE(\n        md.when_handed_over,\n        md.when_prepared,\n        md.created_date\n      )\n    ORDER BY\n      sd.created_date DESC\n    LIMIT\n      1\n  ) rcpt ON TRUE\n  -- Catalogue: the institute's DVDMS mapping for this product knowledge.\n  LEFT JOIN LATERAL (\n    SELECT\n      d2.drug_id,\n      d2.brand_id,\n      d2.name AS drug_name\n    FROM\n      care_dvdms_dvdmsproductmapping pm\n      JOIN care_dvdms_dvdmsinstitute inst ON inst.id = pm.institute_id\n      AND inst.deleted = FALSE\n      AND inst.facility_id = f.id\n      JOIN care_dvdms_dvdmsdrug d2 ON d2.id = pm.drug_id\n      AND d2.deleted = FALSE\n    WHERE\n      pm.product_knowledge_id = pk.id\n      AND pm.deleted = FALSE\n    ORDER BY\n      (pm.mapping_type = 'manual_mapping') DESC,\n      pm.usage_count DESC,\n      pm.last_used_date DESC NULLS LAST\n    LIMIT\n      1\n  ) map ON TRUE\nWHERE\n  md.deleted = FALSE\n  AND md.status = 'completed'\n  AND f.external_id = {{facility_id}}::UUID\n  AND (\n    COALESCE(md.when_handed_over, md.when_prepared, md.created_date)\n    AT TIME ZONE 'Asia/Kolkata'\n  )::date = w.end_date\n  AND EXISTS (\n    SELECT\n      1\n    FROM\n      emr_healthcareservice hs\n    WHERE\n      loc.id = ANY (hs.locations)\n      AND hs.deleted = FALSE\n      AND hs.internal_type = 'pharmacy'\n  )\n  [[AND loc.external_id = {{location_id}}::UUID]]\n  [[AND COALESCE(dord.external_id, md.external_id) = {{issue_id}}::UUID]]\nORDER BY\n  loc.name,\n  COALESCE(dord.external_id, md.external_id),\n  pk.name;\n",
+              "native": "-- Issue Detail (line items)\n-- One row per dispensed line item. Drills into the Issue Summary card:\n-- Issue Date + Facility ID are required; Location ID and Issue ID are optional\n-- (blank = all DDCs / all issues for that day).\n--\n-- DVDMS drug identity is resolved from two sources, in order:\n--   receipt   - the DVDMS inward item actually delivered into this inventory\n--               item (exact: matches on supplied_inventory_item_id, so it is\n--               specific to this product AND this location)\n--   catalogue - care_dvdms_dvdmsproductmapping for the product knowledge, used\n--               when there is no DVDMS receipt behind the stock\nWITH\n  w AS (\n    SELECT\n      CASE LOWER(TRIM({{issue_date}}))\n        WHEN 'today' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date\n        WHEN 'yesterday' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date - 1\n        ELSE {{issue_date}}::date\n      END AS end_date\n  )\nSELECT\n  (\n    COALESCE(md.when_handed_over, md.when_prepared, md.created_date)\n    AT TIME ZONE 'Asia/Kolkata'\n  )::date                                      AS issue_date,\n  loc.external_id                              AS location_id,\n  loc.name                                     AS store,\n  COALESCE(dord.external_id, md.external_id)   AS issue_id,\n  pat.external_id                              AS patient_id,\n  pk.name                                      AS product,\n  COALESCE(rcpt.drug_name, map.drug_name)      AS drug_name,\n  md.quantity                                  AS quantity,\n  COALESCE(prod.batch ->> 'lot_number', rcpt.batch) AS batch_no,\n  COALESCE(\n    (prod.expiration_date AT TIME ZONE 'Asia/Kolkata')::date,\n    rcpt.expiry_date\n  )                                            AS expiry,\n  COALESCE(rcpt.drug_id, map.drug_id)          AS drug_id,\n  COALESCE(rcpt.brand_id, map.brand_id)        AS drug_brand_id\nFROM\n  w\n  CROSS JOIN emr_medicationdispense md\n  JOIN emr_facilitylocation loc ON loc.id = md.location_id\n  AND loc.deleted = FALSE\n  JOIN facility_facility f ON f.id = loc.facility_id\n  AND f.deleted = FALSE\n  JOIN emr_patient pat ON pat.id = md.patient_id\n  AND pat.deleted = FALSE\n  JOIN emr_inventoryitem ii ON ii.id = md.item_id\n  AND ii.deleted = FALSE\n  JOIN emr_product prod ON prod.id = ii.product_id\n  AND prod.deleted = FALSE\n  JOIN emr_productknowledge pk ON pk.id = prod.product_knowledge_id\n  AND pk.deleted = FALSE\n  LEFT JOIN emr_dispenseorder dord ON dord.id = md.order_id\n  AND dord.deleted = FALSE\n  -- Provenance: the DVDMS inward item delivered into THIS inventory item.\n  LEFT JOIN LATERAL (\n    SELECT\n      d.drug_id,\n      d.brand_id,\n      d.name AS drug_name,\n      iir.batch,\n      iir.expiry_date\n    FROM\n      emr_supplydelivery sd\n      JOIN care_dvdms_dvdmsrecorditemdelivery rid ON rid.supply_delivery_id = sd.id\n      AND rid.deleted = FALSE\n      AND rid.status <> 'REVERSED'\n      JOIN care_dvdms_dvdmsinwarditemrecord iir ON iir.id = rid.inward_record_item_id\n      AND iir.deleted = FALSE\n      LEFT JOIN care_dvdms_dvdmsrecorditemorder rio ON rio.id = iir.record_order_item_id\n      AND rio.deleted = FALSE\n      LEFT JOIN care_dvdms_dvdmsdrug d ON d.id = rio.drug_id\n      AND d.deleted = FALSE\n    WHERE\n      sd.supplied_inventory_item_id = md.item_id\n      AND sd.deleted = FALSE\n      AND sd.status = 'completed'\n      AND sd.created_date <= COALESCE(\n        md.when_handed_over,\n        md.when_prepared,\n        md.created_date\n      )\n    ORDER BY\n      sd.created_date DESC\n    LIMIT\n      1\n  ) rcpt ON TRUE\n  -- Catalogue: the institute's DVDMS mapping for this product knowledge.\n  LEFT JOIN LATERAL (\n    SELECT\n      d2.drug_id,\n      d2.brand_id,\n      d2.name AS drug_name\n    FROM\n      care_dvdms_dvdmsproductmapping pm\n      JOIN care_dvdms_dvdmsinstitute inst ON inst.id = pm.institute_id\n      AND inst.deleted = FALSE\n      AND inst.facility_id = f.id\n      JOIN care_dvdms_dvdmsdrug d2 ON d2.id = pm.drug_id\n      AND d2.deleted = FALSE\n    WHERE\n      pm.product_knowledge_id = pk.id\n      AND pm.deleted = FALSE\n    ORDER BY\n      (pm.mapping_type = 'manual_mapping') DESC,\n      pm.usage_count DESC,\n      pm.last_used_date DESC NULLS LAST\n    LIMIT\n      1\n  ) map ON TRUE\nWHERE\n  md.deleted = FALSE\n  AND md.status = 'completed'\n  AND f.external_id = {{facility_id}}::UUID\n  AND (\n    COALESCE(md.when_handed_over, md.when_prepared, md.created_date)\n    AT TIME ZONE 'Asia/Kolkata'\n  )::date = w.end_date\n  AND EXISTS (\n    SELECT\n      1\n    FROM\n      emr_healthcareservice hs\n    WHERE\n      loc.id = ANY (hs.locations)\n      AND hs.deleted = FALSE\n      AND hs.internal_type = 'pharmacy'\n  )\n  [[AND loc.external_id = {{location_id}}::UUID]]\n  [[AND COALESCE(dord.external_id, md.external_id) = {{issue_id}}::UUID]]\nORDER BY\n  loc.name,\n  COALESCE(dord.external_id, md.external_id),\n  pk.name;\n",
               "lib/type": "mbql.stage/native",
               "template-tags": [
                 {
@@ -1296,8 +590,8 @@
         "entity_id": "2rlVLna9Xfo5I8urMtA79",
         "collection_preview": true,
         "visualization_settings": {
-          "table.pivot_column": "Issue Date",
-          "table.cell_column": "Quantity"
+          "table.pivot_column": "issue_date",
+          "table.cell_column": "quantity"
         },
         "metabase_version": "v0.63.16.8 (f4eec95)",
         "parameters": [
@@ -1434,471 +728,7 @@
         "collection_position": null,
         "source_card_id": null,
         "table_id": null,
-        "result_metadata": [
-          {
-            "database_type": "date",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Transfer Date",
-            "lib/original-name": "Transfer Date",
-            "name": "Transfer Date",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Transfer Date",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Transfer Date",
-              {
-                "base-type": "type/Date"
-              }
-            ],
-            "effective_type": "type/Date",
-            "lib/desired-column-alias": "Transfer Date",
-            "display_name": "Transfer Date",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 1,
-                "nil%": 0
-              },
-              "type": {
-                "type/DateTime": {
-                  "earliest": "2026-10-09",
-                  "latest": "2026-10-09",
-                  "mode-fraction": 1,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Date"
-          },
-          {
-            "database_type": "uuid",
-            "semantic_type": null,
-            "lib/deduplicated-name": "From Store ID",
-            "lib/original-name": "From Store ID",
-            "name": "From Store ID",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "From Store ID",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "From Store ID",
-              {
-                "base-type": "type/UUID"
-              }
-            ],
-            "effective_type": "type/UUID",
-            "lib/desired-column-alias": "From Store ID",
-            "display_name": "From Store ID",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 3,
-                "nil%": 0.6
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0.6,
-                  "average-length": 14.4,
-                  "mode-fraction": 0.6,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/UUID"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "From Store",
-            "lib/original-name": "From Store",
-            "name": "From Store",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "From Store",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "From Store",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "From Store",
-            "display_name": "From Store",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 4,
-                "nil%": 0
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0,
-                  "average-length": 7.6,
-                  "mode-fraction": 0.3,
-                  "top-3-fraction": 0.9
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "uuid",
-            "semantic_type": null,
-            "lib/deduplicated-name": "To Store ID",
-            "lib/original-name": "To Store ID",
-            "name": "To Store ID",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "To Store ID",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "To Store ID",
-              {
-                "base-type": "type/UUID"
-              }
-            ],
-            "effective_type": "type/UUID",
-            "lib/desired-column-alias": "To Store ID",
-            "display_name": "To Store ID",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 3,
-                "nil%": 0
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0,
-                  "average-length": 36,
-                  "mode-fraction": 0.5,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/UUID"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "To Store",
-            "lib/original-name": "To Store",
-            "name": "To Store",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "To Store",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "To Store",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "To Store",
-            "display_name": "To Store",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 3,
-                "nil%": 0
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0,
-                  "average-length": 13,
-                  "mode-fraction": 0.5,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Product",
-            "lib/original-name": "Product",
-            "name": "Product",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Product",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Product",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Product",
-            "display_name": "Product",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 5,
-                "nil%": 0
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0,
-                  "average-length": 18.5,
-                  "mode-fraction": 0.4,
-                  "top-3-fraction": 0.8
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Drug Name",
-            "lib/original-name": "Drug Name",
-            "name": "Drug Name",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Drug Name",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Drug Name",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Drug Name",
-            "display_name": "Drug Name",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 5,
-                "nil%": 0.1
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0.1,
-                  "average-length": 20.6,
-                  "mode-fraction": 0.4,
-                  "top-3-fraction": 0.8
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "numeric",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Quantity",
-            "lib/original-name": "Quantity",
-            "name": "Quantity",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Quantity",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Quantity",
-              {
-                "base-type": "type/Decimal"
-              }
-            ],
-            "effective_type": "type/Decimal",
-            "lib/desired-column-alias": "Quantity",
-            "display_name": "Quantity",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 8,
-                "nil%": 0
-              },
-              "type": {
-                "type/Number": {
-                  "skewness": 2.189415519972334,
-                  "min": 1,
-                  "q1": 100,
-                  "q3": 1111,
-                  "excess-kurtosis": 5.305790992170791,
-                  "zero-fraction": 0,
-                  "mode-fraction": 0.2,
-                  "top-3-fraction": 0.5,
-                  "max": 5001,
-                  "sd": 1536.4988375452087,
-                  "avg": 1061.6999999999998
-                }
-              }
-            },
-            "base_type": "type/Decimal"
-          },
-          {
-            "database_type": "text",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Batch No",
-            "lib/original-name": "Batch No",
-            "name": "Batch No",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Batch No",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Batch No",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Batch No",
-            "display_name": "Batch No",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 3,
-                "nil%": 0
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0,
-                  "average-length": 8.8,
-                  "mode-fraction": 0.7,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "date",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Expiry",
-            "lib/original-name": "Expiry",
-            "name": "Expiry",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Expiry",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Expiry",
-              {
-                "base-type": "type/Date"
-              }
-            ],
-            "effective_type": "type/Date",
-            "lib/desired-column-alias": "Expiry",
-            "display_name": "Expiry",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 3,
-                "nil%": 0
-              },
-              "type": {
-                "type/DateTime": {
-                  "earliest": "2026-11-07",
-                  "latest": "2027-11-30",
-                  "mode-fraction": 0.7,
-                  "top-3-fraction": 1
-                }
-              }
-            },
-            "base_type": "type/Date"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Drug ID",
-            "lib/original-name": "Drug ID",
-            "name": "Drug ID",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Drug ID",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Drug ID",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Drug ID",
-            "display_name": "Drug ID",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 5,
-                "nil%": 0.1
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0.1,
-                  "average-length": 7.2,
-                  "mode-fraction": 0.4,
-                  "top-3-fraction": 0.8
-                }
-              }
-            },
-            "base_type": "type/Text"
-          },
-          {
-            "database_type": "varchar",
-            "semantic_type": null,
-            "lib/deduplicated-name": "Drug Brand ID",
-            "lib/original-name": "Drug Brand ID",
-            "name": "Drug Brand ID",
-            "lib/source": "source/native",
-            "lib/source-column-alias": "Drug Brand ID",
-            "source": "native",
-            "field_ref": [
-              "field",
-              "Drug Brand ID",
-              {
-                "base-type": "type/Text"
-              }
-            ],
-            "effective_type": "type/Text",
-            "lib/desired-column-alias": "Drug Brand ID",
-            "display_name": "Drug Brand ID",
-            "fingerprint": {
-              "global": {
-                "distinct-count": 5,
-                "nil%": 0.1
-              },
-              "type": {
-                "type/Text": {
-                  "percent-json": 0,
-                  "percent-url": 0,
-                  "percent-email": 0,
-                  "percent-state": 0,
-                  "percent-blank": 0.1,
-                  "average-length": 7.2,
-                  "mode-fraction": 0.4,
-                  "top-3-fraction": 0.8
-                }
-              }
-            },
-            "base_type": "type/Text"
-          }
-        ],
+        "result_metadata": [],
         "embedding_type": null,
         "initially_published_at": null,
         "can_write": true,
@@ -1926,7 +756,7 @@
           "lib/type": "mbql/query",
           "stages": [
             {
-              "native": "-- Stock Transfers (sent & received)\n-- One row per completed supply delivery line. Same shape as Issue Detail, but\n-- the counterparty is a store rather than a patient.\n--\n-- Filters: Issue Date + Facility ID required; Location ID and Drug ID optional.\n--   Location ID matches EITHER side - a store's sent and received rows both\n--   appear when you filter by it.\n--   Facility scope is \"origin OR destination belongs to the facility\", so a\n--   transfer received from another facility shows up here too.\n--\n-- DVDMS drug identity resolves in two steps:\n--   receipt   - the DVDMS inward item tied to this exact supply delivery\n--               (care_dvdms_dvdmsrecorditemdelivery.supply_delivery_id)\n--   catalogue - care_dvdms_dvdmsproductmapping for the product knowledge,\n--               which is what internal store-to-store transfers fall back on\nWITH\n  w AS (\n    SELECT\n      CASE LOWER(TRIM({{issue_date}}))\n        WHEN 'today' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date\n        WHEN 'yesterday' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date - 1\n        ELSE {{issue_date}}::date\n      END AS end_date\n  )\nSELECT\n  (sd.created_date AT TIME ZONE 'Asia/Kolkata')::date AS \"Transfer Date\",\n  orig.external_id                             AS \"From Store ID\",\n  COALESCE(orig.name, sup.name)                AS \"From Store\",\n  dest.external_id                             AS \"To Store ID\",\n  dest.name                                    AS \"To Store\",\n  pk.name                                      AS \"Product\",\n  COALESCE(d.name, map.drug_name)              AS \"Drug Name\",\n  sd.supplied_item_quantity                    AS \"Quantity\",\n  COALESCE(prod.batch ->> 'lot_number', iir.batch) AS \"Batch No\",\n  COALESCE(\n    (prod.expiration_date AT TIME ZONE 'Asia/Kolkata')::date,\n    iir.expiry_date\n  )                                            AS \"Expiry\",\n  COALESCE(d.drug_id, map.drug_id)             AS \"Drug ID\",\n  COALESCE(d.brand_id, map.brand_id)           AS \"Drug Brand ID\"\nFROM\n  w\n  CROSS JOIN facility_facility f\n  CROSS JOIN emr_supplydelivery sd\n  JOIN emr_deliveryorder dor ON dor.id = sd.order_id\n  AND dor.deleted = FALSE\n  JOIN emr_facilitylocation dest ON dest.id = dor.destination_id\n  AND dest.deleted = FALSE\n  LEFT JOIN emr_facilitylocation orig ON orig.id = dor.origin_id\n  AND orig.deleted = FALSE\n  LEFT JOIN emr_organization sup ON sup.id = dor.supplier_id\n  AND sup.deleted = FALSE\n  LEFT JOIN emr_inventoryitem ii ON ii.id = sd.supplied_inventory_item_id\n  AND ii.deleted = FALSE\n  JOIN emr_product prod ON prod.id = COALESCE(ii.product_id, sd.supplied_item_id)\n  AND prod.deleted = FALSE\n  JOIN emr_productknowledge pk ON pk.id = prod.product_knowledge_id\n  AND pk.deleted = FALSE\n  -- Receipt provenance: one-to-one with this supply delivery, so no guessing.\n  LEFT JOIN care_dvdms_dvdmsrecorditemdelivery rid ON rid.supply_delivery_id = sd.id\n  AND rid.deleted = FALSE\n  AND rid.status <> 'REVERSED'\n  LEFT JOIN care_dvdms_dvdmsinwarditemrecord iir ON iir.id = rid.inward_record_item_id\n  AND iir.deleted = FALSE\n  LEFT JOIN care_dvdms_dvdmsrecorditemorder rio ON rio.id = iir.record_order_item_id\n  AND rio.deleted = FALSE\n  LEFT JOIN care_dvdms_dvdmsdrug d ON d.id = rio.drug_id\n  AND d.deleted = FALSE\n  -- Catalogue fallback: the institute's mapping for this product knowledge.\n  LEFT JOIN LATERAL (\n    SELECT\n      d2.drug_id,\n      d2.brand_id,\n      d2.name AS drug_name\n    FROM\n      care_dvdms_dvdmsproductmapping pm\n      JOIN care_dvdms_dvdmsinstitute inst ON inst.id = pm.institute_id\n      AND inst.deleted = FALSE\n      AND inst.facility_id = f.id\n      JOIN care_dvdms_dvdmsdrug d2 ON d2.id = pm.drug_id\n      AND d2.deleted = FALSE\n    WHERE\n      pm.product_knowledge_id = pk.id\n      AND pm.deleted = FALSE\n    ORDER BY\n      (pm.mapping_type = 'manual_mapping') DESC,\n      pm.usage_count DESC,\n      pm.last_used_date DESC NULLS LAST\n    LIMIT\n      1\n  ) map ON TRUE\nWHERE\n  sd.deleted = FALSE\n  AND sd.status = 'completed'\n  AND f.deleted = FALSE\n  AND f.external_id = {{facility_id}}::UUID\n  AND (\n    orig.facility_id = f.id\n    OR dest.facility_id = f.id\n  )\n  AND (sd.created_date AT TIME ZONE 'Asia/Kolkata')::date = w.end_date\n  [[AND (\n    orig.external_id = {{location_id}}::UUID\n    OR dest.external_id = {{location_id}}::UUID\n  )]]\n  [[AND COALESCE(d.drug_id, map.drug_id) = {{drug_id}}]]\nORDER BY\n  COALESCE(orig.name, sup.name),\n  dest.name,\n  pk.name;\n",
+              "native": "-- Stock Transfers (sent & received)\n-- One row per completed supply delivery line. Same shape as Issue Detail, but\n-- the counterparty is a store rather than a patient.\n--\n-- Filters: Issue Date + Facility ID required; Location ID and Drug ID optional.\n--   Location ID matches EITHER side - a store's sent and received rows both\n--   appear when you filter by it.\n--   Facility scope is \"origin OR destination belongs to the facility\", so a\n--   transfer received from another facility shows up here too.\n--\n-- DVDMS drug identity resolves in two steps:\n--   receipt   - the DVDMS inward item tied to this exact supply delivery\n--               (care_dvdms_dvdmsrecorditemdelivery.supply_delivery_id)\n--   catalogue - care_dvdms_dvdmsproductmapping for the product knowledge,\n--               which is what internal store-to-store transfers fall back on\nWITH\n  w AS (\n    SELECT\n      CASE LOWER(TRIM({{issue_date}}))\n        WHEN 'today' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date\n        WHEN 'yesterday' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date - 1\n        ELSE {{issue_date}}::date\n      END AS end_date\n  )\nSELECT\n  (sd.created_date AT TIME ZONE 'Asia/Kolkata')::date AS transfer_date,\n  orig.external_id                             AS from_store_id,\n  COALESCE(orig.name, sup.name)                AS from_store,\n  dest.external_id                             AS to_store_id,\n  dest.name                                    AS to_store,\n  pk.name                                      AS product,\n  COALESCE(d.name, map.drug_name)              AS drug_name,\n  sd.supplied_item_quantity                    AS quantity,\n  COALESCE(prod.batch ->> 'lot_number', iir.batch) AS batch_no,\n  COALESCE(\n    (prod.expiration_date AT TIME ZONE 'Asia/Kolkata')::date,\n    iir.expiry_date\n  )                                            AS expiry,\n  COALESCE(d.drug_id, map.drug_id)             AS drug_id,\n  COALESCE(d.brand_id, map.brand_id)           AS drug_brand_id\nFROM\n  w\n  CROSS JOIN facility_facility f\n  CROSS JOIN emr_supplydelivery sd\n  JOIN emr_deliveryorder dor ON dor.id = sd.order_id\n  AND dor.deleted = FALSE\n  JOIN emr_facilitylocation dest ON dest.id = dor.destination_id\n  AND dest.deleted = FALSE\n  LEFT JOIN emr_facilitylocation orig ON orig.id = dor.origin_id\n  AND orig.deleted = FALSE\n  LEFT JOIN emr_organization sup ON sup.id = dor.supplier_id\n  AND sup.deleted = FALSE\n  LEFT JOIN emr_inventoryitem ii ON ii.id = sd.supplied_inventory_item_id\n  AND ii.deleted = FALSE\n  JOIN emr_product prod ON prod.id = COALESCE(ii.product_id, sd.supplied_item_id)\n  AND prod.deleted = FALSE\n  JOIN emr_productknowledge pk ON pk.id = prod.product_knowledge_id\n  AND pk.deleted = FALSE\n  -- Receipt provenance: one-to-one with this supply delivery, so no guessing.\n  LEFT JOIN care_dvdms_dvdmsrecorditemdelivery rid ON rid.supply_delivery_id = sd.id\n  AND rid.deleted = FALSE\n  AND rid.status <> 'REVERSED'\n  LEFT JOIN care_dvdms_dvdmsinwarditemrecord iir ON iir.id = rid.inward_record_item_id\n  AND iir.deleted = FALSE\n  LEFT JOIN care_dvdms_dvdmsrecorditemorder rio ON rio.id = iir.record_order_item_id\n  AND rio.deleted = FALSE\n  LEFT JOIN care_dvdms_dvdmsdrug d ON d.id = rio.drug_id\n  AND d.deleted = FALSE\n  -- Catalogue fallback: the institute's mapping for this product knowledge.\n  LEFT JOIN LATERAL (\n    SELECT\n      d2.drug_id,\n      d2.brand_id,\n      d2.name AS drug_name\n    FROM\n      care_dvdms_dvdmsproductmapping pm\n      JOIN care_dvdms_dvdmsinstitute inst ON inst.id = pm.institute_id\n      AND inst.deleted = FALSE\n      AND inst.facility_id = f.id\n      JOIN care_dvdms_dvdmsdrug d2 ON d2.id = pm.drug_id\n      AND d2.deleted = FALSE\n    WHERE\n      pm.product_knowledge_id = pk.id\n      AND pm.deleted = FALSE\n    ORDER BY\n      (pm.mapping_type = 'manual_mapping') DESC,\n      pm.usage_count DESC,\n      pm.last_used_date DESC NULLS LAST\n    LIMIT\n      1\n  ) map ON TRUE\nWHERE\n  sd.deleted = FALSE\n  AND sd.status = 'completed'\n  AND f.deleted = FALSE\n  AND f.external_id = {{facility_id}}::UUID\n  AND (\n    orig.facility_id = f.id\n    OR dest.facility_id = f.id\n  )\n  AND (sd.created_date AT TIME ZONE 'Asia/Kolkata')::date = w.end_date\n  [[AND (\n    orig.external_id = {{location_id}}::UUID\n    OR dest.external_id = {{location_id}}::UUID\n  )]]\n  [[AND COALESCE(d.drug_id, map.drug_id) = {{drug_id}}]]\nORDER BY\n  COALESCE(orig.name, sup.name),\n  dest.name,\n  pk.name;\n",
               "lib/type": "mbql.stage/native",
               "template-tags": [
                 {
@@ -1966,8 +796,8 @@
         "entity_id": "0SbfcKqUDOOLXq2pW0IfR",
         "collection_preview": true,
         "visualization_settings": {
-          "table.pivot_column": "Transfer Date",
-          "table.cell_column": "Quantity"
+          "table.pivot_column": "transfer_date",
+          "table.cell_column": "quantity"
         },
         "metabase_version": "v0.63.16.8 (f4eec95)",
         "parameters": [
@@ -2073,11 +903,11 @@
       "card_id": 103,
       "entity_id": "K1hlrYAWXQz6yflnh5xfg",
       "visualization_settings": {
-        "table.pivot_column": "Transfer Date",
-        "table.cell_column": "Quantity",
+        "table.pivot_column": "transfer_date",
+        "table.cell_column": "quantity",
         "table.freeze_rows": false,
         "column_settings": {
-          "[\"name\",\"From Store ID\"]": {
+          "[\"name\",\"from_store_id\"]": {
             "text_wrapping": true
           }
         }

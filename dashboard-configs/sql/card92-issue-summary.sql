@@ -58,13 +58,13 @@ WITH
       [[AND loc.external_id = {{location_id}}::UUID]]
   )
 SELECT
-  issued_on       AS "Issue Date",
-  location_uuid   AS "Location ID",
-  location_name   AS "DDC",
-  issue_id        AS "Issue ID",
-  patient_uuid    AS "Patient ID",
-  COUNT(*)        AS "No of Items",
-  SUM(quantity)   AS "Total Quantity"
+  issued_on       AS issue_date,
+  location_uuid   AS location_id,
+  location_name   AS ddc,
+  issue_id        AS issue_id,
+  patient_uuid    AS patient_id,
+  COUNT(*)        AS no_of_items,
+  SUM(quantity)   AS total_quantity
 FROM
   dispensed
 GROUP BY

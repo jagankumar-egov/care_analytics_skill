@@ -1,21 +1,21 @@
 SELECT
-  f.external_id                 AS "Facility ID",
-  f.name                        AS "Facility Name",
-  geo.name                      AS "Geo Organization",
-  inst.eaushadhi_institute_id   AS "Institute ID",
-  inst.eaushadhi_institute_name AS "Institute Name",
-  st.eaushadhi_store_id         AS "Store ID",
-  st.eaushadhi_store_name       AS "Store Name",
-  stloc.name                    AS "Store Location",
-  sp.eaushadhi_warehouse_id     AS "Supplier ID",
-  sp.eaushadhi_warehouse_name   AS "Supplier Name",
-  sporg.name                    AS "Supplier Organization",
+  f.external_id                 AS facility_id,
+  f.name                        AS facility_name,
+  geo.name                      AS geo_organization,
+  inst.eaushadhi_institute_id   AS institute_id,
+  inst.eaushadhi_institute_name AS institute_name,
+  st.eaushadhi_store_id         AS store_id,
+  st.eaushadhi_store_name       AS store_name,
+  stloc.name                    AS store_location,
+  sp.eaushadhi_warehouse_id     AS supplier_id,
+  sp.eaushadhi_warehouse_name   AS supplier_name,
+  sporg.name                    AS supplier_organization,
   CASE
     WHEN inst.id IS NULL THEN 'Not onboarded'
     WHEN st.id IS NULL
       OR sp.id IS NULL THEN 'Incomplete mapping'
     ELSE 'Configured'
-  END                           AS "DVDMS Status"
+  END                           AS dvdms_status
 FROM
   facility_facility f
   LEFT JOIN emr_organization geo ON geo.id = f.geo_organization_id

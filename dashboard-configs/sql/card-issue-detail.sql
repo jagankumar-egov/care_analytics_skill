@@ -22,21 +22,21 @@ SELECT
   (
     COALESCE(md.when_handed_over, md.when_prepared, md.created_date)
     AT TIME ZONE 'Asia/Kolkata'
-  )::date                                      AS "Issue Date",
-  loc.external_id                              AS "Location ID",
-  loc.name                                     AS "Store",
-  COALESCE(dord.external_id, md.external_id)   AS "Issue ID",
-  pat.external_id                              AS "Patient ID",
-  pk.name                                      AS "Product",
-  COALESCE(rcpt.drug_name, map.drug_name)      AS "Drug Name",
-  md.quantity                                  AS "Quantity",
-  COALESCE(prod.batch ->> 'lot_number', rcpt.batch) AS "Batch No",
+  )::date                                      AS issue_date,
+  loc.external_id                              AS location_id,
+  loc.name                                     AS store,
+  COALESCE(dord.external_id, md.external_id)   AS issue_id,
+  pat.external_id                              AS patient_id,
+  pk.name                                      AS product,
+  COALESCE(rcpt.drug_name, map.drug_name)      AS drug_name,
+  md.quantity                                  AS quantity,
+  COALESCE(prod.batch ->> 'lot_number', rcpt.batch) AS batch_no,
   COALESCE(
     (prod.expiration_date AT TIME ZONE 'Asia/Kolkata')::date,
     rcpt.expiry_date
-  )                                            AS "Expiry",
-  COALESCE(rcpt.drug_id, map.drug_id)          AS "Drug ID",
-  COALESCE(rcpt.brand_id, map.brand_id)        AS "Drug Brand ID"
+  )                                            AS expiry,
+  COALESCE(rcpt.drug_id, map.drug_id)          AS drug_id,
+  COALESCE(rcpt.brand_id, map.brand_id)        AS drug_brand_id
 FROM
   w
   CROSS JOIN emr_medicationdispense md

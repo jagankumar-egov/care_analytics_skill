@@ -13,12 +13,12 @@ WITH
       END AS end_date
   )
 SELECT
-  loc.external_id                            AS "Location ID",
-  loc.name                                   AS "DDC",
-  loc.status                                 AS "Location Status",
-  t.last_dispense_date                       AS "Last Dispense",
-  (w.end_date - t.last_dispense_date)        AS "Days Since Last Dispense",
-  COALESCE(t.dispenses_7d, 0)                AS "Dispenses (7d)"
+  loc.external_id                            AS location_id,
+  loc.name                                   AS ddc,
+  loc.status                                 AS location_status,
+  t.last_dispense_date                       AS last_dispense,
+  (w.end_date - t.last_dispense_date)        AS days_since_last_dispense,
+  COALESCE(t.dispenses_7d, 0)                AS dispenses_7d
 FROM
   w
   CROSS JOIN facility_facility f
