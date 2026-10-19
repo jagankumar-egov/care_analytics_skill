@@ -1,942 +1,824 @@
 {
-    "description": null,
-    "archived": false,
-    "view_count": 94,
-    "collection_position": null,
-    "dashcards": [
-        {
-            "size_x": 12,
-            "dashboard_tab_id": null,
-            "series": [],
-            "inline_parameters": [],
-            "action_id": null,
-            "collection_authority_level": null,
-            "card": {
-                "cache_invalidated_at": "2026-10-08T11:04:10.985005Z",
-                "description": null,
-                "archived": false,
-                "view_count": 75,
-                "collection_position": null,
-                "source_card_id": null,
-                "table_id": null,
-                "result_metadata": [
-                    {
-                        "database_type": "uuid",
-                        "semantic_type": null,
-                        "lib/deduplicated-name": "Facility ID",
-                        "lib/original-name": "Facility ID",
-                        "name": "Facility ID",
-                        "lib/source": "source/native",
-                        "lib/source-column-alias": "Facility ID",
-                        "source": "native",
-                        "field_ref": [
-                            "field",
-                            "Facility ID",
-                            {
-                                "base-type": "type/UUID"
-                            }
-                        ],
-                        "effective_type": "type/UUID",
-                        "lib/desired-column-alias": "Facility ID",
-                        "display_name": "Facility ID",
-                        "fingerprint": {
-                            "global": {
-                                "distinct-count": 8,
-                                "nil%": 0
-                            },
-                            "type": {
-                                "type/Text": {
-                                    "percent-json": 0,
-                                    "percent-url": 0,
-                                    "percent-email": 0,
-                                    "percent-state": 0,
-                                    "percent-blank": 0,
-                                    "average-length": 36,
-                                    "mode-fraction": 0.125,
-                                    "top-3-fraction": 0.375
-                                }
-                            }
-                        },
-                        "base_type": "type/UUID"
-                    },
-                    {
-                        "database_type": "varchar",
-                        "semantic_type": null,
-                        "lib/deduplicated-name": "Facility Name",
-                        "lib/original-name": "Facility Name",
-                        "name": "Facility Name",
-                        "lib/source": "source/native",
-                        "lib/source-column-alias": "Facility Name",
-                        "source": "native",
-                        "field_ref": [
-                            "field",
-                            "Facility Name",
-                            {
-                                "base-type": "type/Text"
-                            }
-                        ],
-                        "effective_type": "type/Text",
-                        "lib/desired-column-alias": "Facility Name",
-                        "display_name": "Facility Name",
-                        "fingerprint": {
-                            "global": {
-                                "distinct-count": 8,
-                                "nil%": 0
-                            },
-                            "type": {
-                                "type/Text": {
-                                    "percent-json": 0,
-                                    "percent-url": 0,
-                                    "percent-email": 0,
-                                    "percent-state": 0,
-                                    "percent-blank": 0,
-                                    "average-length": 26.75,
-                                    "mode-fraction": 0.125,
-                                    "top-3-fraction": 0.375
-                                }
-                            }
-                        },
-                        "base_type": "type/Text"
-                    },
-                    {
-                        "database_type": "varchar",
-                        "semantic_type": null,
-                        "lib/deduplicated-name": "Geo Organization",
-                        "lib/original-name": "Geo Organization",
-                        "name": "Geo Organization",
-                        "lib/source": "source/native",
-                        "lib/source-column-alias": "Geo Organization",
-                        "source": "native",
-                        "field_ref": [
-                            "field",
-                            "Geo Organization",
-                            {
-                                "base-type": "type/Text"
-                            }
-                        ],
-                        "effective_type": "type/Text",
-                        "lib/desired-column-alias": "Geo Organization",
-                        "display_name": "Geo Organization",
-                        "fingerprint": {
-                            "global": {
-                                "distinct-count": 5,
-                                "nil%": 0
-                            },
-                            "type": {
-                                "type/Text": {
-                                    "percent-json": 0,
-                                    "percent-url": 0,
-                                    "percent-email": 0,
-                                    "percent-state": 0,
-                                    "percent-blank": 0,
-                                    "average-length": 10.75,
-                                    "mode-fraction": 0.375,
-                                    "top-3-fraction": 0.75
-                                }
-                            }
-                        },
-                        "base_type": "type/Text"
-                    }
-                ],
-                "embedding_type": null,
-                "initially_published_at": null,
-                "can_write": true,
-                "card_schema": 23,
-                "database_id": 2,
-                "enable_embedding": false,
-                "collection_id": 4,
-                "query_type": "native",
-                "download_perms": "full",
-                "name": "all faclity",
-                "public_uuid_prefix": null,
-                "document_id": null,
-                "last_used_at": "2026-10-19T09:04:11.67013Z",
-                "type": "question",
-                "dimensions": null,
-                "query_average_duration": null,
-                "creator_id": 1,
-                "moderation_reviews": [],
-                "updated_at": "2026-10-08T11:04:10.988648Z",
-                "made_public_by_id": null,
-                "embedding_params": null,
-                "cache_ttl": null,
-                "dataset_query": {
-                    "stages": [
-                        {
-                            "native": "SELECT\n  \"public\".\"facility_facility\".\"external_id\" AS \"Facility ID\",\n  \"public\".\"facility_facility\".\"name\" AS \"Facility Name\",\n  \"Emr Organization - Geo Organization\".\"name\" AS \"Geo Organization\"\nFROM\n  \"public\".\"facility_facility\"\n  LEFT JOIN (\n    SELECT\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'cache_expiry' ] :: text [ ])\n      ) :: timestamp AS \"cached_parent_json → cache_expiry\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'id' ] :: text [ ])\n      ) :: text AS \"cached_parent_json → id\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'level_cache' ] :: text [ ])\n      ) :: decimal AS \"cached_parent_json → level_cache\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'name' ] :: text [ ])\n      ) :: text AS \"cached_parent_json → name\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'org_type' ] :: text [ ])\n      ) :: text AS \"cached_parent_json → org_type\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'parent', 'cache_expiry' ] :: text [ ])\n      ) :: timestamp AS \"cached_parent_json → parent → cache_expiry\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'parent', 'id' ] :: text [ ])\n      ) :: text AS \"cached_parent_json → parent → id\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'parent', 'level_cache' ] :: text [ ])\n      ) :: decimal AS \"cached_parent_json → parent → level_cache\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'parent', 'name' ] :: text [ ])\n      ) :: text AS \"cached_parent_json → parent → name\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'parent', 'org_type' ] :: text [ ])\n      ) :: text AS \"cached_parent_json → parent → org_type\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'parent', 'parent', 'cache_expiry' ] :: text [ ])\n      ) :: timestamp AS \"cached_parent_json → parent → parent → cache_expiry\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'parent', 'parent', 'id' ] :: text [ ])\n      ) :: text AS \"cached_parent_json → parent → parent → id\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'parent', 'parent', 'level_cache' ] :: text [ ])\n      ) :: decimal AS \"cached_parent_json → parent → parent → level_cache\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'parent', 'parent', 'name' ] :: text [ ])\n      ) :: text AS \"cached_parent_json → parent → parent → name\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'parent', 'parent', 'org_type' ] :: text [ ])\n      ) :: text AS \"cached_parent_json → parent → parent → org_type\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (\n          array [ 'parent',\n          'parent',\n          'parent',\n          'cache_expiry' ] :: text [ ]\n        )\n      ) :: timestamp AS \"cached_parent_json → parent → parent → parent_970d0781\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'parent', 'parent', 'parent', 'id' ] :: text [ ])\n      ) :: text AS \"cached_parent_json → parent → parent → parent → id\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (\n          array [ 'parent',\n          'parent',\n          'parent',\n          'level_cache' ] :: text [ ]\n        )\n      ) :: decimal AS \"cached_parent_json → parent → parent → parent_84943ece\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (array [ 'parent', 'parent', 'parent', 'name' ] :: text [ ])\n      ) :: text AS \"cached_parent_json → parent → parent → parent → name\",\n      (\n        \"public\".\"emr_organization\".\"cached_parent_json\" #>> (\n          array [ 'parent',\n          'parent',\n          'parent',\n          'org_type' ] :: text [ ]\n        )\n      ) :: text AS \"cached_parent_json → parent → parent → parent_7d4b0494\",\n      \"public\".\"emr_organization\".\"id\" AS \"id\",\n      \"public\".\"emr_organization\".\"external_id\" AS \"external_id\",\n      \"public\".\"emr_organization\".\"created_date\" AS \"created_date\",\n      \"public\".\"emr_organization\".\"modified_date\" AS \"modified_date\",\n      \"public\".\"emr_organization\".\"deleted\" AS \"deleted\",\n      \"public\".\"emr_organization\".\"history\" AS \"history\",\n      \"public\".\"emr_organization\".\"meta\" AS \"meta\",\n      \"public\".\"emr_organization\".\"active\" AS \"active\",\n      \"public\".\"emr_organization\".\"org_type\" AS \"org_type\",\n      \"public\".\"emr_organization\".\"name\" AS \"name\",\n      \"public\".\"emr_organization\".\"has_children\" AS \"has_children\",\n      \"public\".\"emr_organization\".\"description\" AS \"description\",\n      \"public\".\"emr_organization\".\"system_generated\" AS \"system_generated\",\n      \"public\".\"emr_organization\".\"level_cache\" AS \"level_cache\",\n      \"public\".\"emr_organization\".\"parent_cache\" AS \"parent_cache\",\n      \"public\".\"emr_organization\".\"metadata\" AS \"metadata\",\n      \"public\".\"emr_organization\".\"cached_parent_json\" AS \"cached_parent_json\",\n      \"public\".\"emr_organization\".\"created_by_id\" AS \"created_by_id\",\n      \"public\".\"emr_organization\".\"parent_id\" AS \"parent_id\",\n      \"public\".\"emr_organization\".\"root_org_id\" AS \"root_org_id\",\n      \"public\".\"emr_organization\".\"updated_by_id\" AS \"updated_by_id\",\n      \"public\".\"emr_organization\".\"managing_organizations\" AS \"managing_organizations\"\n    FROM\n      \"public\".\"emr_organization\"\n  ) AS \"Emr Organization - Geo Organization\" ON \"public\".\"facility_facility\".\"geo_organization_id\" = \"Emr Organization - Geo Organization\".\"id\"\nWHERE\n  (\"public\".\"facility_facility\".\"is_public\" = TRUE)\n  AND (\"public\".\"facility_facility\".\"deleted\" = FALSE)\n  AND (\"public\".\"facility_facility\".\"is_active\" = TRUE)\n  [[AND \"public\".\"facility_facility\".\"external_id\" = CAST({{facility_id}} AS UUID)]]",
-                            "lib/type": "mbql.stage/native",
-                            "template-tags": [
-                                {
-                                    "name": "facility_id",
-                                    "id": "8deca7df-7702-4994-8a0d-fe8e3b87f084",
-                                    "type": "text",
-                                    "display-name": "Facility ID"
-                                }
-                            ]
-                        }
-                    ],
-                    "lib/type": "mbql/query",
-                    "database": 2
-                },
-                "dimension_mappings": null,
-                "id": 88,
-                "legacy_query": null,
-                "parameter_mappings": [],
-                "display": "table",
-                "archived_directly": false,
-                "entity_id": "MggcjyklHOBcHWfblt-s_",
-                "collection_preview": true,
-                "visualization_settings": {
-                    "table.pivot_column": "Geo Organization",
-                    "table.cell_column": "Facility Name"
-                },
-                "metabase_version": "v0.63.16.8 (f4eec95)",
-                "parameters": [
-                    {
-                        "id": "8deca7df-7702-4994-8a0d-fe8e3b87f084",
-                        "type": "string/=",
-                        "target": [
-                            "variable",
-                            [
-                                "template-tag",
-                                "facility_id"
-                            ]
-                        ],
-                        "name": "Facility ID",
-                        "slug": "facility_id",
-                        "isMultiSelect": false
-                    }
-                ],
-                "dashboard_id": 7,
-                "created_at": "2026-10-08T09:31:07.153902Z",
-                "public_uuid": null
-            },
-            "updated_at": "2026-10-08T10:45:16.774444Z",
-            "col": 0,
-            "id": 85,
-            "parameter_mappings": [
-                {
-                    "parameter_id": "58c3c149",
-                    "card_id": 88,
-                    "target": [
-                        "variable",
-                        [
-                            "template-tag",
-                            "facility_id"
-                        ]
-                    ]
-                }
-            ],
-            "card_id": 88,
-            "entity_id": "cXriM_ukDqQnFE9c1e070",
-            "visualization_settings": {},
-            "size_y": 9,
-            "dashboard_id": 7,
-            "created_at": "2026-10-08T09:31:07.160395Z",
-            "row": 0
-        },
-        {
-            "size_x": 12,
-            "dashboard_tab_id": null,
-            "series": [],
-            "inline_parameters": [],
-            "action_id": null,
-            "collection_authority_level": null,
-            "card": {
-                "cache_invalidated_at": null,
-                "description": null,
-                "archived": false,
-                "view_count": 73,
-                "collection_position": null,
-                "source_card_id": null,
-                "table_id": null,
-                "result_metadata": [
-                    {
-                        "database_type": "text",
-                        "semantic_type": null,
-                        "lib/deduplicated-name": "facilityCode",
-                        "lib/original-name": "facilityCode",
-                        "name": "facilityCode",
-                        "lib/source": "source/native",
-                        "lib/source-column-alias": "facilityCode",
-                        "source": "native",
-                        "field_ref": [
-                            "field",
-                            "facilityCode",
-                            {
-                                "base-type": "type/Text"
-                            }
-                        ],
-                        "effective_type": "type/Text",
-                        "lib/desired-column-alias": "facilityCode",
-                        "display_name": "facilityCode",
-                        "fingerprint": {
-                            "global": {
-                                "distinct-count": 1,
-                                "nil%": 0
-                            },
-                            "type": {
-                                "type/Text": {
-                                    "percent-json": 0,
-                                    "percent-url": 0,
-                                    "percent-email": 0,
-                                    "percent-state": 0,
-                                    "percent-blank": 0,
-                                    "average-length": 19,
-                                    "mode-fraction": 1,
-                                    "top-3-fraction": 1
-                                }
-                            }
-                        },
-                        "base_type": "type/Text"
-                    },
-                    {
-                        "database_type": "varchar",
-                        "semantic_type": null,
-                        "lib/deduplicated-name": "facilityName",
-                        "lib/original-name": "facilityName",
-                        "name": "facilityName",
-                        "lib/source": "source/native",
-                        "lib/source-column-alias": "facilityName",
-                        "source": "native",
-                        "field_ref": [
-                            "field",
-                            "facilityName",
-                            {
-                                "base-type": "type/Text"
-                            }
-                        ],
-                        "effective_type": "type/Text",
-                        "lib/desired-column-alias": "facilityName",
-                        "display_name": "facilityName",
-                        "fingerprint": {
-                            "global": {
-                                "distinct-count": 1,
-                                "nil%": 0
-                            },
-                            "type": {
-                                "type/Text": {
-                                    "percent-json": 0,
-                                    "percent-url": 0,
-                                    "percent-email": 0,
-                                    "percent-state": 0,
-                                    "percent-blank": 0,
-                                    "average-length": 16,
-                                    "mode-fraction": 1,
-                                    "top-3-fraction": 1
-                                }
-                            }
-                        },
-                        "base_type": "type/Text"
-                    },
-                    {
-                        "database_type": "int8",
-                        "semantic_type": "type/Quantity",
-                        "lib/deduplicated-name": "totalDDCCount",
-                        "lib/original-name": "totalDDCCount",
-                        "name": "totalDDCCount",
-                        "lib/source": "source/native",
-                        "lib/source-column-alias": "totalDDCCount",
-                        "source": "native",
-                        "field_ref": [
-                            "field",
-                            "totalDDCCount",
-                            {
-                                "base-type": "type/BigInteger"
-                            }
-                        ],
-                        "effective_type": "type/BigInteger",
-                        "lib/desired-column-alias": "totalDDCCount",
-                        "display_name": "totalDDCCount",
-                        "fingerprint": {
-                            "global": {
-                                "distinct-count": 1,
-                                "nil%": 0
-                            },
-                            "type": {
-                                "type/Number": {
-                                    "skewness": null,
-                                    "min": 3,
-                                    "q1": 3,
-                                    "q3": 3,
-                                    "excess-kurtosis": null,
-                                    "zero-fraction": 0,
-                                    "mode-fraction": 1,
-                                    "top-3-fraction": 1,
-                                    "max": 3,
-                                    "sd": 0,
-                                    "avg": 3
-                                }
-                            }
-                        },
-                        "base_type": "type/BigInteger"
-                    },
-                    {
-                        "database_type": "int8",
-                        "semantic_type": "type/Quantity",
-                        "lib/deduplicated-name": "activeDDCCount",
-                        "lib/original-name": "activeDDCCount",
-                        "name": "activeDDCCount",
-                        "lib/source": "source/native",
-                        "lib/source-column-alias": "activeDDCCount",
-                        "source": "native",
-                        "field_ref": [
-                            "field",
-                            "activeDDCCount",
-                            {
-                                "base-type": "type/BigInteger"
-                            }
-                        ],
-                        "effective_type": "type/BigInteger",
-                        "lib/desired-column-alias": "activeDDCCount",
-                        "display_name": "activeDDCCount",
-                        "fingerprint": {
-                            "global": {
-                                "distinct-count": 1,
-                                "nil%": 0
-                            },
-                            "type": {
-                                "type/Number": {
-                                    "skewness": null,
-                                    "min": 3,
-                                    "q1": 3,
-                                    "q3": 3,
-                                    "excess-kurtosis": null,
-                                    "zero-fraction": 0,
-                                    "mode-fraction": 1,
-                                    "top-3-fraction": 1,
-                                    "max": 3,
-                                    "sd": 0,
-                                    "avg": 3
-                                }
-                            }
-                        },
-                        "base_type": "type/BigInteger"
-                    },
-                    {
-                        "database_type": "int8",
-                        "semantic_type": "type/Quantity",
-                        "lib/deduplicated-name": "inactiveDDCCount",
-                        "lib/original-name": "inactiveDDCCount",
-                        "name": "inactiveDDCCount",
-                        "lib/source": "source/native",
-                        "lib/source-column-alias": "inactiveDDCCount",
-                        "source": "native",
-                        "field_ref": [
-                            "field",
-                            "inactiveDDCCount",
-                            {
-                                "base-type": "type/BigInteger"
-                            }
-                        ],
-                        "effective_type": "type/BigInteger",
-                        "lib/desired-column-alias": "inactiveDDCCount",
-                        "display_name": "inactiveDDCCount",
-                        "fingerprint": {
-                            "global": {
-                                "distinct-count": 1,
-                                "nil%": 0
-                            },
-                            "type": {
-                                "type/Number": {
-                                    "skewness": null,
-                                    "min": 0,
-                                    "q1": 0,
-                                    "q3": 0,
-                                    "excess-kurtosis": null,
-                                    "zero-fraction": 1,
-                                    "mode-fraction": 1,
-                                    "top-3-fraction": 1,
-                                    "max": 0,
-                                    "sd": 0,
-                                    "avg": 0
-                                }
-                            }
-                        },
-                        "base_type": "type/BigInteger"
-                    }
-                ],
-                "embedding_type": null,
-                "initially_published_at": null,
-                "can_write": true,
-                "card_schema": 23,
-                "database_id": 2,
-                "enable_embedding": false,
-                "collection_id": 4,
-                "query_type": "native",
-                "download_perms": "full",
-                "name": "active ddc",
-                "public_uuid_prefix": null,
-                "document_id": null,
-                "last_used_at": "2026-10-19T09:04:11.67013Z",
-                "type": "question",
-                "dimensions": null,
-                "query_average_duration": 1,
-                "creator_id": 1,
-                "moderation_reviews": [],
-                "updated_at": "2026-10-08T09:32:19.276421Z",
-                "made_public_by_id": null,
-                "embedding_params": null,
-                "cache_ttl": null,
-                "dataset_query": {
-                    "stages": [
-                        {
-                            "lib/type": "mbql.stage/native",
-                            "native": "SELECT\n  (\n    '****-****-****-' || RIGHT(f.external_id::TEXT, 4)\n  ) AS \"facilityCode\",\n  f.name AS \"facilityName\",\n  COUNT(DISTINCT loc.id) FILTER (\n    WHERE\n      hs.id IS NOT NULL\n  ) AS \"totalDDCCount\",\n  COUNT(DISTINCT loc.id) FILTER (\n    WHERE\n      hs.id IS NOT NULL\n      AND loc.status = 'active'\n  ) AS \"activeDDCCount\",\n  COUNT(DISTINCT loc.id) FILTER (\n    WHERE\n      hs.id IS NOT NULL\n      AND loc.status != 'active'\n  ) AS \"inactiveDDCCount\"\nFROM\n  facility_facility f\n  LEFT JOIN emr_facilitylocation loc ON loc.facility_id = f.id\n  AND loc.deleted = FALSE\n  LEFT JOIN emr_healthcareservice hs ON loc.id = ANY (hs.locations)\n  AND hs.deleted = FALSE\n  AND hs.internal_type = 'pharmacy'\nWHERE\n  f.deleted = FALSE\n  AND f.external_id = {{facility_id}}::UUID\nGROUP BY\n  f.external_id,\n  f.name\nORDER BY\n  f.name;",
-                            "template-tags": [
-                                {
-                                    "type": "text",
-                                    "name": "facility_id",
-                                    "id": "36400947-5a66-4467-bbcc-20324b3f26da",
-                                    "display-name": "Facility ID"
-                                }
-                            ]
-                        }
-                    ],
-                    "lib/type": "mbql/query",
-                    "database": 2
-                },
-                "dimension_mappings": null,
-                "id": 90,
-                "legacy_query": null,
-                "parameter_mappings": [],
-                "display": "table",
-                "archived_directly": false,
-                "entity_id": "Rzz5DXf8h5xQ802WGqynj",
-                "collection_preview": true,
-                "visualization_settings": {
-                    "table.pivot_column": "facilityCode",
-                    "table.cell_column": "totalDDCCount"
-                },
-                "metabase_version": "v0.63.16.8 (f4eec95)",
-                "parameters": [
-                    {
-                        "id": "36400947-5a66-4467-bbcc-20324b3f26da",
-                        "type": "string/=",
-                        "target": [
-                            "variable",
-                            [
-                                "template-tag",
-                                "facility_id"
-                            ]
-                        ],
-                        "name": "Facility ID",
-                        "slug": "facility_id",
-                        "isMultiSelect": false
-                    }
-                ],
-                "dashboard_id": 7,
-                "created_at": "2026-10-08T09:32:19.276421Z",
-                "public_uuid": null
-            },
-            "updated_at": "2026-10-08T09:39:04.942068Z",
-            "col": 12,
-            "id": 87,
-            "parameter_mappings": [
-                {
-                    "parameter_id": "58c3c149",
-                    "card_id": 90,
-                    "target": [
-                        "variable",
-                        [
-                            "template-tag",
-                            "facility_id"
-                        ]
-                    ]
-                }
-            ],
-            "card_id": 90,
-            "entity_id": "Jp9DEhJq8niqt4_mCL1EA",
-            "visualization_settings": {},
-            "size_y": 9,
-            "dashboard_id": 7,
-            "created_at": "2026-10-08T09:32:19.283251Z",
-            "row": 0
-        },
-        {
-            "size_x": 12,
-            "dashboard_tab_id": null,
-            "series": [],
-            "inline_parameters": [],
-            "action_id": null,
-            "collection_authority_level": null,
-            "card": {
-                "cache_invalidated_at": "2026-10-08T09:49:02.915945Z",
-                "description": null,
-                "archived": false,
-                "view_count": 86,
-                "collection_position": null,
-                "source_card_id": null,
-                "table_id": null,
-                "result_metadata": null,
-                "embedding_type": null,
-                "initially_published_at": null,
-                "can_write": true,
-                "card_schema": 23,
-                "database_id": 2,
-                "enable_embedding": false,
-                "collection_id": 4,
-                "query_type": "native",
-                "download_perms": "full",
-                "name": "Active DDC Item Issue",
-                "public_uuid_prefix": null,
-                "document_id": null,
-                "last_used_at": "2026-10-19T09:04:11.67013Z",
-                "type": "question",
-                "dimensions": null,
-                "query_average_duration": null,
-                "creator_id": 1,
-                "moderation_reviews": [],
-                "updated_at": "2026-10-08T09:49:02.918392Z",
-                "made_public_by_id": null,
-                "embedding_params": null,
-                "cache_ttl": null,
-                "dataset_query": {
-                    "stages": [
-                        {
-                            "lib/type": "mbql.stage/native",
-                            "native": "WITH\n  p AS (\n    SELECT\n      CASE LOWER(TRIM({{issue_date}}))\n        WHEN 'today' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date\n        WHEN 'yesterday' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date - 1\n        ELSE {{issue_date}}::date\n      END AS d\n  )\nSELECT\n  loc.name AS \"STORE_NAME\",\n  dvdms.eaushadhi_issue_no AS \"HSTNUM_ISSUE_NO\",\n  dvdms.drug_id AS \"HSTNUM_ITEM_ID\",\n  dvdms.brand_id AS \"HSTNUM_ITEMBRAND_ID\",\n  COALESCE(dvdms.batch, p2.batch ->> 'lot_number') AS \"HSTSTR_BATCH_SL_NO\",\n  md.quantity AS \"HSTNUM_ISSUE_QTY\",\n  COALESCE(\n    dvdms.expiry_date,\n    (p2.expiration_date AT TIME ZONE 'Asia/Kolkata')::date\n  ) AS \"HSTDT_EXPIRY_DATE\",\n  pat.external_id AS \"HRGNUM_PUK\"\nFROM\n  p,\n  emr_medicationdispense md\n  JOIN emr_facilitylocation loc ON loc.id = md.location_id\n  JOIN facility_facility f ON f.id = loc.facility_id\n  JOIN emr_inventoryitem ii ON ii.id = md.item_id\n  JOIN emr_product p2 ON p2.id = ii.product_id\n  JOIN emr_patient pat ON pat.id = md.patient_id\n  LEFT JOIN LATERAL (\n    SELECT\n      ir.eaushadhi_issue_no,\n      d.drug_id,\n      d.brand_id,\n      iir.batch,\n      iir.expiry_date\n    FROM\n      emr_supplydelivery sd\n      JOIN emr_inventoryitem sii ON sii.id = sd.supplied_inventory_item_id\n      JOIN care_dvdms_dvdmsrecorddelivery rd ON rd.delivery_order_id = sd.order_id\n      AND rd.deleted = FALSE\n      AND rd.status <> 'cancelled'\n      JOIN care_dvdms_dvdmsinwardrecord ir ON ir.id = rd.inward_record_id\n      LEFT JOIN care_dvdms_dvdmsrecorditemdelivery rid ON rid.supply_delivery_id = sd.id\n      AND rid.record_delivery_id = rd.id\n      AND rid.deleted = FALSE\n      LEFT JOIN care_dvdms_dvdmsinwarditemrecord iir ON iir.id = rid.inward_record_item_id\n      LEFT JOIN care_dvdms_dvdmsrecorditemorder rio ON rio.id = iir.record_order_item_id\n      LEFT JOIN care_dvdms_dvdmsdrug d ON d.id = rio.drug_id\n    WHERE\n      sii.product_id = ii.product_id\n      AND sd.status = 'completed'\n      AND sd.deleted = FALSE\n      AND sd.created_date <= COALESCE(\n        md.when_handed_over,\n        md.when_prepared,\n        md.created_date\n      )\n    ORDER BY\n      sd.created_date DESC\n    LIMIT\n      1\n  ) dvdms ON TRUE\nWHERE\n  md.deleted = FALSE\n  AND md.status = 'completed'\n  AND f.external_id = {{facility_id}}::UUID\n  AND (\n    COALESCE(\n      md.when_handed_over,\n      md.when_prepared,\n      md.created_date\n    ) AT TIME ZONE 'Asia/Kolkata'\n  )::date = p.d\nORDER BY\n  COALESCE(\n    md.when_handed_over,\n    md.when_prepared,\n    md.created_date\n  ),\n  \"HSTNUM_ISSUE_NO\";",
-                            "template-tags": [
-                                {
-                                    "id": "95cf86dc-93f5-4dd1-95da-ced15a3c8bcc",
-                                    "type": "text",
-                                    "name": "facility_id",
-                                    "display-name": "Facility ID"
-                                },
-                                {
-                                    "id": "2d0274ba-84fc-4a71-b63e-c9e08fb80c70",
-                                    "type": "text",
-                                    "required": false,
-                                    "name": "issue_date",
-                                    "display-name": "Issue Date",
-                                    "default": null
-                                }
-                            ]
-                        }
-                    ],
-                    "lib/type": "mbql/query",
-                    "database": 2
-                },
-                "dimension_mappings": null,
-                "id": 92,
-                "legacy_query": null,
-                "parameter_mappings": [],
-                "display": "table",
-                "archived_directly": false,
-                "entity_id": "gAPaiU1-mL6tbjjOgcb9W",
-                "collection_preview": true,
-                "visualization_settings": {
-                    "table.pivot_column": "STORE_NAME",
-                    "table.cell_column": "HSTNUM_ISSUE_QTY"
-                },
-                "metabase_version": "v0.63.16.8 (f4eec95)",
-                "parameters": [
-                    {
-                        "id": "95cf86dc-93f5-4dd1-95da-ced15a3c8bcc",
-                        "type": "string/=",
-                        "target": [
-                            "variable",
-                            [
-                                "template-tag",
-                                "facility_id"
-                            ]
-                        ],
-                        "name": "Facility ID",
-                        "slug": "facility_id",
-                        "isMultiSelect": false
-                    },
-                    {
-                        "id": "2d0274ba-84fc-4a71-b63e-c9e08fb80c70",
-                        "type": "string/=",
-                        "target": [
-                            "variable",
-                            [
-                                "template-tag",
-                                "issue_date"
-                            ]
-                        ],
-                        "name": "Issue Date",
-                        "slug": "issue_date",
-                        "default": null,
-                        "required": false,
-                        "isMultiSelect": false
-                    }
-                ],
-                "dashboard_id": 7,
-                "created_at": "2026-10-08T09:35:28.041813Z",
-                "public_uuid": null
-            },
-            "updated_at": "2026-10-08T09:48:35.706453Z",
-            "col": 0,
-            "id": 89,
-            "parameter_mappings": [
-                {
-                    "parameter_id": "58c3c149",
-                    "card_id": 92,
-                    "target": [
-                        "variable",
-                        [
-                            "template-tag",
-                            "facility_id"
-                        ]
-                    ]
-                },
-                {
-                    "parameter_id": "f0020b42",
-                    "card_id": 92,
-                    "target": [
-                        "variable",
-                        [
-                            "template-tag",
-                            "issue_date"
-                        ]
-                    ]
-                }
-            ],
-            "card_id": 92,
-            "entity_id": "7zzLqzvDLbAqrIpw2ZiIm",
-            "visualization_settings": {},
-            "size_y": 9,
-            "dashboard_id": 7,
-            "created_at": "2026-10-08T09:35:28.057975Z",
-            "row": 9
-        },
-        {
-            "size_x": 12,
-            "dashboard_tab_id": null,
-            "series": [],
-            "inline_parameters": [],
-            "action_id": null,
-            "collection_authority_level": null,
-            "card": {
-                "cache_invalidated_at": "2026-10-08T10:02:17.747432Z",
-                "description": null,
-                "archived": false,
-                "view_count": 78,
-                "collection_position": null,
-                "source_card_id": null,
-                "table_id": null,
-                "result_metadata": null,
-                "embedding_type": null,
-                "initially_published_at": null,
-                "can_write": true,
-                "card_schema": 23,
-                "database_id": 2,
-                "enable_embedding": false,
-                "collection_id": 4,
-                "query_type": "native",
-                "download_perms": "full",
-                "name": "Issue & Consumption",
-                "public_uuid_prefix": null,
-                "document_id": null,
-                "last_used_at": "2026-10-19T09:04:11.67013Z",
-                "type": "question",
-                "dimensions": null,
-                "query_average_duration": null,
-                "creator_id": 1,
-                "moderation_reviews": [],
-                "updated_at": "2026-10-08T10:02:17.749852Z",
-                "made_public_by_id": null,
-                "embedding_params": null,
-                "cache_ttl": null,
-                "dataset_query": {
-                    "stages": [
-                        {
-                            "lib/type": "mbql.stage/native",
-                            "native": "WITH\n   pharmacy_stores AS (\n     SELECT\n       loc.id AS location_id\n     FROM\n       emr_facilitylocation loc\n       JOIN emr_healthcareservice hs ON loc.id = ANY (hs.locations)\n       AND hs.deleted = FALSE\n       AND hs.internal_type = 'pharmacy'\n     WHERE\n       loc.deleted = FALSE\n   ),\n   eaushadhi_drugs AS (\n     SELECT DISTINCT ON (ii.product_id)\n       ii.product_id,\n       d.drug_id,\n       d.name AS drug_name,\n       ir.eaushadhi_issue_no\n     FROM\n       care_dvdms_dvdmsrecorditemorder rio\n       JOIN care_dvdms_dvdmsrecordorder ro ON ro.id = rio.record_order_id\n       AND ro.deleted = FALSE\n       AND ro.status <> 'cancelled'\n       JOIN care_dvdms_dvdmsdrug d ON d.id = rio.drug_id\n       JOIN emr_supplydelivery sd ON sd.supply_request_id = rio.supply_request_id\n       AND sd.deleted = FALSE\n       JOIN emr_inventoryitem ii ON ii.id = sd.supplied_inventory_item_id\n       LEFT JOIN care_dvdms_dvdmsrecorddelivery rd ON rd.delivery_order_id = sd.order_id\n       AND rd.deleted = FALSE\n       AND rd.status <> 'cancelled'\n       LEFT JOIN care_dvdms_dvdmsinwardrecord ir ON ir.id = rd.inward_record_id\n     WHERE\n       rio.deleted = FALSE\n     ORDER BY\n       ii.product_id,\n       sd.created_date DESC\n   ),\n   movements AS (\n     SELECT\n       dor.origin_id AS from_location_id,\n       dor.destination_id AS to_location_id,\n       ii.product_id,\n       sd.created_date::date AS metric_date,\n       CASE\n         WHEN dor.origin_id IS NOT NULL THEN sd.supplied_item_quantity\n         ELSE 0\n       END AS quantity_issued,\n       sd.supplied_item_quantity AS quantity_consumed\n     FROM\n       emr_supplydelivery sd\n       JOIN emr_deliveryorder dor ON dor.id = sd.order_id\n       AND dor.deleted = FALSE\n       JOIN emr_inventoryitem ii ON ii.id = sd.supplied_inventory_item_id\n     WHERE\n       sd.deleted = FALSE\n       AND sd.status = 'completed'\n     UNION ALL\n     SELECT\n       ii.location_id AS from_location_id,\n       NULL AS to_location_id,\n       ii.product_id,\n       COALESCE(md.when_handed_over, md.when_prepared, md.created_date)::date AS metric_date,\n       md.quantity AS quantity_issued,\n       0 AS quantity_consumed\n     FROM\n       emr_medicationdispense md\n       JOIN emr_inventoryitem ii ON ii.id = md.item_id\n     WHERE\n       md.deleted = FALSE\n       AND md.status = 'completed'\n   )\n SELECT\n   COALESCE(fl.name, '-') AS from_store,\n   COALESCE(tl.name, '-') AS to_store,\n   ed.drug_id,\n   ed.drug_name,\n   p.batch ->> 'lot_number' AS batch_number,\n   (p.expiration_date AT TIME ZONE 'Asia/Kolkata')::date AS expiry_date,\n   ed.eaushadhi_issue_no AS issue_no,\n   m.metric_date,\n   SUM(m.quantity_issued) AS total_quantity_issued,\n   SUM(m.quantity_consumed) AS total_quantity_consumed\n FROM\n   movements m\n   JOIN emr_product p ON p.id = m.product_id\n   LEFT JOIN emr_facilitylocation fl ON fl.id = m.from_location_id\n   LEFT JOIN emr_facilitylocation tl ON tl.id = m.to_location_id\n   JOIN facility_facility f ON f.id = COALESCE(fl.facility_id, tl.facility_id)\n   LEFT JOIN eaushadhi_drugs ed ON ed.product_id = m.product_id\n WHERE\n   f.external_id = {{facility_id}}::UUID\n   AND m.metric_date = {{issue_date}}::date\n   AND (\n     m.from_location_id IN (SELECT location_id FROM pharmacy_stores)\n     OR m.to_location_id IN (SELECT location_id FROM pharmacy_stores)\n   )\n GROUP BY\n   fl.name,\n   tl.name,\n   p.id,\n   ed.drug_id,\n   ed.drug_name,\n   ed.eaushadhi_issue_no,\n   m.metric_date\n ORDER BY\n   from_store,\n   to_store,\n   drug_name,\n   batch_number;",
-                            "template-tags": [
-                                {
-                                    "id": "da512fe7-8234-4478-9228-a31cd13f6904",
-                                    "type": "text",
-                                    "name": "facility_id",
-                                    "display-name": "Facility ID"
-                                },
-                                {
-                                    "id": "59829d20-9f5f-48e2-81b0-198033e4c7a5",
-                                    "type": "text",
-                                    "name": "issue_date",
-                                    "display-name": "Issue Date"
-                                }
-                            ]
-                        }
-                    ],
-                    "lib/type": "mbql/query",
-                    "database": 2
-                },
-                "dimension_mappings": null,
-                "id": 93,
-                "legacy_query": null,
-                "parameter_mappings": [],
-                "display": "table",
-                "archived_directly": false,
-                "entity_id": "PL55TPY5kNwIa-hcmZQG6",
-                "collection_preview": true,
-                "visualization_settings": {
-                    "table.pivot_column": "from_store",
-                    "table.cell_column": "total_quantity_issued"
-                },
-                "metabase_version": "v0.63.16.8 (f4eec95)",
-                "parameters": [
-                    {
-                        "id": "da512fe7-8234-4478-9228-a31cd13f6904",
-                        "type": "string/=",
-                        "target": [
-                            "variable",
-                            [
-                                "template-tag",
-                                "facility_id"
-                            ]
-                        ],
-                        "name": "Facility ID",
-                        "slug": "facility_id",
-                        "isMultiSelect": false
-                    },
-                    {
-                        "id": "59829d20-9f5f-48e2-81b0-198033e4c7a5",
-                        "type": "string/=",
-                        "target": [
-                            "variable",
-                            [
-                                "template-tag",
-                                "issue_date"
-                            ]
-                        ],
-                        "name": "Issue Date",
-                        "slug": "issue_date",
-                        "isMultiSelect": false
-                    }
-                ],
-                "dashboard_id": 7,
-                "created_at": "2026-10-08T09:36:05.303418Z",
-                "public_uuid": null
-            },
-            "updated_at": "2026-10-08T09:48:35.706453Z",
-            "col": 12,
-            "id": 90,
-            "parameter_mappings": [
-                {
-                    "parameter_id": "58c3c149",
-                    "card_id": 93,
-                    "target": [
-                        "variable",
-                        [
-                            "template-tag",
-                            "facility_id"
-                        ]
-                    ]
-                },
-                {
-                    "parameter_id": "f0020b42",
-                    "card_id": 93,
-                    "target": [
-                        "variable",
-                        [
-                            "template-tag",
-                            "issue_date"
-                        ]
-                    ]
-                }
-            ],
-            "card_id": 93,
-            "entity_id": "on3lZktF6RrXaHn93ixnk",
-            "visualization_settings": {},
-            "size_y": 9,
-            "dashboard_id": 7,
-            "created_at": "2026-10-08T09:36:05.309984Z",
-            "row": 9
-        }
-    ],
-    "embedding_type": "guest-embed",
-    "initially_published_at": "2026-10-08T09:44:19.976403Z",
-    "can_write": true,
-    "can_set_cache_policy": true,
-    "tabs": [],
-    "enable_embedding": true,
-    "collection_id": 4,
-    "show_in_getting_started": false,
-    "name": "DVDMS Stock",
-    "is_remote_synced": false,
-    "width": "fixed",
-    "public_uuid_prefix": null,
-    "caveats": null,
-    "collection_authority_level": null,
-    "creator_id": 1,
-    "can_restore": false,
-    "moderation_reviews": [],
-    "updated_at": "2026-10-08T11:12:15.675912Z",
-    "made_public_by_id": null,
-    "embedding_params": {
-        "facility_id": "enabled",
-        "date": "enabled"
-    },
-    "cache_ttl": null,
-    "last_used_param_values": {
-        "58c3c149": [
-            "5e971c0e-22d8-494a-a231-2b10c5938140"
-        ],
-        "f0020b42": [
-            "10-09-2026"
-        ]
-    },
-    "id": 7,
-    "last_viewed_at": "2026-10-19T09:04:11.661465Z",
-    "position": null,
-    "archived_directly": false,
-    "entity_id": "GyEG0Z3geasMUxpW0rst-",
-    "param_fields": {},
-    "last-edit-info": {
-        "id": 1,
-        "email": "jagan.kumar@egov.org.in",
-        "first_name": "Jagankumar",
-        "last_name": "E",
-        "timestamp": "2026-10-08T11:11:49.569572Z"
-    },
-    "collection": {
-        "authority_level": null,
+  "description": null,
+  "archived": false,
+  "view_count": 94,
+  "collection_position": null,
+  "dashcards": [
+    {
+      "size_x": 12,
+      "dashboard_tab_id": null,
+      "series": [],
+      "inline_parameters": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "card": {
+        "cache_invalidated_at": "2026-10-08T11:04:10.985005Z",
         "description": null,
         "archived": false,
-        "slug": "jagankumar_e_s_personal_collection",
-        "archive_operation_id": null,
-        "name": "Jagankumar E's Personal Collection",
-        "is_remote_synced": false,
-        "personal_owner_id": 1,
-        "type": null,
-        "is_sample": false,
-        "effective_location": "/",
-        "id": 4,
-        "archived_directly": null,
-        "entity_id": "Ot5KR_ZcC6-BIRkJrH-_M",
-        "location": "/",
-        "namespace": null,
-        "is_personal": true,
-        "created_at": "2026-03-24T03:56:01.375354Z"
-    },
-    "parameters": [
-        {
+        "view_count": 75,
+        "collection_position": null,
+        "source_card_id": null,
+        "table_id": null,
+        "result_metadata": [],
+        "embedding_type": null,
+        "initially_published_at": null,
+        "can_write": true,
+        "card_schema": 23,
+        "database_id": 2,
+        "enable_embedding": false,
+        "collection_id": 4,
+        "query_type": "native",
+        "download_perms": "full",
+        "name": "Facility & DVDMS Mapping",
+        "public_uuid_prefix": null,
+        "document_id": null,
+        "last_used_at": "2026-10-19T09:04:11.67013Z",
+        "type": "question",
+        "dimensions": null,
+        "query_average_duration": null,
+        "creator_id": 1,
+        "moderation_reviews": [],
+        "updated_at": "2026-10-08T11:04:10.988648Z",
+        "made_public_by_id": null,
+        "embedding_params": null,
+        "cache_ttl": null,
+        "dataset_query": {
+          "stages": [
+            {
+              "native": "SELECT\n  f.external_id                 AS \"Facility ID\",\n  f.name                        AS \"Facility Name\",\n  geo.name                      AS \"Geo Organization\",\n  inst.eaushadhi_institute_id   AS \"Institute ID\",\n  inst.eaushadhi_institute_name AS \"Institute Name\",\n  st.eaushadhi_store_id         AS \"Store ID\",\n  st.eaushadhi_store_name       AS \"Store Name\",\n  stloc.name                    AS \"Store Location\",\n  sp.eaushadhi_warehouse_id     AS \"Supplier ID\",\n  sp.eaushadhi_warehouse_name   AS \"Supplier Name\",\n  sporg.name                    AS \"Supplier Organization\",\n  CASE\n    WHEN inst.id IS NULL THEN 'Not onboarded'\n    WHEN st.id IS NULL\n      OR sp.id IS NULL THEN 'Incomplete mapping'\n    ELSE 'Configured'\n  END                           AS \"DVDMS Status\"\nFROM\n  facility_facility f\n  LEFT JOIN emr_organization geo ON geo.id = f.geo_organization_id\n  AND geo.deleted = FALSE\n  LEFT JOIN care_dvdms_dvdmsinstitute inst ON inst.facility_id = f.id\n  AND inst.deleted = FALSE\n  -- One store / one supplier per institute is enforced in the UI, not in the\n  -- database (the only DB constraint is one *default* per institute). LATERAL\n  -- + LIMIT 1 keeps this one row per facility even if that invariant slips.\n  LEFT JOIN LATERAL (\n    SELECT\n      s2.id,\n      s2.eaushadhi_store_id,\n      s2.eaushadhi_store_name,\n      s2.location_id\n    FROM\n      care_dvdms_dvdmsstore s2\n    WHERE\n      s2.institute_id = inst.id\n      AND s2.deleted = FALSE\n    ORDER BY\n      s2.is_default DESC,\n      s2.id\n    LIMIT\n      1\n  ) st ON TRUE\n  LEFT JOIN emr_facilitylocation stloc ON stloc.id = st.location_id\n  AND stloc.deleted = FALSE\n  LEFT JOIN LATERAL (\n    SELECT\n      p2.id,\n      p2.eaushadhi_warehouse_id,\n      p2.eaushadhi_warehouse_name,\n      p2.supplier_id\n    FROM\n      care_dvdms_dvdmssupplier p2\n    WHERE\n      p2.institute_id = inst.id\n      AND p2.deleted = FALSE\n    ORDER BY\n      p2.is_default DESC,\n      p2.id\n    LIMIT\n      1\n  ) sp ON TRUE\n  LEFT JOIN emr_organization sporg ON sporg.id = sp.supplier_id\n  AND sporg.deleted = FALSE\nWHERE\n  f.deleted = FALSE\n  AND f.is_active = TRUE\n  -- Inherited from the original card. Drop this line to also list facilities\n  -- that are not flagged public (is_public defaults to FALSE).\n  AND f.is_public = TRUE\n  [[AND f.external_id = {{facility_id}}::UUID]]\nORDER BY\n  f.name;",
+              "lib/type": "mbql.stage/native",
+              "template-tags": [
+                {
+                  "name": "facility_id",
+                  "id": "8deca7df-7702-4994-8a0d-fe8e3b87f084",
+                  "type": "text",
+                  "display-name": "Facility ID"
+                }
+              ]
+            }
+          ],
+          "lib/type": "mbql/query",
+          "database": 2
+        },
+        "dimension_mappings": null,
+        "id": 88,
+        "legacy_query": null,
+        "parameter_mappings": [],
+        "display": "table",
+        "archived_directly": false,
+        "entity_id": "MggcjyklHOBcHWfblt-s_",
+        "collection_preview": true,
+        "visualization_settings": {
+          "table.pivot_column": "Geo Organization",
+          "table.cell_column": "Facility Name"
+        },
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "parameters": [
+          {
+            "id": "8deca7df-7702-4994-8a0d-fe8e3b87f084",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "facility_id"
+              ]
+            ],
             "name": "Facility ID",
             "slug": "facility_id",
-            "id": "58c3c149",
-            "type": "string/=",
-            "sectionId": "id",
-            "values_query_type": "none",
             "isMultiSelect": false
+          }
+        ],
+        "dashboard_id": 7,
+        "created_at": "2026-10-08T09:31:07.153902Z",
+        "public_uuid": null
+      },
+      "updated_at": "2026-10-08T10:45:16.774444Z",
+      "col": 0,
+      "id": 85,
+      "parameter_mappings": [
+        {
+          "parameter_id": "58c3c149",
+          "card_id": 88,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "facility_id"
+            ]
+          ]
+        }
+      ],
+      "card_id": 88,
+      "entity_id": "cXriM_ukDqQnFE9c1e070",
+      "visualization_settings": {},
+      "size_y": 9,
+      "dashboard_id": 7,
+      "created_at": "2026-10-08T09:31:07.160395Z",
+      "row": 0
+    },
+    {
+      "size_x": 12,
+      "dashboard_tab_id": null,
+      "series": [],
+      "inline_parameters": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "card": {
+        "cache_invalidated_at": null,
+        "description": null,
+        "archived": false,
+        "view_count": 73,
+        "collection_position": null,
+        "source_card_id": null,
+        "table_id": null,
+        "result_metadata": [
+          {
+            "database_type": "text",
+            "semantic_type": null,
+            "lib/deduplicated-name": "facilityCode",
+            "lib/original-name": "facilityCode",
+            "name": "facilityCode",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "facilityCode",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "facilityCode",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "facilityCode",
+            "display_name": "facilityCode",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 1,
+                "nil%": 0
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0,
+                  "average-length": 19,
+                  "mode-fraction": 1,
+                  "top-3-fraction": 1
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "facilityName",
+            "lib/original-name": "facilityName",
+            "name": "facilityName",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "facilityName",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "facilityName",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "facilityName",
+            "display_name": "facilityName",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 1,
+                "nil%": 0
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0,
+                  "average-length": 16,
+                  "mode-fraction": 1,
+                  "top-3-fraction": 1
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "int8",
+            "semantic_type": "type/Quantity",
+            "lib/deduplicated-name": "totalDDCCount",
+            "lib/original-name": "totalDDCCount",
+            "name": "totalDDCCount",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "totalDDCCount",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "totalDDCCount",
+              {
+                "base-type": "type/BigInteger"
+              }
+            ],
+            "effective_type": "type/BigInteger",
+            "lib/desired-column-alias": "totalDDCCount",
+            "display_name": "totalDDCCount",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 1,
+                "nil%": 0
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": 3,
+                  "q1": 3,
+                  "q3": 3,
+                  "excess-kurtosis": null,
+                  "zero-fraction": 0,
+                  "mode-fraction": 1,
+                  "top-3-fraction": 1,
+                  "max": 3,
+                  "sd": 0,
+                  "avg": 3
+                }
+              }
+            },
+            "base_type": "type/BigInteger"
+          },
+          {
+            "database_type": "int8",
+            "semantic_type": "type/Quantity",
+            "lib/deduplicated-name": "activeDDCCount",
+            "lib/original-name": "activeDDCCount",
+            "name": "activeDDCCount",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "activeDDCCount",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "activeDDCCount",
+              {
+                "base-type": "type/BigInteger"
+              }
+            ],
+            "effective_type": "type/BigInteger",
+            "lib/desired-column-alias": "activeDDCCount",
+            "display_name": "activeDDCCount",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 1,
+                "nil%": 0
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": 3,
+                  "q1": 3,
+                  "q3": 3,
+                  "excess-kurtosis": null,
+                  "zero-fraction": 0,
+                  "mode-fraction": 1,
+                  "top-3-fraction": 1,
+                  "max": 3,
+                  "sd": 0,
+                  "avg": 3
+                }
+              }
+            },
+            "base_type": "type/BigInteger"
+          },
+          {
+            "database_type": "int8",
+            "semantic_type": "type/Quantity",
+            "lib/deduplicated-name": "inactiveDDCCount",
+            "lib/original-name": "inactiveDDCCount",
+            "name": "inactiveDDCCount",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "inactiveDDCCount",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "inactiveDDCCount",
+              {
+                "base-type": "type/BigInteger"
+              }
+            ],
+            "effective_type": "type/BigInteger",
+            "lib/desired-column-alias": "inactiveDDCCount",
+            "display_name": "inactiveDDCCount",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 1,
+                "nil%": 0
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": 0,
+                  "q1": 0,
+                  "q3": 0,
+                  "excess-kurtosis": null,
+                  "zero-fraction": 1,
+                  "mode-fraction": 1,
+                  "top-3-fraction": 1,
+                  "max": 0,
+                  "sd": 0,
+                  "avg": 0
+                }
+              }
+            },
+            "base_type": "type/BigInteger"
+          }
+        ],
+        "embedding_type": null,
+        "initially_published_at": null,
+        "can_write": true,
+        "card_schema": 23,
+        "database_id": 2,
+        "enable_embedding": false,
+        "collection_id": 4,
+        "query_type": "native",
+        "download_perms": "full",
+        "name": "active ddc",
+        "public_uuid_prefix": null,
+        "document_id": null,
+        "last_used_at": "2026-10-19T09:04:11.67013Z",
+        "type": "question",
+        "dimensions": null,
+        "query_average_duration": 1,
+        "creator_id": 1,
+        "moderation_reviews": [],
+        "updated_at": "2026-10-08T09:32:19.276421Z",
+        "made_public_by_id": null,
+        "embedding_params": null,
+        "cache_ttl": null,
+        "dataset_query": {
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "SELECT\n  (\n    '****-****-****-' || RIGHT(f.external_id::TEXT, 4)\n  ) AS \"facilityCode\",\n  f.name AS \"facilityName\",\n  COUNT(DISTINCT loc.id) FILTER (\n    WHERE\n      hs.id IS NOT NULL\n  ) AS \"totalDDCCount\",\n  COUNT(DISTINCT loc.id) FILTER (\n    WHERE\n      hs.id IS NOT NULL\n      AND loc.status = 'active'\n  ) AS \"activeDDCCount\",\n  COUNT(DISTINCT loc.id) FILTER (\n    WHERE\n      hs.id IS NOT NULL\n      AND loc.status != 'active'\n  ) AS \"inactiveDDCCount\"\nFROM\n  facility_facility f\n  LEFT JOIN emr_facilitylocation loc ON loc.facility_id = f.id\n  AND loc.deleted = FALSE\n  LEFT JOIN emr_healthcareservice hs ON loc.id = ANY (hs.locations)\n  AND hs.deleted = FALSE\n  AND hs.internal_type = 'pharmacy'\nWHERE\n  f.deleted = FALSE\n  AND f.external_id = {{facility_id}}::UUID\nGROUP BY\n  f.external_id,\n  f.name\nORDER BY\n  f.name;",
+              "template-tags": [
+                {
+                  "type": "text",
+                  "name": "facility_id",
+                  "id": "36400947-5a66-4467-bbcc-20324b3f26da",
+                  "display-name": "Facility ID"
+                }
+              ]
+            }
+          ],
+          "lib/type": "mbql/query",
+          "database": 2
+        },
+        "dimension_mappings": null,
+        "id": 90,
+        "legacy_query": null,
+        "parameter_mappings": [],
+        "display": "table",
+        "archived_directly": false,
+        "entity_id": "Rzz5DXf8h5xQ802WGqynj",
+        "collection_preview": true,
+        "visualization_settings": {
+          "table.pivot_column": "facilityCode",
+          "table.cell_column": "totalDDCCount"
+        },
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "parameters": [
+          {
+            "id": "36400947-5a66-4467-bbcc-20324b3f26da",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "facility_id"
+              ]
+            ],
+            "name": "Facility ID",
+            "slug": "facility_id",
+            "isMultiSelect": false
+          }
+        ],
+        "dashboard_id": 7,
+        "created_at": "2026-10-08T09:32:19.276421Z",
+        "public_uuid": null
+      },
+      "updated_at": "2026-10-08T09:39:04.942068Z",
+      "col": 12,
+      "id": 87,
+      "parameter_mappings": [
+        {
+          "parameter_id": "58c3c149",
+          "card_id": 90,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "facility_id"
+            ]
+          ]
+        }
+      ],
+      "card_id": 90,
+      "entity_id": "Jp9DEhJq8niqt4_mCL1EA",
+      "visualization_settings": {},
+      "size_y": 9,
+      "dashboard_id": 7,
+      "created_at": "2026-10-08T09:32:19.283251Z",
+      "row": 0
+    },
+    {
+      "size_x": 12,
+      "dashboard_tab_id": null,
+      "series": [],
+      "inline_parameters": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "card": {
+        "cache_invalidated_at": "2026-10-08T09:49:02.915945Z",
+        "description": null,
+        "archived": false,
+        "view_count": 86,
+        "collection_position": null,
+        "source_card_id": null,
+        "table_id": null,
+        "result_metadata": null,
+        "embedding_type": null,
+        "initially_published_at": null,
+        "can_write": true,
+        "card_schema": 23,
+        "database_id": 2,
+        "enable_embedding": false,
+        "collection_id": 4,
+        "query_type": "native",
+        "download_perms": "full",
+        "name": "Active DDC Item Issue",
+        "public_uuid_prefix": null,
+        "document_id": null,
+        "last_used_at": "2026-10-19T09:04:11.67013Z",
+        "type": "question",
+        "dimensions": null,
+        "query_average_duration": null,
+        "creator_id": 1,
+        "moderation_reviews": [],
+        "updated_at": "2026-10-08T09:49:02.918392Z",
+        "made_public_by_id": null,
+        "embedding_params": null,
+        "cache_ttl": null,
+        "dataset_query": {
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "WITH\n  p AS (\n    SELECT\n      CASE LOWER(TRIM({{issue_date}}))\n        WHEN 'today' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date\n        WHEN 'yesterday' THEN (NOW() AT TIME ZONE 'Asia/Kolkata')::date - 1\n        ELSE {{issue_date}}::date\n      END AS d\n  )\nSELECT\n  loc.name AS \"STORE_NAME\",\n  dvdms.eaushadhi_issue_no AS \"HSTNUM_ISSUE_NO\",\n  dvdms.drug_id AS \"HSTNUM_ITEM_ID\",\n  dvdms.brand_id AS \"HSTNUM_ITEMBRAND_ID\",\n  COALESCE(dvdms.batch, p2.batch ->> 'lot_number') AS \"HSTSTR_BATCH_SL_NO\",\n  md.quantity AS \"HSTNUM_ISSUE_QTY\",\n  COALESCE(\n    dvdms.expiry_date,\n    (p2.expiration_date AT TIME ZONE 'Asia/Kolkata')::date\n  ) AS \"HSTDT_EXPIRY_DATE\",\n  pat.external_id AS \"HRGNUM_PUK\"\nFROM\n  p,\n  emr_medicationdispense md\n  JOIN emr_facilitylocation loc ON loc.id = md.location_id\n  JOIN facility_facility f ON f.id = loc.facility_id\n  JOIN emr_inventoryitem ii ON ii.id = md.item_id\n  JOIN emr_product p2 ON p2.id = ii.product_id\n  JOIN emr_patient pat ON pat.id = md.patient_id\n  LEFT JOIN LATERAL (\n    SELECT\n      ir.eaushadhi_issue_no,\n      d.drug_id,\n      d.brand_id,\n      iir.batch,\n      iir.expiry_date\n    FROM\n      emr_supplydelivery sd\n      JOIN emr_inventoryitem sii ON sii.id = sd.supplied_inventory_item_id\n      JOIN care_dvdms_dvdmsrecorddelivery rd ON rd.delivery_order_id = sd.order_id\n      AND rd.deleted = FALSE\n      AND rd.status <> 'cancelled'\n      JOIN care_dvdms_dvdmsinwardrecord ir ON ir.id = rd.inward_record_id\n      LEFT JOIN care_dvdms_dvdmsrecorditemdelivery rid ON rid.supply_delivery_id = sd.id\n      AND rid.record_delivery_id = rd.id\n      AND rid.deleted = FALSE\n      LEFT JOIN care_dvdms_dvdmsinwarditemrecord iir ON iir.id = rid.inward_record_item_id\n      LEFT JOIN care_dvdms_dvdmsrecorditemorder rio ON rio.id = iir.record_order_item_id\n      LEFT JOIN care_dvdms_dvdmsdrug d ON d.id = rio.drug_id\n    WHERE\n      sii.product_id = ii.product_id\n      AND sd.status = 'completed'\n      AND sd.deleted = FALSE\n      AND sd.created_date <= COALESCE(\n        md.when_handed_over,\n        md.when_prepared,\n        md.created_date\n      )\n    ORDER BY\n      sd.created_date DESC\n    LIMIT\n      1\n  ) dvdms ON TRUE\nWHERE\n  md.deleted = FALSE\n  AND md.status = 'completed'\n  AND f.external_id = {{facility_id}}::UUID\n  AND (\n    COALESCE(\n      md.when_handed_over,\n      md.when_prepared,\n      md.created_date\n    ) AT TIME ZONE 'Asia/Kolkata'\n  )::date = p.d\nORDER BY\n  COALESCE(\n    md.when_handed_over,\n    md.when_prepared,\n    md.created_date\n  ),\n  \"HSTNUM_ISSUE_NO\";",
+              "template-tags": [
+                {
+                  "id": "95cf86dc-93f5-4dd1-95da-ced15a3c8bcc",
+                  "type": "text",
+                  "name": "facility_id",
+                  "display-name": "Facility ID"
+                },
+                {
+                  "id": "2d0274ba-84fc-4a71-b63e-c9e08fb80c70",
+                  "type": "text",
+                  "required": false,
+                  "name": "issue_date",
+                  "display-name": "Issue Date",
+                  "default": null
+                }
+              ]
+            }
+          ],
+          "lib/type": "mbql/query",
+          "database": 2
+        },
+        "dimension_mappings": null,
+        "id": 92,
+        "legacy_query": null,
+        "parameter_mappings": [],
+        "display": "table",
+        "archived_directly": false,
+        "entity_id": "gAPaiU1-mL6tbjjOgcb9W",
+        "collection_preview": true,
+        "visualization_settings": {
+          "table.pivot_column": "STORE_NAME",
+          "table.cell_column": "HSTNUM_ISSUE_QTY"
+        },
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "parameters": [
+          {
+            "id": "95cf86dc-93f5-4dd1-95da-ced15a3c8bcc",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "facility_id"
+              ]
+            ],
+            "name": "Facility ID",
+            "slug": "facility_id",
+            "isMultiSelect": false
+          },
+          {
+            "id": "2d0274ba-84fc-4a71-b63e-c9e08fb80c70",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "issue_date"
+              ]
+            ],
+            "name": "Issue Date",
+            "slug": "issue_date",
+            "default": null,
+            "required": false,
+            "isMultiSelect": false
+          }
+        ],
+        "dashboard_id": 7,
+        "created_at": "2026-10-08T09:35:28.041813Z",
+        "public_uuid": null
+      },
+      "updated_at": "2026-10-08T09:48:35.706453Z",
+      "col": 0,
+      "id": 89,
+      "parameter_mappings": [
+        {
+          "parameter_id": "58c3c149",
+          "card_id": 92,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "facility_id"
+            ]
+          ]
         },
         {
-            "name": "Date",
-            "slug": "date",
-            "id": "f0020b42",
-            "type": "string/=",
-            "sectionId": "string",
-            "values_query_type": "none",
-            "isMultiSelect": false,
-            "default": [
-                "today"
+          "parameter_id": "f0020b42",
+          "card_id": 92,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "issue_date"
             ]
+          ]
         }
+      ],
+      "card_id": 92,
+      "entity_id": "7zzLqzvDLbAqrIpw2ZiIm",
+      "visualization_settings": {},
+      "size_y": 9,
+      "dashboard_id": 7,
+      "created_at": "2026-10-08T09:35:28.057975Z",
+      "row": 9
+    },
+    {
+      "size_x": 12,
+      "dashboard_tab_id": null,
+      "series": [],
+      "inline_parameters": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "card": {
+        "cache_invalidated_at": "2026-10-08T10:02:17.747432Z",
+        "description": null,
+        "archived": false,
+        "view_count": 78,
+        "collection_position": null,
+        "source_card_id": null,
+        "table_id": null,
+        "result_metadata": null,
+        "embedding_type": null,
+        "initially_published_at": null,
+        "can_write": true,
+        "card_schema": 23,
+        "database_id": 2,
+        "enable_embedding": false,
+        "collection_id": 4,
+        "query_type": "native",
+        "download_perms": "full",
+        "name": "Issue & Consumption",
+        "public_uuid_prefix": null,
+        "document_id": null,
+        "last_used_at": "2026-10-19T09:04:11.67013Z",
+        "type": "question",
+        "dimensions": null,
+        "query_average_duration": null,
+        "creator_id": 1,
+        "moderation_reviews": [],
+        "updated_at": "2026-10-08T10:02:17.749852Z",
+        "made_public_by_id": null,
+        "embedding_params": null,
+        "cache_ttl": null,
+        "dataset_query": {
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "WITH\n   pharmacy_stores AS (\n     SELECT\n       loc.id AS location_id\n     FROM\n       emr_facilitylocation loc\n       JOIN emr_healthcareservice hs ON loc.id = ANY (hs.locations)\n       AND hs.deleted = FALSE\n       AND hs.internal_type = 'pharmacy'\n     WHERE\n       loc.deleted = FALSE\n   ),\n   eaushadhi_drugs AS (\n     SELECT DISTINCT ON (ii.product_id)\n       ii.product_id,\n       d.drug_id,\n       d.name AS drug_name,\n       ir.eaushadhi_issue_no\n     FROM\n       care_dvdms_dvdmsrecorditemorder rio\n       JOIN care_dvdms_dvdmsrecordorder ro ON ro.id = rio.record_order_id\n       AND ro.deleted = FALSE\n       AND ro.status <> 'cancelled'\n       JOIN care_dvdms_dvdmsdrug d ON d.id = rio.drug_id\n       JOIN emr_supplydelivery sd ON sd.supply_request_id = rio.supply_request_id\n       AND sd.deleted = FALSE\n       JOIN emr_inventoryitem ii ON ii.id = sd.supplied_inventory_item_id\n       LEFT JOIN care_dvdms_dvdmsrecorddelivery rd ON rd.delivery_order_id = sd.order_id\n       AND rd.deleted = FALSE\n       AND rd.status <> 'cancelled'\n       LEFT JOIN care_dvdms_dvdmsinwardrecord ir ON ir.id = rd.inward_record_id\n     WHERE\n       rio.deleted = FALSE\n     ORDER BY\n       ii.product_id,\n       sd.created_date DESC\n   ),\n   movements AS (\n     SELECT\n       dor.origin_id AS from_location_id,\n       dor.destination_id AS to_location_id,\n       ii.product_id,\n       sd.created_date::date AS metric_date,\n       CASE\n         WHEN dor.origin_id IS NOT NULL THEN sd.supplied_item_quantity\n         ELSE 0\n       END AS quantity_issued,\n       sd.supplied_item_quantity AS quantity_consumed\n     FROM\n       emr_supplydelivery sd\n       JOIN emr_deliveryorder dor ON dor.id = sd.order_id\n       AND dor.deleted = FALSE\n       JOIN emr_inventoryitem ii ON ii.id = sd.supplied_inventory_item_id\n     WHERE\n       sd.deleted = FALSE\n       AND sd.status = 'completed'\n     UNION ALL\n     SELECT\n       ii.location_id AS from_location_id,\n       NULL AS to_location_id,\n       ii.product_id,\n       COALESCE(md.when_handed_over, md.when_prepared, md.created_date)::date AS metric_date,\n       md.quantity AS quantity_issued,\n       0 AS quantity_consumed\n     FROM\n       emr_medicationdispense md\n       JOIN emr_inventoryitem ii ON ii.id = md.item_id\n     WHERE\n       md.deleted = FALSE\n       AND md.status = 'completed'\n   )\n SELECT\n   COALESCE(fl.name, '-') AS from_store,\n   COALESCE(tl.name, '-') AS to_store,\n   ed.drug_id,\n   ed.drug_name,\n   p.batch ->> 'lot_number' AS batch_number,\n   (p.expiration_date AT TIME ZONE 'Asia/Kolkata')::date AS expiry_date,\n   ed.eaushadhi_issue_no AS issue_no,\n   m.metric_date,\n   SUM(m.quantity_issued) AS total_quantity_issued,\n   SUM(m.quantity_consumed) AS total_quantity_consumed\n FROM\n   movements m\n   JOIN emr_product p ON p.id = m.product_id\n   LEFT JOIN emr_facilitylocation fl ON fl.id = m.from_location_id\n   LEFT JOIN emr_facilitylocation tl ON tl.id = m.to_location_id\n   JOIN facility_facility f ON f.id = COALESCE(fl.facility_id, tl.facility_id)\n   LEFT JOIN eaushadhi_drugs ed ON ed.product_id = m.product_id\n WHERE\n   f.external_id = {{facility_id}}::UUID\n   AND m.metric_date = {{issue_date}}::date\n   AND (\n     m.from_location_id IN (SELECT location_id FROM pharmacy_stores)\n     OR m.to_location_id IN (SELECT location_id FROM pharmacy_stores)\n   )\n GROUP BY\n   fl.name,\n   tl.name,\n   p.id,\n   ed.drug_id,\n   ed.drug_name,\n   ed.eaushadhi_issue_no,\n   m.metric_date\n ORDER BY\n   from_store,\n   to_store,\n   drug_name,\n   batch_number;",
+              "template-tags": [
+                {
+                  "id": "da512fe7-8234-4478-9228-a31cd13f6904",
+                  "type": "text",
+                  "name": "facility_id",
+                  "display-name": "Facility ID"
+                },
+                {
+                  "id": "59829d20-9f5f-48e2-81b0-198033e4c7a5",
+                  "type": "text",
+                  "name": "issue_date",
+                  "display-name": "Issue Date"
+                }
+              ]
+            }
+          ],
+          "lib/type": "mbql/query",
+          "database": 2
+        },
+        "dimension_mappings": null,
+        "id": 93,
+        "legacy_query": null,
+        "parameter_mappings": [],
+        "display": "table",
+        "archived_directly": false,
+        "entity_id": "PL55TPY5kNwIa-hcmZQG6",
+        "collection_preview": true,
+        "visualization_settings": {
+          "table.pivot_column": "from_store",
+          "table.cell_column": "total_quantity_issued"
+        },
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "parameters": [
+          {
+            "id": "da512fe7-8234-4478-9228-a31cd13f6904",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "facility_id"
+              ]
+            ],
+            "name": "Facility ID",
+            "slug": "facility_id",
+            "isMultiSelect": false
+          },
+          {
+            "id": "59829d20-9f5f-48e2-81b0-198033e4c7a5",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "issue_date"
+              ]
+            ],
+            "name": "Issue Date",
+            "slug": "issue_date",
+            "isMultiSelect": false
+          }
+        ],
+        "dashboard_id": 7,
+        "created_at": "2026-10-08T09:36:05.303418Z",
+        "public_uuid": null
+      },
+      "updated_at": "2026-10-08T09:48:35.706453Z",
+      "col": 12,
+      "id": 90,
+      "parameter_mappings": [
+        {
+          "parameter_id": "58c3c149",
+          "card_id": 93,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "facility_id"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "f0020b42",
+          "card_id": 93,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "issue_date"
+            ]
+          ]
+        }
+      ],
+      "card_id": 93,
+      "entity_id": "on3lZktF6RrXaHn93ixnk",
+      "visualization_settings": {},
+      "size_y": 9,
+      "dashboard_id": 7,
+      "created_at": "2026-10-08T09:36:05.309984Z",
+      "row": 9
+    }
+  ],
+  "embedding_type": "guest-embed",
+  "initially_published_at": "2026-10-08T09:44:19.976403Z",
+  "can_write": true,
+  "can_set_cache_policy": true,
+  "tabs": [],
+  "enable_embedding": true,
+  "collection_id": 4,
+  "show_in_getting_started": false,
+  "name": "DVDMS Stock",
+  "is_remote_synced": false,
+  "width": "fixed",
+  "public_uuid_prefix": null,
+  "caveats": null,
+  "collection_authority_level": null,
+  "creator_id": 1,
+  "can_restore": false,
+  "moderation_reviews": [],
+  "updated_at": "2026-10-08T11:12:15.675912Z",
+  "made_public_by_id": null,
+  "embedding_params": {
+    "facility_id": "enabled",
+    "date": "enabled"
+  },
+  "cache_ttl": null,
+  "last_used_param_values": {
+    "58c3c149": [
+      "5e971c0e-22d8-494a-a231-2b10c5938140"
     ],
-    "auto_apply_filters": false,
-    "created_at": "2026-10-08T09:18:26.138101Z",
-    "public_uuid": null,
-    "points_of_interest": null,
-    "can_delete": false
+    "f0020b42": [
+      "10-09-2026"
+    ]
+  },
+  "id": 7,
+  "last_viewed_at": "2026-10-19T09:04:11.661465Z",
+  "position": null,
+  "archived_directly": false,
+  "entity_id": "GyEG0Z3geasMUxpW0rst-",
+  "param_fields": {},
+  "last-edit-info": {
+    "id": 1,
+    "email": "jagan.kumar@egov.org.in",
+    "first_name": "Jagankumar",
+    "last_name": "E",
+    "timestamp": "2026-10-08T11:11:49.569572Z"
+  },
+  "collection": {
+    "authority_level": null,
+    "description": null,
+    "archived": false,
+    "slug": "jagankumar_e_s_personal_collection",
+    "archive_operation_id": null,
+    "name": "Jagankumar E's Personal Collection",
+    "is_remote_synced": false,
+    "personal_owner_id": 1,
+    "type": null,
+    "is_sample": false,
+    "effective_location": "/",
+    "id": 4,
+    "archived_directly": null,
+    "entity_id": "Ot5KR_ZcC6-BIRkJrH-_M",
+    "location": "/",
+    "namespace": null,
+    "is_personal": true,
+    "created_at": "2026-03-24T03:56:01.375354Z"
+  },
+  "parameters": [
+    {
+      "name": "Facility ID",
+      "slug": "facility_id",
+      "id": "58c3c149",
+      "type": "string/=",
+      "sectionId": "id",
+      "values_query_type": "none",
+      "isMultiSelect": false
+    },
+    {
+      "name": "Date",
+      "slug": "date",
+      "id": "f0020b42",
+      "type": "string/=",
+      "sectionId": "string",
+      "values_query_type": "none",
+      "isMultiSelect": false,
+      "default": [
+        "today"
+      ]
+    }
+  ],
+  "auto_apply_filters": false,
+  "created_at": "2026-10-08T09:18:26.138101Z",
+  "public_uuid": null,
+  "points_of_interest": null,
+  "can_delete": false
 }
