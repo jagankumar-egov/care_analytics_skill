@@ -18,7 +18,6 @@ WITH
       -- own negative key so each stands alone instead of collapsing together.
       COALESCE(dord.id, -md.id)                 AS issue_key,
       COALESCE(dord.external_id, md.external_id) AS issue_id,
-      dord.alternate_identifier                 AS issue_no,
       loc.external_id                           AS location_uuid,
       loc.name                                  AS location_name,
       pat.external_id                           AS patient_uuid,
@@ -63,7 +62,6 @@ SELECT
   location_uuid   AS "Location ID",
   location_name   AS "DDC",
   issue_id        AS "Issue ID",
-  issue_no        AS "Issue No",
   patient_uuid    AS "Patient ID",
   COUNT(*)        AS "No of Items",
   SUM(quantity)   AS "Total Quantity"
@@ -75,9 +73,7 @@ GROUP BY
   location_uuid,
   location_name,
   issue_id,
-  issue_no,
   patient_uuid
 ORDER BY
   location_name,
-  issue_no NULLS LAST,
   issue_id;
