@@ -1,0 +1,3692 @@
+{
+  "description": null,
+  "archived": false,
+  "view_count": 23,
+  "collection_position": null,
+  "dashcards": [
+    {
+      "size_x": 24,
+      "dashboard_tab_id": null,
+      "series": [],
+      "inline_parameters": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "card": {
+        "cache_invalidated_at": null,
+        "description": null,
+        "archived": false,
+        "view_count": 13,
+        "collection_position": null,
+        "source_card_id": null,
+        "table_id": null,
+        "result_metadata": [
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "FACILITY_NAME",
+            "lib/original-name": "FACILITY_NAME",
+            "name": "FACILITY_NAME",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "FACILITY_NAME",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "FACILITY_NAME",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "FACILITY_NAME",
+            "display_name": "FACILITY_NAME",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 126,
+                "nil%": 0
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0,
+                  "average-length": 13.579365079365079,
+                  "mode-fraction": 0.007936507936507936,
+                  "top-3-fraction": 0.023809523809523808
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "INSTITUTE_NAME",
+            "lib/original-name": "INSTITUTE_NAME",
+            "name": "INSTITUTE_NAME",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "INSTITUTE_NAME",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "INSTITUTE_NAME",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "INSTITUTE_NAME",
+            "display_name": "INSTITUTE_NAME",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 4,
+                "nil%": 0.9761904761904762
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0.9841269841269841,
+                  "average-length": 0.1349206349206349,
+                  "mode-fraction": 0.9761904761904762,
+                  "top-3-fraction": 0.9920634920634921
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "PARENT_ID",
+            "lib/original-name": "PARENT_ID",
+            "name": "PARENT_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "PARENT_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "PARENT_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "PARENT_ID",
+            "display_name": "PARENT_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 2,
+                "nil%": 0.9920634920634921
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0.9920634920634921,
+                  "average-length": 0.06349206349206349,
+                  "mode-fraction": 0.9920634920634921,
+                  "top-3-fraction": 1
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "HOSPITAL_UNIQUE_ID",
+            "lib/original-name": "HOSPITAL_UNIQUE_ID",
+            "name": "HOSPITAL_UNIQUE_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "HOSPITAL_UNIQUE_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "HOSPITAL_UNIQUE_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "HOSPITAL_UNIQUE_ID",
+            "display_name": "HOSPITAL_UNIQUE_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 9,
+                "nil%": 0.9365079365079365
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0.9365079365079365,
+                  "average-length": 0.6746031746031746,
+                  "mode-fraction": 0.9365079365079365,
+                  "top-3-fraction": 0.9523809523809523
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "text",
+            "semantic_type": null,
+            "lib/deduplicated-name": "FACILITY_ACTIVE_STATUS",
+            "lib/original-name": "FACILITY_ACTIVE_STATUS",
+            "name": "FACILITY_ACTIVE_STATUS",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "FACILITY_ACTIVE_STATUS",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "FACILITY_ACTIVE_STATUS",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "FACILITY_ACTIVE_STATUS",
+            "display_name": "FACILITY_ACTIVE_STATUS",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 2,
+                "nil%": 0
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0,
+                  "average-length": 7.825396825396825,
+                  "mode-fraction": 0.9126984126984127,
+                  "top-3-fraction": 1
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "STORE_ID",
+            "lib/original-name": "STORE_ID",
+            "name": "STORE_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "STORE_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "STORE_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "STORE_ID",
+            "display_name": "STORE_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 2,
+                "nil%": 0.9920634920634921
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0.9920634920634921,
+                  "average-length": 0.06349206349206349,
+                  "mode-fraction": 0.9920634920634921,
+                  "top-3-fraction": 1
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "STORE_NAME",
+            "lib/original-name": "STORE_NAME",
+            "name": "STORE_NAME",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "STORE_NAME",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "STORE_NAME",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "STORE_NAME",
+            "display_name": "STORE_NAME",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 2,
+                "nil%": 0.9920634920634921
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0.9920634920634921,
+                  "average-length": 0.06349206349206349,
+                  "mode-fraction": 0.9920634920634921,
+                  "top-3-fraction": 1
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "text",
+            "semantic_type": null,
+            "lib/deduplicated-name": "STORE_ACTIVE_STATUS",
+            "lib/original-name": "STORE_ACTIVE_STATUS",
+            "name": "STORE_ACTIVE_STATUS",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "STORE_ACTIVE_STATUS",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "STORE_ACTIVE_STATUS",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "STORE_ACTIVE_STATUS",
+            "display_name": "STORE_ACTIVE_STATUS",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 2,
+                "nil%": 0.9920634920634921
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0.9920634920634921,
+                  "average-length": 0.047619047619047616,
+                  "mode-fraction": 0.9920634920634921,
+                  "top-3-fraction": 1
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "PARENT_STORE_NAME",
+            "lib/original-name": "PARENT_STORE_NAME",
+            "name": "PARENT_STORE_NAME",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "PARENT_STORE_NAME",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "PARENT_STORE_NAME",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "PARENT_STORE_NAME",
+            "display_name": "PARENT_STORE_NAME",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 2,
+                "nil%": 0.9920634920634921
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0.9920634920634921,
+                  "average-length": 0.0873015873015873,
+                  "mode-fraction": 0.9920634920634921,
+                  "top-3-fraction": 1
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "int8",
+            "semantic_type": "type/Quantity",
+            "lib/deduplicated-name": "ACTIVE_USERS_COUNT",
+            "lib/original-name": "ACTIVE_USERS_COUNT",
+            "name": "ACTIVE_USERS_COUNT",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "ACTIVE_USERS_COUNT",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "ACTIVE_USERS_COUNT",
+              {
+                "base-type": "type/BigInteger"
+              }
+            ],
+            "effective_type": "type/BigInteger",
+            "lib/desired-column-alias": "ACTIVE_USERS_COUNT",
+            "display_name": "ACTIVE_USERS_COUNT",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 4,
+                "nil%": 0
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": 4.693143033909888,
+                  "min": 0,
+                  "q1": 0,
+                  "q3": 0,
+                  "excess-kurtosis": 23.134517810976707,
+                  "zero-fraction": 0.9365079365079365,
+                  "mode-fraction": 0.9365079365079365,
+                  "top-3-fraction": 0.9920634920634921,
+                  "max": 3,
+                  "sd": 0.43505153863633345,
+                  "avg": 0.10317460317460317
+                }
+              }
+            },
+            "base_type": "type/BigInteger"
+          }
+        ],
+        "embedding_type": null,
+        "initially_published_at": null,
+        "can_write": true,
+        "card_schema": 23,
+        "database_id": 2,
+        "enable_embedding": false,
+        "collection_id": 17,
+        "query_type": "native",
+        "download_perms": "full",
+        "name": "Facilities and Stores (KPI1)",
+        "document_id": null,
+        "last_used_at": "2026-11-02T11:29:14.214193Z",
+        "type": "question",
+        "dimensions": null,
+        "query_average_duration": 121,
+        "creator_id": 13,
+        "moderation_reviews": [],
+        "updated_at": "2026-11-02T10:51:41.651665Z",
+        "made_public_by_id": null,
+        "embedding_params": null,
+        "cache_ttl": null,
+        "dataset_query": {
+          "stages": [
+            {
+              "native": "WITH\n  activity AS (\n    SELECT\n      e.facility_id,\n      e.created_by_id,\n      e.created_date\n    FROM\n      emr_encounter e\n    WHERE\n      e.deleted = FALSE\n      AND e.created_date >= NOW() - INTERVAL '30 days'\n    UNION ALL\n    SELECT\n      l.facility_id,\n      md.created_by_id,\n      md.created_date\n    FROM\n      emr_medicationdispense md\n      JOIN emr_facilitylocation l ON l.id = md.location_id\n    WHERE\n      md.deleted = FALSE\n      AND md.created_date >= NOW() - INTERVAL '30 days'\n    UNION ALL\n    SELECT\n      l.facility_id,\n      d.created_by_id,\n      d.created_date\n    FROM\n      emr_deliveryorder d\n      JOIN emr_facilitylocation l ON l.id = d.destination_id\n    WHERE\n      d.deleted = FALSE\n      AND d.created_date >= NOW() - INTERVAL '30 days'\n    UNION ALL\n    SELECT\n      l.facility_id,\n      r.created_by_id,\n      r.created_date\n    FROM\n      emr_requestorder r\n      JOIN emr_facilitylocation l ON l.id = r.destination_id\n    WHERE\n      r.deleted = FALSE\n      AND r.created_date >= NOW() - INTERVAL '30 days'\n  ),\n  facility_activity AS (\n    SELECT\n      facility_id,\n      COUNT(DISTINCT created_by_id) FILTER (\n        WHERE\n          created_date >= NOW() - INTERVAL '7 days'\n      ) AS active_users\n    FROM\n      activity\n    GROUP BY\n      facility_id\n  )\nSELECT\n  f.name AS \"FACILITY_NAME\",\n  inst.eaushadhi_institute_name AS \"INSTITUTE_NAME\",\n  sp.eaushadhi_warehouse_id AS \"PARENT_ID\",\n  hf.hf_id AS \"HOSPITAL_UNIQUE_ID\",\n  CASE\n    WHEN fa.facility_id IS NULL THEN 'Inactive'\n    ELSE 'Active'\n  END AS \"FACILITY_ACTIVE_STATUS\",\n  st.eaushadhi_store_id AS \"STORE_ID\",\n  st.eaushadhi_store_name AS \"STORE_NAME\",\n  CASE\n    WHEN st.id IS NULL THEN NULL\n    WHEN EXISTS (\n      -- Indent raised\n      SELECT\n        1\n      FROM\n        care_dvdms_dvdmsoutwardrecordorder o\n        JOIN care_dvdms_dvdmsrecordorder ro ON ro.id = o.record_order_id\n      WHERE\n        ro.institute_store_id = st.id\n        AND o.deleted = FALSE\n        AND o.status = 'submitted'\n        AND o.modified_date >= NOW() - INTERVAL '7 days'\n    )\n    OR EXISTS (\n      -- Issue received; inward records with no outward_record can't be tied to a store\n      SELECT\n        1\n      FROM\n        care_dvdms_dvdmsinwardrecord i\n        JOIN care_dvdms_dvdmsoutwardrecordorder o ON o.id = i.outward_record_id\n        JOIN care_dvdms_dvdmsrecordorder ro ON ro.id = o.record_order_id\n      WHERE\n        ro.institute_store_id = st.id\n        AND i.deleted = FALSE\n        AND i.created_date >= NOW() - INTERVAL '7 days'\n    ) THEN 'Active'\n    ELSE 'Inactive'\n  END AS \"STORE_ACTIVE_STATUS\",\n  sp.eaushadhi_warehouse_name AS \"PARENT_STORE_NAME\",\n  COALESCE(fa.active_users, 0) AS \"ACTIVE_USERS_COUNT\"\nFROM\n  facility_facility f\n  LEFT JOIN abdm_healthfacility hf ON hf.facility_id = f.external_id\n  AND hf.deleted = FALSE\n  LEFT JOIN facility_activity fa ON fa.facility_id = f.id\n  LEFT JOIN care_dvdms_dvdmsinstitute inst ON inst.facility_id = f.id\n  AND inst.deleted = FALSE\n  -- One store / one supplier per institute is enforced in the UI, not in the\n  -- database. LATERAL + LIMIT 1 keeps one row per facility, preferring the default.\n  LEFT JOIN LATERAL (\n    SELECT\n      s2.id,\n      s2.eaushadhi_store_id,\n      s2.eaushadhi_store_name\n    FROM\n      care_dvdms_dvdmsstore s2\n    WHERE\n      s2.institute_id = inst.id\n      AND s2.deleted = FALSE\n    ORDER BY\n      s2.is_default DESC,\n      s2.id\n    LIMIT\n      1\n  ) st ON TRUE\n  LEFT JOIN LATERAL (\n    SELECT\n      p2.eaushadhi_warehouse_id,\n      p2.eaushadhi_warehouse_name\n    FROM\n      care_dvdms_dvdmssupplier p2\n    WHERE\n      p2.institute_id = inst.id\n      AND p2.deleted = FALSE\n    ORDER BY\n      p2.is_default DESC,\n      p2.id\n    LIMIT\n      1\n  ) sp ON TRUE\nWHERE\n  f.deleted = FALSE\n  AND f.is_active = TRUE\n  AND f.is_public = TRUE [[AND st.eaushadhi_store_id = {{store_id}}]]\nORDER BY\n  f.name;",
+              "lib/type": "mbql.stage/native",
+              "template-tags": [
+                {
+                  "type": "text",
+                  "name": "store_id",
+                  "id": "56ec2e8b-a3f1-40a9-80af-066c507efb83",
+                  "display-name": "Store ID"
+                }
+              ]
+            }
+          ],
+          "lib/type": "mbql/query",
+          "database": 2
+        },
+        "dimension_mappings": null,
+        "id": 91,
+        "legacy_query": null,
+        "parameter_mappings": [],
+        "display": "table",
+        "archived_directly": false,
+        "entity_id": "kwQ2SUvDSikqoNpctnvsJ",
+        "collection_preview": true,
+        "visualization_settings": {
+          "table.pivot_column": "INSTITUTE_NAME",
+          "table.cell_column": "ACTIVE_USERS_COUNT"
+        },
+        "metabase_version": "v0.63.13 (e8882cc)",
+        "parameters": [
+          {
+            "id": "56ec2e8b-a3f1-40a9-80af-066c507efb83",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "store_id"
+              ]
+            ],
+            "name": "Store ID",
+            "slug": "store_id",
+            "isMultiSelect": false
+          }
+        ],
+        "dashboard_id": 8,
+        "created_at": "2026-11-02T10:51:41.651665Z",
+        "public_uuid": null
+      },
+      "updated_at": "2026-11-02T11:00:15.189142Z",
+      "col": 0,
+      "id": 82,
+      "parameter_mappings": [
+        {
+          "parameter_id": "1331f013",
+          "card_id": 91,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "store_id"
+            ]
+          ]
+        }
+      ],
+      "card_id": 91,
+      "entity_id": "Ba3YdilyIiXPCto_IK-yo",
+      "visualization_settings": {},
+      "size_y": 9,
+      "dashboard_id": 8,
+      "created_at": "2026-11-02T10:51:41.710203Z",
+      "row": 0
+    },
+    {
+      "size_x": 24,
+      "dashboard_tab_id": null,
+      "series": [],
+      "inline_parameters": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "card": {
+        "cache_invalidated_at": null,
+        "description": null,
+        "archived": false,
+        "view_count": 12,
+        "collection_position": null,
+        "source_card_id": null,
+        "table_id": null,
+        "result_metadata": [
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "STORE_ID",
+            "lib/original-name": "STORE_ID",
+            "name": "STORE_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "STORE_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "STORE_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "STORE_ID",
+            "display_name": "STORE_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "STORE_NAME",
+            "lib/original-name": "STORE_NAME",
+            "name": "STORE_NAME",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "STORE_NAME",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "STORE_NAME",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "STORE_NAME",
+            "display_name": "STORE_NAME",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "USER_ID",
+            "lib/original-name": "USER_ID",
+            "name": "USER_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "USER_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "USER_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "USER_ID",
+            "display_name": "USER_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "text",
+            "semantic_type": null,
+            "lib/deduplicated-name": "USER_NAME",
+            "lib/original-name": "USER_NAME",
+            "name": "USER_NAME",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "USER_NAME",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "USER_NAME",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "USER_NAME",
+            "display_name": "USER_NAME",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "text",
+            "semantic_type": null,
+            "lib/deduplicated-name": "USER_ACTIVE_STATUS",
+            "lib/original-name": "USER_ACTIVE_STATUS",
+            "name": "USER_ACTIVE_STATUS",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "USER_ACTIVE_STATUS",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "USER_ACTIVE_STATUS",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "USER_ACTIVE_STATUS",
+            "display_name": "USER_ACTIVE_STATUS",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "timestamptz",
+            "semantic_type": null,
+            "lib/deduplicated-name": "LATEST_LOGIN_DATE",
+            "lib/original-name": "LATEST_LOGIN_DATE",
+            "name": "LATEST_LOGIN_DATE",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "LATEST_LOGIN_DATE",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "LATEST_LOGIN_DATE",
+              {
+                "base-type": "type/DateTimeWithLocalTZ"
+              }
+            ],
+            "effective_type": "type/DateTimeWithLocalTZ",
+            "lib/desired-column-alias": "LATEST_LOGIN_DATE",
+            "display_name": "LATEST_LOGIN_DATE",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/DateTime": {
+                  "earliest": null,
+                  "latest": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/DateTimeWithLocalTZ"
+          },
+          {
+            "database_type": "date",
+            "semantic_type": null,
+            "lib/deduplicated-name": "DISPENSE_DATE",
+            "lib/original-name": "DISPENSE_DATE",
+            "name": "DISPENSE_DATE",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "DISPENSE_DATE",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "DISPENSE_DATE",
+              {
+                "base-type": "type/Date"
+              }
+            ],
+            "effective_type": "type/Date",
+            "lib/desired-column-alias": "DISPENSE_DATE",
+            "display_name": "DISPENSE_DATE",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/DateTime": {
+                  "earliest": null,
+                  "latest": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Date"
+          },
+          {
+            "database_type": "int8",
+            "semantic_type": "type/Quantity",
+            "lib/deduplicated-name": "NUMBER_OF_DISPENSES",
+            "lib/original-name": "NUMBER_OF_DISPENSES",
+            "name": "NUMBER_OF_DISPENSES",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "NUMBER_OF_DISPENSES",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "NUMBER_OF_DISPENSES",
+              {
+                "base-type": "type/BigInteger"
+              }
+            ],
+            "effective_type": "type/BigInteger",
+            "lib/desired-column-alias": "NUMBER_OF_DISPENSES",
+            "display_name": "NUMBER_OF_DISPENSES",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/BigInteger"
+          },
+          {
+            "database_type": "int8",
+            "semantic_type": "type/Quantity",
+            "lib/deduplicated-name": "TOTAL_DDC_COUNT",
+            "lib/original-name": "TOTAL_DDC_COUNT",
+            "name": "TOTAL_DDC_COUNT",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "TOTAL_DDC_COUNT",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "TOTAL_DDC_COUNT",
+              {
+                "base-type": "type/BigInteger"
+              }
+            ],
+            "effective_type": "type/BigInteger",
+            "lib/desired-column-alias": "TOTAL_DDC_COUNT",
+            "display_name": "TOTAL_DDC_COUNT",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/BigInteger"
+          },
+          {
+            "database_type": "int8",
+            "semantic_type": "type/Quantity",
+            "lib/deduplicated-name": "ACTIVE_DDC_COUNT",
+            "lib/original-name": "ACTIVE_DDC_COUNT",
+            "name": "ACTIVE_DDC_COUNT",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "ACTIVE_DDC_COUNT",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "ACTIVE_DDC_COUNT",
+              {
+                "base-type": "type/BigInteger"
+              }
+            ],
+            "effective_type": "type/BigInteger",
+            "lib/desired-column-alias": "ACTIVE_DDC_COUNT",
+            "display_name": "ACTIVE_DDC_COUNT",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/BigInteger"
+          },
+          {
+            "database_type": "int8",
+            "semantic_type": "type/Quantity",
+            "lib/deduplicated-name": "INACTIVE_DDC_COUNT",
+            "lib/original-name": "INACTIVE_DDC_COUNT",
+            "name": "INACTIVE_DDC_COUNT",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "INACTIVE_DDC_COUNT",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "INACTIVE_DDC_COUNT",
+              {
+                "base-type": "type/BigInteger"
+              }
+            ],
+            "effective_type": "type/BigInteger",
+            "lib/desired-column-alias": "INACTIVE_DDC_COUNT",
+            "display_name": "INACTIVE_DDC_COUNT",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/BigInteger"
+          }
+        ],
+        "embedding_type": null,
+        "initially_published_at": null,
+        "can_write": true,
+        "card_schema": 23,
+        "database_id": 2,
+        "enable_embedding": false,
+        "collection_id": 17,
+        "query_type": "native",
+        "download_perms": "full",
+        "name": "Active DDCs",
+        "document_id": null,
+        "last_used_at": "2026-11-02T11:29:14.214193Z",
+        "type": "question",
+        "dimensions": null,
+        "query_average_duration": 101,
+        "creator_id": 13,
+        "moderation_reviews": [],
+        "updated_at": "2026-11-02T10:52:44.860138Z",
+        "made_public_by_id": null,
+        "embedding_params": null,
+        "cache_ttl": null,
+        "dataset_query": {
+          "stages": [
+            {
+              "native": "WITH\n  dispenses AS (\n    SELECT\n      f.id AS facility_pk,\n      st.id AS store_pk,\n      st.eaushadhi_store_id,\n      st.eaushadhi_store_name,\n      md.created_by_id,\n      COALESCE(md.when_handed_over, md.when_prepared, md.created_date)::DATE AS dispense_date\n    FROM\n      emr_medicationdispense md\n      JOIN emr_facilitylocation l ON l.id = md.location_id\n      JOIN facility_facility f ON f.id = l.facility_id\n      AND f.deleted = FALSE\n      AND f.is_active = TRUE\n      AND f.is_public = TRUE\n      JOIN care_dvdms_dvdmsinstitute inst ON inst.facility_id = f.id\n      AND inst.deleted = FALSE\n\n      JOIN LATERAL (\n        SELECT\n          s2.id,\n          s2.eaushadhi_store_id,\n          s2.eaushadhi_store_name\n        FROM\n          care_dvdms_dvdmsstore s2\n        WHERE\n          s2.institute_id = inst.id\n          AND s2.deleted = FALSE\n        ORDER BY\n          s2.is_default DESC,\n          s2.id\n        LIMIT\n          1\n      ) st ON TRUE\n    WHERE\n      md.deleted = FALSE\n      AND md.status NOT IN ('cancelled', 'entered_in_error', 'stopped', 'declined')\n      [[AND st.eaushadhi_store_id = {{store_id}}]]\n      [[AND COALESCE(md.when_handed_over, md.when_prepared, md.created_date)::DATE = {{dispense_date}}]]\n  ),\n  active_users AS (\n    SELECT created_by_id FROM emr_encounter\n    WHERE deleted = FALSE AND created_date >= NOW() - INTERVAL '7 days'\n    UNION\n    SELECT created_by_id FROM emr_medicationdispense\n    WHERE deleted = FALSE AND created_date >= NOW() - INTERVAL '7 days'\n    UNION\n    SELECT created_by_id FROM emr_deliveryorder\n    WHERE deleted = FALSE AND created_date >= NOW() - INTERVAL '7 days'\n    UNION\n    SELECT created_by_id FROM emr_requestorder\n    WHERE deleted = FALSE AND created_date >= NOW() - INTERVAL '7 days'\n  ),\n  ddc AS (\n    SELECT\n      l.facility_id,\n      md.location_id,\n      MAX(COALESCE(md.when_handed_over, md.when_prepared, md.created_date)) AS last_dispense\n    FROM\n      emr_medicationdispense md\n      JOIN emr_facilitylocation l ON l.id = md.location_id\n      AND l.deleted = FALSE\n    WHERE\n      md.deleted = FALSE\n      AND md.status NOT IN ('cancelled', 'entered_in_error', 'stopped', 'declined')\n    GROUP BY\n      l.facility_id,\n      md.location_id\n  ),\n  ddc_counts AS (\n    SELECT\n      facility_id,\n      COUNT(*) AS total_ddc_count,\n      COUNT(*) FILTER (\n        WHERE\n          last_dispense >= NOW() - INTERVAL '7 days'\n      ) AS active_ddc_count\n    FROM\n      ddc\n    GROUP BY\n      facility_id\n  )\nSELECT\n  d.eaushadhi_store_id AS \"STORE_ID\",\n  d.eaushadhi_store_name AS \"STORE_NAME\",\n  u.username AS \"USER_ID\",\n  -- Falls back to the username for accounts with no first/last name\n  COALESCE(NULLIF(TRIM(CONCAT_WS(' ', u.first_name, u.last_name)), ''), u.username) AS \"USER_NAME\",\n  CASE\n    WHEN au.created_by_id IS NULL THEN 'Inactive'\n    ELSE 'Active'\n  END AS \"USER_ACTIVE_STATUS\",\n  u.last_login AS \"LATEST_LOGIN_DATE\",\n  d.dispense_date AS \"DISPENSE_DATE\",\n  COUNT(*) AS \"NUMBER_OF_DISPENSES\",\n  dc.total_ddc_count AS \"TOTAL_DDC_COUNT\",\n  dc.active_ddc_count AS \"ACTIVE_DDC_COUNT\",\n  dc.total_ddc_count - dc.active_ddc_count AS \"INACTIVE_DDC_COUNT\"\nFROM\n  dispenses d\n  JOIN users_user u ON u.id = d.created_by_id\n  LEFT JOIN active_users au ON au.created_by_id = u.id\n  LEFT JOIN ddc_counts dc ON dc.facility_id = d.facility_pk\nGROUP BY\n  d.store_pk,\n  d.eaushadhi_store_id,\n  d.eaushadhi_store_name,\n  u.id,\n  au.created_by_id,\n  d.dispense_date,\n  dc.total_ddc_count,\n  dc.active_ddc_count\nORDER BY\n  \"STORE_NAME\",\n  \"DISPENSE_DATE\" DESC,\n  \"USER_NAME\";\n",
+              "lib/type": "mbql.stage/native",
+              "template-tags": [
+                {
+                  "type": "text",
+                  "name": "store_id",
+                  "id": "c1a39b34-0acf-4e7b-b59c-fe92c0e1c4b1",
+                  "display-name": "Store ID"
+                },
+                {
+                  "type": "text",
+                  "name": "dispense_date",
+                  "id": "c13d70e0-0e0b-4442-89f2-c90c7a711138",
+                  "display-name": "Dispense Date"
+                }
+              ]
+            }
+          ],
+          "lib/type": "mbql/query",
+          "database": 2
+        },
+        "dimension_mappings": null,
+        "id": 92,
+        "legacy_query": null,
+        "parameter_mappings": [],
+        "display": "table",
+        "archived_directly": false,
+        "entity_id": "3qBQOWJ-lWeXl2G1XW9Ze",
+        "collection_preview": true,
+        "visualization_settings": {},
+        "metabase_version": "v0.63.13 (e8882cc)",
+        "parameters": [
+          {
+            "id": "c1a39b34-0acf-4e7b-b59c-fe92c0e1c4b1",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "store_id"
+              ]
+            ],
+            "name": "Store ID",
+            "slug": "store_id",
+            "isMultiSelect": false
+          },
+          {
+            "id": "c13d70e0-0e0b-4442-89f2-c90c7a711138",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "dispense_date"
+              ]
+            ],
+            "name": "Dispense Date",
+            "slug": "dispense_date",
+            "isMultiSelect": false
+          }
+        ],
+        "dashboard_id": 8,
+        "created_at": "2026-11-02T10:52:44.860138Z",
+        "public_uuid": null
+      },
+      "updated_at": "2026-11-02T11:00:15.189142Z",
+      "col": 0,
+      "id": 83,
+      "parameter_mappings": [
+        {
+          "parameter_id": "1331f013",
+          "card_id": 92,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "store_id"
+            ]
+          ]
+        }
+      ],
+      "card_id": 92,
+      "entity_id": "JLYkmwM6Z2-YQ51B_Lfvp",
+      "visualization_settings": {},
+      "size_y": 9,
+      "dashboard_id": 8,
+      "created_at": "2026-11-02T10:52:44.900687Z",
+      "row": 9
+    },
+    {
+      "size_x": 24,
+      "dashboard_tab_id": null,
+      "series": [],
+      "inline_parameters": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "card": {
+        "cache_invalidated_at": null,
+        "description": null,
+        "archived": false,
+        "view_count": 11,
+        "collection_position": null,
+        "source_card_id": null,
+        "table_id": null,
+        "result_metadata": [
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "STORE_ID",
+            "lib/original-name": "STORE_ID",
+            "name": "STORE_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "STORE_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "STORE_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "STORE_ID",
+            "display_name": "STORE_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "STORE_NAME",
+            "lib/original-name": "STORE_NAME",
+            "name": "STORE_NAME",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "STORE_NAME",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "STORE_NAME",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "STORE_NAME",
+            "display_name": "STORE_NAME",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "DISTRICT_NAME",
+            "lib/original-name": "DISTRICT_NAME",
+            "name": "DISTRICT_NAME",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "DISTRICT_NAME",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "DISTRICT_NAME",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "DISTRICT_NAME",
+            "display_name": "DISTRICT_NAME",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "text",
+            "semantic_type": null,
+            "lib/deduplicated-name": "PRESCRIPTION_ID",
+            "lib/original-name": "PRESCRIPTION_ID",
+            "name": "PRESCRIPTION_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "PRESCRIPTION_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "PRESCRIPTION_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "PRESCRIPTION_ID",
+            "display_name": "PRESCRIPTION_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "date",
+            "semantic_type": null,
+            "lib/deduplicated-name": "PRESCRIPTION_DATE",
+            "lib/original-name": "PRESCRIPTION_DATE",
+            "name": "PRESCRIPTION_DATE",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "PRESCRIPTION_DATE",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "PRESCRIPTION_DATE",
+              {
+                "base-type": "type/Date"
+              }
+            ],
+            "effective_type": "type/Date",
+            "lib/desired-column-alias": "PRESCRIPTION_DATE",
+            "display_name": "PRESCRIPTION_DATE",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/DateTime": {
+                  "earliest": null,
+                  "latest": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Date"
+          },
+          {
+            "database_type": "date",
+            "semantic_type": null,
+            "lib/deduplicated-name": "DISPENSE_DATE",
+            "lib/original-name": "DISPENSE_DATE",
+            "name": "DISPENSE_DATE",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "DISPENSE_DATE",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "DISPENSE_DATE",
+              {
+                "base-type": "type/Date"
+              }
+            ],
+            "effective_type": "type/Date",
+            "lib/desired-column-alias": "DISPENSE_DATE",
+            "display_name": "DISPENSE_DATE",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/DateTime": {
+                  "earliest": null,
+                  "latest": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Date"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "PATIENT_UHID",
+            "lib/original-name": "PATIENT_UHID",
+            "name": "PATIENT_UHID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "PATIENT_UHID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "PATIENT_UHID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "PATIENT_UHID",
+            "display_name": "PATIENT_UHID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "text",
+            "semantic_type": null,
+            "lib/deduplicated-name": "ABHA_ID",
+            "lib/original-name": "ABHA_ID",
+            "name": "ABHA_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "ABHA_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "ABHA_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "ABHA_ID",
+            "display_name": "ABHA_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "DRUG_ID",
+            "lib/original-name": "DRUG_ID",
+            "name": "DRUG_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "DRUG_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "DRUG_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "DRUG_ID",
+            "display_name": "DRUG_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "text",
+            "semantic_type": null,
+            "lib/deduplicated-name": "DRUG_NAME_BRAND_DETAILS",
+            "lib/original-name": "DRUG_NAME_BRAND_DETAILS",
+            "name": "DRUG_NAME_BRAND_DETAILS",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "DRUG_NAME_BRAND_DETAILS",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "DRUG_NAME_BRAND_DETAILS",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "DRUG_NAME_BRAND_DETAILS",
+            "display_name": "DRUG_NAME_BRAND_DETAILS",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "QUANTITY_PRESCRIBED",
+            "lib/original-name": "QUANTITY_PRESCRIBED",
+            "name": "QUANTITY_PRESCRIBED",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "QUANTITY_PRESCRIBED",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "QUANTITY_PRESCRIBED",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "QUANTITY_PRESCRIBED",
+            "display_name": "QUANTITY_PRESCRIBED",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "AVAILABLE_STOCK_BEFORE_TRANSACTION",
+            "lib/original-name": "AVAILABLE_STOCK_BEFORE_TRANSACTION",
+            "name": "AVAILABLE_STOCK_BEFORE_TRANSACTION",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "AVAILABLE_STOCK_BEFORE_TRANSACTION",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "AVAILABLE_STOCK_BEFORE_TRANSACTION",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "AVAILABLE_STOCK_BEFORE_TRANSACTION",
+            "display_name": "AVAILABLE_STOCK_BEFORE_TRANSACTION",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "ACTUAL_QUANTITY_SENT_DISPENSED",
+            "lib/original-name": "ACTUAL_QUANTITY_SENT_DISPENSED",
+            "name": "ACTUAL_QUANTITY_SENT_DISPENSED",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "ACTUAL_QUANTITY_SENT_DISPENSED",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "ACTUAL_QUANTITY_SENT_DISPENSED",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "ACTUAL_QUANTITY_SENT_DISPENSED",
+            "display_name": "ACTUAL_QUANTITY_SENT_DISPENSED",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "UPDATED_INVENTORY_QUANTITY_AFTER_DISPENSE",
+            "lib/original-name": "UPDATED_INVENTORY_QUANTITY_AFTER_DISPENSE",
+            "name": "UPDATED_INVENTORY_QUANTITY_AFTER_DISPENSE",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "UPDATED_INVENTORY_QUANTITY_AFTER_DISPENSE",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "UPDATED_INVENTORY_QUANTITY_AFTER_DISPENSE",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "UPDATED_INVENTORY_QUANTITY_AFTER_DISPENSE",
+            "display_name": "UPDATED_INVENTORY_QUANTITY_AFTER_DISPENSE",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          }
+        ],
+        "embedding_type": null,
+        "initially_published_at": null,
+        "can_write": true,
+        "card_schema": 23,
+        "database_id": 2,
+        "enable_embedding": false,
+        "collection_id": 17,
+        "query_type": "native",
+        "download_perms": "full",
+        "name": "Active DDC Issues (Patient Level)",
+        "document_id": null,
+        "last_used_at": "2026-11-02T11:29:14.214193Z",
+        "type": "question",
+        "dimensions": null,
+        "query_average_duration": 139,
+        "creator_id": 13,
+        "moderation_reviews": [],
+        "updated_at": "2026-11-02T10:53:43.458545Z",
+        "made_public_by_id": null,
+        "embedding_params": null,
+        "cache_ttl": null,
+        "dataset_query": {
+          "stages": [
+            {
+              "native": "\n\nWITH\n  timing_units (code, days) AS (\n    VALUES\n      ('s', 1 / 86400.0),\n      ('min', 1 / 1440.0),\n      ('h', 1 / 24.0),\n      ('d', 1.0),\n      ('wk', 7.0),\n      ('mo', 30.0),\n      ('a', 365.0)\n  ),\n  stock_movements AS (\n    SELECT\n      o.destination_id AS location_id,\n      pr.product_knowledge_id,\n      sd.supplied_item_quantity AS quantity,\n      sd.created_date AS moved_at,\n      0 AS is_dispense,\n      sd.id AS ref_id\n    FROM\n      emr_supplydelivery sd\n      JOIN emr_deliveryorder o ON o.id = sd.order_id\n      LEFT JOIN emr_inventoryitem sii ON sii.id = sd.supplied_inventory_item_id\n      JOIN emr_product pr ON pr.id = COALESCE(sd.supplied_item_id, sii.product_id)\n    WHERE\n      sd.deleted = FALSE\n      AND sd.status = 'completed'\n    UNION ALL\n    SELECT\n      o.origin_id,\n      pr.product_knowledge_id,\n      -sd.supplied_item_quantity,\n      sd.created_date,\n      0,\n      sd.id\n    FROM\n      emr_supplydelivery sd\n      JOIN emr_deliveryorder o ON o.id = sd.order_id\n      LEFT JOIN emr_inventoryitem sii ON sii.id = sd.supplied_inventory_item_id\n      JOIN emr_product pr ON pr.id = COALESCE(sd.supplied_item_id, sii.product_id)\n    WHERE\n      sd.deleted = FALSE\n      AND sd.status = 'completed'\n      AND o.origin_id IS NOT NULL\n    UNION ALL\n    -- Dispenses from a location\n    SELECT\n      md.location_id,\n      pr.product_knowledge_id,\n      -md.quantity,\n      COALESCE(md.when_handed_over, md.when_prepared, md.created_date),\n      1,\n      md.id\n    FROM\n      emr_medicationdispense md\n      JOIN emr_inventoryitem ii ON ii.id = md.item_id\n      JOIN emr_product pr ON pr.id = ii.product_id\n    WHERE\n      md.deleted = FALSE\n      AND md.status NOT IN ('cancelled', 'entered_in_error', 'stopped', 'declined')\n  ),\n  current_stock AS (\n    SELECT\n      ii.location_id,\n      pr.product_knowledge_id,\n      SUM(ii.net_content) AS quantity\n    FROM\n      emr_inventoryitem ii\n      JOIN emr_product pr ON pr.id = ii.product_id\n    WHERE\n      ii.deleted = FALSE\n    GROUP BY\n      ii.location_id,\n      pr.product_knowledge_id\n  ),\n  stock_ledger AS (\n    -- Opening stock is not always recorded as a delivery, so instead of summing up from\n    -- zero, start at today's stock and undo every movement after the row; on a dispense\n    -- row that gives the stock just after that dispense\n    SELECT\n      m.ref_id AS dispense_id,\n      m.is_dispense,\n      COALESCE(cs.quantity, 0) - COALESCE(\n        SUM(m.quantity) OVER (\n          PARTITION BY\n            m.location_id,\n            m.product_knowledge_id\n          ORDER BY\n            m.moved_at,\n            m.is_dispense,\n            m.ref_id ROWS BETWEEN 1 FOLLOWING AND UNBOUNDED FOLLOWING\n        ),\n        0\n      ) AS stock_after\n    FROM\n      stock_movements m\n      LEFT JOIN current_stock cs ON cs.location_id = m.location_id\n      AND cs.product_knowledge_id = m.product_knowledge_id\n  )\nSELECT\n  st.eaushadhi_store_id AS \"STORE_ID\",\n  st.eaushadhi_store_name AS \"STORE_NAME\",\n  dist.name AS \"DISTRICT_NAME\",\n  mrp.meta ->> 'eaushadhi_prescription_id' AS \"PRESCRIPTION_ID\",\n  COALESCE(mr.authored_on, mrp.created_date)::DATE AS \"PRESCRIPTION_DATE\",\n  COALESCE(md.when_handed_over, md.when_prepared, md.created_date)::DATE AS \"DISPENSE_DATE\",\n  uhid.value AS \"PATIENT_UHID\",\n  ab.abha_number AS \"ABHA_ID\",\n  drug.eaushadhi_drug_id AS \"DRUG_ID\",\n  CONCAT_WS(' / ', drug.name, NULLIF(drug.brand_id, '')) AS \"DRUG_NAME_BRAND_DETAILS\",\n  qp.quantity AS \"QUANTITY_PRESCRIBED\",\n  sl.stock_after + md.quantity AS \"AVAILABLE_STOCK_BEFORE_TRANSACTION\",\n  md.quantity AS \"ACTUAL_QUANTITY_SENT_DISPENSED\",\n  sl.stock_after AS \"UPDATED_INVENTORY_QUANTITY_AFTER_DISPENSE\"\nFROM\n  emr_medicationdispense md\n  JOIN emr_facilitylocation l ON l.id = md.location_id\n  JOIN facility_facility f ON f.id = l.facility_id\n  AND f.deleted = FALSE\n  AND f.is_active = TRUE\n  AND f.is_public = TRUE\n  JOIN care_dvdms_dvdmsinstitute inst ON inst.facility_id = f.id\n  AND inst.deleted = FALSE\n  -- Dispenses happen at DDC counters, so each one is attributed to the\n  -- institute's store (default first), as in KPI 2\n  JOIN LATERAL (\n    SELECT\n      s2.eaushadhi_store_id,\n      s2.eaushadhi_store_name\n    FROM\n      care_dvdms_dvdmsstore s2\n    WHERE\n      s2.institute_id = inst.id\n      AND s2.deleted = FALSE\n    ORDER BY\n      s2.is_default DESC,\n      s2.id\n    LIMIT\n      1\n  ) st ON TRUE\n  JOIN emr_inventoryitem ii ON ii.id = md.item_id\n  JOIN emr_product pr ON pr.id = ii.product_id\n  JOIN emr_patient p ON p.id = md.patient_id\n  LEFT JOIN emr_medicationrequest mr ON mr.id = md.authorizing_request_id\n  LEFT JOIN emr_medicationrequestprescription mrp ON mrp.id = mr.prescription_id\n  LEFT JOIN abdm_abhanumber ab ON ab.patient_id = p.id\n  AND ab.deleted = FALSE\n  LEFT JOIN stock_ledger sl ON sl.dispense_id = md.id\n  AND sl.is_dispense = 1\n  -- District: the facility's geo organization or one of its parents\n  LEFT JOIN LATERAL (\n    SELECT\n      o.name\n    FROM\n      emr_organization o\n    WHERE\n      o.id = ANY (f.geo_organization_cache)\n      AND o.org_type = 'govt'\n      AND o.metadata ->> 'govt_org_type' = 'district'\n      AND o.deleted = FALSE\n    LIMIT\n      1\n  ) dist ON TRUE\n  -- UHID: identifier whose config display is \"UHID\", as get_patient_uhid in care_radiology.\n  -- Read from PatientIdentifier, which backs both Patient.instance_identifiers and\n  -- Patient.facility_identifiers, so a UHID configured for the facility is found too\n  LEFT JOIN LATERAL (\n    SELECT\n      pi.value\n    FROM\n      emr_patientidentifier pi\n      JOIN emr_patientidentifierconfig c ON c.id = pi.config_id\n    WHERE\n      pi.patient_id = p.id\n      AND pi.deleted = FALSE\n      AND pi.value <> ''\n      AND LOWER(c.config ->> 'display') = 'uhid'\n      AND (\n        c.facility_id IS NULL\n        OR c.facility_id = f.id\n      )\n    ORDER BY\n      c.facility_id NULLS FIRST\n    LIMIT\n      1\n  ) uhid ON TRUE\n  -- Drug: the institute's mapping for the product, most used first (as _find_product_mapping)\n  LEFT JOIN LATERAL (\n    SELECT\n      pm.eaushadhi_drug_id,\n      dr.name,\n      dr.brand_id\n    FROM\n      care_dvdms_dvdmsproductmapping pm\n      JOIN care_dvdms_dvdmsdrug dr ON dr.id = pm.drug_id\n    WHERE\n      pm.institute_id = inst.id\n      AND pm.product_knowledge_id = pr.product_knowledge_id\n      AND pm.deleted = FALSE\n    ORDER BY\n      pm.usage_count DESC,\n      pm.modified_date DESC\n    LIMIT\n      1\n  ) drug ON TRUE\n  -- Quantity prescribed: dose x frequency x (duration / period), summed over dosage instructions\n  LEFT JOIN LATERAL (\n    SELECT\n      SUM(\n        (di -> 'dose_and_rate' -> 'dose_quantity' ->> 'value')::NUMERIC\n        * (di -> 'timing' -> 'repeat' ->> 'frequency')::NUMERIC\n        * (di -> 'timing' -> 'repeat' -> 'bounds_duration' ->> 'value')::NUMERIC * bu.days\n        / NULLIF((di -> 'timing' -> 'repeat' ->> 'period')::NUMERIC * pu.days, 0)\n      ) AS quantity\n    FROM\n      jsonb_array_elements(COALESCE(mr.dosage_instruction, '[]'::JSONB)) di\n      JOIN timing_units bu ON bu.code = di -> 'timing' -> 'repeat' -> 'bounds_duration' ->> 'unit'\n      JOIN timing_units pu ON pu.code = di -> 'timing' -> 'repeat' ->> 'period_unit'\n  ) qp ON TRUE\nWHERE\n  md.deleted = FALSE\n  AND md.status NOT IN ('cancelled', 'entered_in_error', 'stopped', 'declined')\n  [[AND st.eaushadhi_store_id = {{store_id}}]]\n  [[AND COALESCE(md.when_handed_over, md.when_prepared, md.created_date)::DATE = {{dispense_date}}]]\nORDER BY\n  COALESCE(md.when_handed_over, md.when_prepared, md.created_date) DESC,\n  md.id DESC;\n",
+              "lib/type": "mbql.stage/native",
+              "template-tags": [
+                {
+                  "type": "text",
+                  "name": "store_id",
+                  "id": "360232f5-49af-464d-88ed-b4891114113c",
+                  "display-name": "Store ID"
+                },
+                {
+                  "type": "text",
+                  "name": "dispense_date",
+                  "id": "5d3a3755-7843-4668-99a4-bfb251a49d63",
+                  "display-name": "Dispense Date"
+                }
+              ]
+            }
+          ],
+          "lib/type": "mbql/query",
+          "database": 2
+        },
+        "dimension_mappings": null,
+        "id": 93,
+        "legacy_query": null,
+        "parameter_mappings": [],
+        "display": "table",
+        "archived_directly": false,
+        "entity_id": "r49sSpL7vodgn7Yx8IGbI",
+        "collection_preview": true,
+        "visualization_settings": {},
+        "metabase_version": "v0.63.13 (e8882cc)",
+        "parameters": [
+          {
+            "id": "360232f5-49af-464d-88ed-b4891114113c",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "store_id"
+              ]
+            ],
+            "name": "Store ID",
+            "slug": "store_id",
+            "isMultiSelect": false
+          },
+          {
+            "id": "5d3a3755-7843-4668-99a4-bfb251a49d63",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "dispense_date"
+              ]
+            ],
+            "name": "Dispense Date",
+            "slug": "dispense_date",
+            "isMultiSelect": false
+          }
+        ],
+        "dashboard_id": 8,
+        "created_at": "2026-11-02T10:53:43.458545Z",
+        "public_uuid": null
+      },
+      "updated_at": "2026-11-02T11:00:15.189142Z",
+      "col": 0,
+      "id": 84,
+      "parameter_mappings": [
+        {
+          "parameter_id": "1331f013",
+          "card_id": 93,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "store_id"
+            ]
+          ]
+        }
+      ],
+      "card_id": 93,
+      "entity_id": "ZWElaJy-3QLdYnM2Uj-dn",
+      "visualization_settings": {},
+      "size_y": 9,
+      "dashboard_id": 8,
+      "created_at": "2026-11-02T10:53:43.506303Z",
+      "row": 18
+    },
+    {
+      "size_x": 24,
+      "dashboard_tab_id": null,
+      "series": [],
+      "inline_parameters": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "card": {
+        "cache_invalidated_at": null,
+        "description": null,
+        "archived": false,
+        "view_count": 10,
+        "collection_position": null,
+        "source_card_id": null,
+        "table_id": null,
+        "result_metadata": [
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "STORE_ID",
+            "lib/original-name": "STORE_ID",
+            "name": "STORE_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "STORE_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "STORE_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "STORE_ID",
+            "display_name": "STORE_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "date",
+            "semantic_type": null,
+            "lib/deduplicated-name": "DISPENSE_DATE",
+            "lib/original-name": "DISPENSE_DATE",
+            "name": "DISPENSE_DATE",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "DISPENSE_DATE",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "DISPENSE_DATE",
+              {
+                "base-type": "type/Date"
+              }
+            ],
+            "effective_type": "type/Date",
+            "lib/desired-column-alias": "DISPENSE_DATE",
+            "display_name": "DISPENSE_DATE",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/DateTime": {
+                  "earliest": null,
+                  "latest": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Date"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "PATIENT_UHID",
+            "lib/original-name": "PATIENT_UHID",
+            "name": "PATIENT_UHID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "PATIENT_UHID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "PATIENT_UHID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "PATIENT_UHID",
+            "display_name": "PATIENT_UHID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "text",
+            "semantic_type": null,
+            "lib/deduplicated-name": "ABHA_ID",
+            "lib/original-name": "ABHA_ID",
+            "name": "ABHA_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "ABHA_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "ABHA_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "ABHA_ID",
+            "display_name": "ABHA_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "DRUG_ID",
+            "lib/original-name": "DRUG_ID",
+            "name": "DRUG_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "DRUG_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "DRUG_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "DRUG_ID",
+            "display_name": "DRUG_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "PATIENT_WISE_DRUG_SENT",
+            "lib/original-name": "PATIENT_WISE_DRUG_SENT",
+            "name": "PATIENT_WISE_DRUG_SENT",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "PATIENT_WISE_DRUG_SENT",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "PATIENT_WISE_DRUG_SENT",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "PATIENT_WISE_DRUG_SENT",
+            "display_name": "PATIENT_WISE_DRUG_SENT",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "text",
+            "semantic_type": null,
+            "lib/deduplicated-name": "DRUG_BRAND_DETAILS",
+            "lib/original-name": "DRUG_BRAND_DETAILS",
+            "name": "DRUG_BRAND_DETAILS",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "DRUG_BRAND_DETAILS",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "DRUG_BRAND_DETAILS",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "DRUG_BRAND_DETAILS",
+            "display_name": "DRUG_BRAND_DETAILS",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "int8",
+            "semantic_type": "type/Quantity",
+            "lib/deduplicated-name": "SENT_COUNT",
+            "lib/original-name": "SENT_COUNT",
+            "name": "SENT_COUNT",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "SENT_COUNT",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "SENT_COUNT",
+              {
+                "base-type": "type/BigInteger"
+              }
+            ],
+            "effective_type": "type/BigInteger",
+            "lib/desired-column-alias": "SENT_COUNT",
+            "display_name": "SENT_COUNT",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/BigInteger"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "STORES_AVAILABLE_STOCK",
+            "lib/original-name": "STORES_AVAILABLE_STOCK",
+            "name": "STORES_AVAILABLE_STOCK",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "STORES_AVAILABLE_STOCK",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "STORES_AVAILABLE_STOCK",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "STORES_AVAILABLE_STOCK",
+            "display_name": "STORES_AVAILABLE_STOCK",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "QUANTITY_REQUESTED",
+            "lib/original-name": "QUANTITY_REQUESTED",
+            "name": "QUANTITY_REQUESTED",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "QUANTITY_REQUESTED",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "QUANTITY_REQUESTED",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "QUANTITY_REQUESTED",
+            "display_name": "QUANTITY_REQUESTED",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "QUANTITY_SENT",
+            "lib/original-name": "QUANTITY_SENT",
+            "name": "QUANTITY_SENT",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "QUANTITY_SENT",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "QUANTITY_SENT",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "QUANTITY_SENT",
+            "display_name": "QUANTITY_SENT",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "UPDATED_INVENTORY_QUANTITY",
+            "lib/original-name": "UPDATED_INVENTORY_QUANTITY",
+            "name": "UPDATED_INVENTORY_QUANTITY",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "UPDATED_INVENTORY_QUANTITY",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "UPDATED_INVENTORY_QUANTITY",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "UPDATED_INVENTORY_QUANTITY",
+            "display_name": "UPDATED_INVENTORY_QUANTITY",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          }
+        ],
+        "embedding_type": null,
+        "initially_published_at": null,
+        "can_write": true,
+        "card_schema": 23,
+        "database_id": 2,
+        "enable_embedding": false,
+        "collection_id": 17,
+        "query_type": "native",
+        "download_perms": "full",
+        "name": "Active DDC Issue Details (Patient and Drug Level)",
+        "document_id": null,
+        "last_used_at": "2026-11-02T11:29:14.214193Z",
+        "type": "question",
+        "dimensions": null,
+        "query_average_duration": 141,
+        "creator_id": 13,
+        "moderation_reviews": [],
+        "updated_at": "2026-11-02T10:54:36.566515Z",
+        "made_public_by_id": null,
+        "embedding_params": null,
+        "cache_ttl": null,
+        "dataset_query": {
+          "stages": [
+            {
+              "native": "WITH\n  timing_units (code, days) AS (\n    VALUES\n      ('s', 1 / 86400.0),\n      ('min', 1 / 1440.0),\n      ('h', 1 / 24.0),\n      ('d', 1.0),\n      ('wk', 7.0),\n      ('mo', 30.0),\n      ('a', 365.0)\n  ),\n  stock_movements AS (\n    SELECT\n      o.destination_id AS location_id,\n      pr.product_knowledge_id,\n      sd.supplied_item_quantity AS quantity,\n      sd.created_date AS moved_at,\n      0 AS is_dispense,\n      sd.id AS ref_id\n    FROM\n      emr_supplydelivery sd\n      JOIN emr_deliveryorder o ON o.id = sd.order_id\n      LEFT JOIN emr_inventoryitem sii ON sii.id = sd.supplied_inventory_item_id\n      JOIN emr_product pr ON pr.id = COALESCE(sd.supplied_item_id, sii.product_id)\n    WHERE\n      sd.deleted = FALSE\n      AND sd.status = 'completed'\n    UNION ALL\n    SELECT\n      o.origin_id,\n      pr.product_knowledge_id,\n      -sd.supplied_item_quantity,\n      sd.created_date,\n      0,\n      sd.id\n    FROM\n      emr_supplydelivery sd\n      JOIN emr_deliveryorder o ON o.id = sd.order_id\n      LEFT JOIN emr_inventoryitem sii ON sii.id = sd.supplied_inventory_item_id\n      JOIN emr_product pr ON pr.id = COALESCE(sd.supplied_item_id, sii.product_id)\n    WHERE\n      sd.deleted = FALSE\n      AND sd.status = 'completed'\n      AND o.origin_id IS NOT NULL\n    UNION ALL\n    -- Dispenses from a location\n    SELECT\n      md.location_id,\n      pr.product_knowledge_id,\n      -md.quantity,\n      COALESCE(md.when_handed_over, md.when_prepared, md.created_date),\n      1,\n      md.id\n    FROM\n      emr_medicationdispense md\n      JOIN emr_inventoryitem ii ON ii.id = md.item_id\n      JOIN emr_product pr ON pr.id = ii.product_id\n    WHERE\n      md.deleted = FALSE\n      AND md.status NOT IN ('cancelled', 'entered_in_error', 'stopped', 'declined')\n  ),\n  current_stock AS (\n    SELECT\n      ii.location_id,\n      pr.product_knowledge_id,\n      SUM(ii.net_content) AS quantity\n    FROM\n      emr_inventoryitem ii\n      JOIN emr_product pr ON pr.id = ii.product_id\n    WHERE\n      ii.deleted = FALSE\n    GROUP BY\n      ii.location_id,\n      pr.product_knowledge_id\n  ),\n  stock_ledger AS (\n    -- Opening stock is not always recorded as a delivery, so instead of summing up from\n    -- zero, start at today's stock and undo every movement after the row; on a dispense\n    -- row that gives the stock just after that dispense\n    SELECT\n      m.ref_id AS dispense_id,\n      m.is_dispense,\n      COALESCE(cs.quantity, 0) - COALESCE(\n        SUM(m.quantity) OVER (\n          PARTITION BY\n            m.location_id,\n            m.product_knowledge_id\n          ORDER BY\n            m.moved_at,\n            m.is_dispense,\n            m.ref_id ROWS BETWEEN 1 FOLLOWING AND UNBOUNDED FOLLOWING\n        ),\n        0\n      ) AS stock_after\n    FROM\n      stock_movements m\n      LEFT JOIN current_stock cs ON cs.location_id = m.location_id\n      AND cs.product_knowledge_id = m.product_knowledge_id\n  )\nSELECT\n  st.eaushadhi_store_id AS \"STORE_ID\",\n  COALESCE(md.when_handed_over, md.when_prepared, md.created_date)::DATE AS \"DISPENSE_DATE\",\n  uhid.value AS \"PATIENT_UHID\",\n  ab.abha_number AS \"ABHA_ID\",\n  drug.eaushadhi_drug_id AS \"DRUG_ID\",\n  pk.name AS \"PATIENT_WISE_DRUG_SENT\",\n  NULLIF(drug.brand_id, '') AS \"DRUG_BRAND_DETAILS\",\n  -- Times this drug was sent to this patient, within the filtered rows\n  COUNT(*) OVER (\n    PARTITION BY\n      md.patient_id,\n      pr.product_knowledge_id\n  ) AS \"SENT_COUNT\",\n  sl.stock_after + md.quantity AS \"STORES_AVAILABLE_STOCK\",\n  qp.quantity AS \"QUANTITY_REQUESTED\",\n  md.quantity AS \"QUANTITY_SENT\",\n  sl.stock_after AS \"UPDATED_INVENTORY_QUANTITY\"\nFROM\n  emr_medicationdispense md\n  JOIN emr_facilitylocation l ON l.id = md.location_id\n  JOIN facility_facility f ON f.id = l.facility_id\n  AND f.deleted = FALSE\n  AND f.is_active = TRUE\n  AND f.is_public = TRUE\n  JOIN care_dvdms_dvdmsinstitute inst ON inst.facility_id = f.id\n  AND inst.deleted = FALSE\n  -- Dispenses happen at DDC counters, so each one is attributed to the\n  -- institute's store (default first), as in KPI 2\n  JOIN LATERAL (\n    SELECT\n      s2.eaushadhi_store_id,\n      s2.eaushadhi_store_name\n    FROM\n      care_dvdms_dvdmsstore s2\n    WHERE\n      s2.institute_id = inst.id\n      AND s2.deleted = FALSE\n    ORDER BY\n      s2.is_default DESC,\n      s2.id\n    LIMIT\n      1\n  ) st ON TRUE\n  JOIN emr_inventoryitem ii ON ii.id = md.item_id\n  JOIN emr_product pr ON pr.id = ii.product_id\n  JOIN emr_productknowledge pk ON pk.id = pr.product_knowledge_id\n  JOIN emr_patient p ON p.id = md.patient_id\n  LEFT JOIN emr_medicationrequest mr ON mr.id = md.authorizing_request_id\n  LEFT JOIN abdm_abhanumber ab ON ab.patient_id = p.id\n  AND ab.deleted = FALSE\n  LEFT JOIN stock_ledger sl ON sl.dispense_id = md.id\n  AND sl.is_dispense = 1\n  -- UHID: identifier whose config display is \"UHID\", as get_patient_uhid in care_radiology.\n  -- Read from PatientIdentifier, which backs both Patient.instance_identifiers and\n  -- Patient.facility_identifiers, so a UHID configured for the facility is found too\n  LEFT JOIN LATERAL (\n    SELECT\n      pi.value\n    FROM\n      emr_patientidentifier pi\n      JOIN emr_patientidentifierconfig c ON c.id = pi.config_id\n    WHERE\n      pi.patient_id = p.id\n      AND pi.deleted = FALSE\n      AND pi.value <> ''\n      AND LOWER(c.config ->> 'display') = 'uhid'\n      AND (\n        c.facility_id IS NULL\n        OR c.facility_id = f.id\n      )\n    ORDER BY\n      c.facility_id NULLS FIRST\n    LIMIT\n      1\n  ) uhid ON TRUE\n  -- Drug: the institute's mapping for the product, most used first (as _find_product_mapping)\n  LEFT JOIN LATERAL (\n    SELECT\n      pm.eaushadhi_drug_id,\n      dr.brand_id\n    FROM\n      care_dvdms_dvdmsproductmapping pm\n      JOIN care_dvdms_dvdmsdrug dr ON dr.id = pm.drug_id\n    WHERE\n      pm.institute_id = inst.id\n      AND pm.product_knowledge_id = pr.product_knowledge_id\n      AND pm.deleted = FALSE\n    ORDER BY\n      pm.usage_count DESC,\n      pm.modified_date DESC\n    LIMIT\n      1\n  ) drug ON TRUE\n  -- Quantity requested: dose x frequency x (duration / period), summed over dosage instructions\n  LEFT JOIN LATERAL (\n    SELECT\n      SUM(\n        (di -> 'dose_and_rate' -> 'dose_quantity' ->> 'value')::NUMERIC\n        * (di -> 'timing' -> 'repeat' ->> 'frequency')::NUMERIC\n        * (di -> 'timing' -> 'repeat' -> 'bounds_duration' ->> 'value')::NUMERIC * bu.days\n        / NULLIF((di -> 'timing' -> 'repeat' ->> 'period')::NUMERIC * pu.days, 0)\n      ) AS quantity\n    FROM\n      jsonb_array_elements(COALESCE(mr.dosage_instruction, '[]'::JSONB)) di\n      JOIN timing_units bu ON bu.code = di -> 'timing' -> 'repeat' -> 'bounds_duration' ->> 'unit'\n      JOIN timing_units pu ON pu.code = di -> 'timing' -> 'repeat' ->> 'period_unit'\n  ) qp ON TRUE\nWHERE\n  md.deleted = FALSE\n  AND md.status NOT IN ('cancelled', 'entered_in_error', 'stopped', 'declined')\n  [[AND st.eaushadhi_store_id = {{store_id}}]]\n  [[AND COALESCE(md.when_handed_over, md.when_prepared, md.created_date)::DATE = {{dispense_date}}]]\nORDER BY\n  md.patient_id,\n  pk.name,\n  COALESCE(md.when_handed_over, md.when_prepared, md.created_date) DESC,\n  md.id DESC;\n",
+              "lib/type": "mbql.stage/native",
+              "template-tags": [
+                {
+                  "type": "text",
+                  "name": "store_id",
+                  "id": "ee0480ec-a3b5-467e-99d6-08406b632d79",
+                  "display-name": "Store ID"
+                },
+                {
+                  "type": "text",
+                  "name": "dispense_date",
+                  "id": "46824bda-623e-4f60-81a2-6b843ca7aa26",
+                  "display-name": "Dispense Date"
+                }
+              ]
+            }
+          ],
+          "lib/type": "mbql/query",
+          "database": 2
+        },
+        "dimension_mappings": null,
+        "id": 94,
+        "legacy_query": null,
+        "parameter_mappings": [],
+        "display": "table",
+        "archived_directly": false,
+        "entity_id": "b-g2q5w1nlixw17l9TNlw",
+        "collection_preview": true,
+        "visualization_settings": {},
+        "metabase_version": "v0.63.13 (e8882cc)",
+        "parameters": [
+          {
+            "id": "ee0480ec-a3b5-467e-99d6-08406b632d79",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "store_id"
+              ]
+            ],
+            "name": "Store ID",
+            "slug": "store_id",
+            "isMultiSelect": false
+          },
+          {
+            "id": "46824bda-623e-4f60-81a2-6b843ca7aa26",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "dispense_date"
+              ]
+            ],
+            "name": "Dispense Date",
+            "slug": "dispense_date",
+            "isMultiSelect": false
+          }
+        ],
+        "dashboard_id": 8,
+        "created_at": "2026-11-02T10:54:36.566515Z",
+        "public_uuid": null
+      },
+      "updated_at": "2026-11-02T11:00:15.189142Z",
+      "col": 0,
+      "id": 85,
+      "parameter_mappings": [
+        {
+          "parameter_id": "1331f013",
+          "card_id": 94,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "store_id"
+            ]
+          ]
+        }
+      ],
+      "card_id": 94,
+      "entity_id": "gHYdQjys0ESQqfHy8-zy-",
+      "visualization_settings": {},
+      "size_y": 8,
+      "dashboard_id": 8,
+      "created_at": "2026-11-02T10:54:36.611778Z",
+      "row": 27
+    },
+    {
+      "size_x": 24,
+      "dashboard_tab_id": null,
+      "series": [],
+      "inline_parameters": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "card": {
+        "cache_invalidated_at": null,
+        "description": null,
+        "archived": false,
+        "view_count": 9,
+        "collection_position": null,
+        "source_card_id": null,
+        "table_id": null,
+        "result_metadata": [
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "STORE_ID",
+            "lib/original-name": "STORE_ID",
+            "name": "STORE_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "STORE_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "STORE_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "STORE_ID",
+            "display_name": "STORE_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 1,
+                "nil%": 0
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0,
+                  "average-length": 8,
+                  "mode-fraction": 1,
+                  "top-3-fraction": 1
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "STORE_NAME",
+            "lib/original-name": "STORE_NAME",
+            "name": "STORE_NAME",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "STORE_NAME",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "STORE_NAME",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "STORE_NAME",
+            "display_name": "STORE_NAME",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 1,
+                "nil%": 0
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0,
+                  "average-length": 8,
+                  "mode-fraction": 1,
+                  "top-3-fraction": 1
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "DISTRICT_NAME",
+            "lib/original-name": "DISTRICT_NAME",
+            "name": "DISTRICT_NAME",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "DISTRICT_NAME",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "DISTRICT_NAME",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "DISTRICT_NAME",
+            "display_name": "DISTRICT_NAME",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 1,
+                "nil%": 1
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 1,
+                  "average-length": 0,
+                  "mode-fraction": 1,
+                  "top-3-fraction": 1
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "DRUG_ITEM_ID",
+            "lib/original-name": "DRUG_ITEM_ID",
+            "name": "DRUG_ITEM_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "DRUG_ITEM_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "DRUG_ITEM_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "DRUG_ITEM_ID",
+            "display_name": "DRUG_ITEM_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 1,
+                "nil%": 0
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0,
+                  "average-length": 8,
+                  "mode-fraction": 1,
+                  "top-3-fraction": 1
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "DRUG_ITEM_NAME",
+            "lib/original-name": "DRUG_ITEM_NAME",
+            "name": "DRUG_ITEM_NAME",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "DRUG_ITEM_NAME",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "DRUG_ITEM_NAME",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "DRUG_ITEM_NAME",
+            "display_name": "DRUG_ITEM_NAME",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 1,
+                "nil%": 0
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": 0,
+                  "percent-url": 0,
+                  "percent-email": 0,
+                  "percent-state": 0,
+                  "percent-blank": 0,
+                  "average-length": 59,
+                  "mode-fraction": 1,
+                  "top-3-fraction": 1
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "AVAILABLE_MAIN_STORE_QTY",
+            "lib/original-name": "AVAILABLE_MAIN_STORE_QTY",
+            "name": "AVAILABLE_MAIN_STORE_QTY",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "AVAILABLE_MAIN_STORE_QTY",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "AVAILABLE_MAIN_STORE_QTY",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "AVAILABLE_MAIN_STORE_QTY",
+            "display_name": "AVAILABLE_MAIN_STORE_QTY",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 1,
+                "nil%": 0
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": 100,
+                  "q1": 100,
+                  "q3": 100,
+                  "excess-kurtosis": null,
+                  "zero-fraction": 0,
+                  "mode-fraction": 1,
+                  "top-3-fraction": 1,
+                  "max": 100,
+                  "sd": 0,
+                  "avg": 100
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "AVAILABLE_INHAND_QTY",
+            "lib/original-name": "AVAILABLE_INHAND_QTY",
+            "name": "AVAILABLE_INHAND_QTY",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "AVAILABLE_INHAND_QTY",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "AVAILABLE_INHAND_QTY",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "AVAILABLE_INHAND_QTY",
+            "display_name": "AVAILABLE_INHAND_QTY",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 1,
+                "nil%": 0
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": 100,
+                  "q1": 100,
+                  "q3": 100,
+                  "excess-kurtosis": null,
+                  "zero-fraction": 0,
+                  "mode-fraction": 1,
+                  "top-3-fraction": 1,
+                  "max": 100,
+                  "sd": 0,
+                  "avg": 100
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          }
+        ],
+        "embedding_type": null,
+        "initially_published_at": null,
+        "can_write": true,
+        "card_schema": 23,
+        "database_id": 2,
+        "enable_embedding": false,
+        "collection_id": 17,
+        "query_type": "native",
+        "download_perms": "full",
+        "name": "Hospital Inventory Position (CARE System)",
+        "document_id": null,
+        "last_used_at": "2026-11-02T11:29:14.214193Z",
+        "type": "question",
+        "dimensions": null,
+        "query_average_duration": 148,
+        "creator_id": 13,
+        "moderation_reviews": [],
+        "updated_at": "2026-11-02T10:55:15.949087Z",
+        "made_public_by_id": null,
+        "embedding_params": null,
+        "cache_ttl": null,
+        "dataset_query": {
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "-- KPI 5: Hospital Inventory Position (CARE System)\nWITH\n  location_stock AS (\n    SELECT\n      l.facility_id,\n      ii.location_id,\n      pr.product_knowledge_id,\n      SUM(ii.net_content) AS quantity\n    FROM\n      emr_inventoryitem ii\n      JOIN emr_product pr ON pr.id = ii.product_id\n      JOIN emr_facilitylocation l ON l.id = ii.location_id\n    WHERE\n      ii.deleted = FALSE\n    GROUP BY\n      l.facility_id,\n      ii.location_id,\n      pr.product_knowledge_id\n  )\nSELECT\n  st.eaushadhi_store_id AS \"STORE_ID\",\n  st.eaushadhi_store_name AS \"STORE_NAME\",\n  dist.name AS \"DISTRICT_NAME\",\n  drug.eaushadhi_drug_id AS \"DRUG_ITEM_ID\",\n  -- Products with no DVDMS mapping fall back to the CARE product name\n  COALESCE(drug.name, pk.name) AS \"DRUG_ITEM_NAME\",\n  COALESCE(\n    SUM(ls.quantity) FILTER (\n      WHERE\n        ls.location_id = st.location_id\n    ),\n    0\n  ) AS \"AVAILABLE_MAIN_STORE_QTY\",\n  SUM(ls.quantity) AS \"AVAILABLE_INHAND_QTY\"\nFROM\n  facility_facility f\n  JOIN care_dvdms_dvdmsinstitute inst ON inst.facility_id = f.id\n  AND inst.deleted = FALSE\n  -- Main store: the institute's default store (first store if none is marked default)\n  JOIN LATERAL (\n    SELECT\n      s2.eaushadhi_store_id,\n      s2.eaushadhi_store_name,\n      s2.location_id\n    FROM\n      care_dvdms_dvdmsstore s2\n    WHERE\n      s2.institute_id = inst.id\n      AND s2.deleted = FALSE\n    ORDER BY\n      s2.is_default DESC,\n      s2.id\n    LIMIT\n      1\n  ) st ON TRUE\n  JOIN location_stock ls ON ls.facility_id = f.id\n  JOIN emr_productknowledge pk ON pk.id = ls.product_knowledge_id\n  -- Drug: the institute's mapping for the product, most used first (as _find_product_mapping)\n  LEFT JOIN LATERAL (\n    SELECT\n      pm.eaushadhi_drug_id,\n      dr.name\n    FROM\n      care_dvdms_dvdmsproductmapping pm\n      JOIN care_dvdms_dvdmsdrug dr ON dr.id = pm.drug_id\n    WHERE\n      pm.institute_id = inst.id\n      AND pm.product_knowledge_id = ls.product_knowledge_id\n      AND pm.deleted = FALSE\n    ORDER BY\n      pm.usage_count DESC,\n      pm.modified_date DESC\n    LIMIT\n      1\n  ) drug ON TRUE\n  -- District: the facility's geo organization or one of its parents\n  LEFT JOIN LATERAL (\n    SELECT\n      o.name\n    FROM\n      emr_organization o\n    WHERE\n      o.id = ANY (f.geo_organization_cache)\n      AND o.org_type = 'govt'\n      AND o.metadata ->> 'govt_org_type' = 'district'\n      AND o.deleted = FALSE\n    LIMIT\n      1\n  ) dist ON TRUE\nWHERE\n  f.deleted = FALSE\n  AND f.is_active = TRUE\n  AND f.is_public = TRUE [[AND st.eaushadhi_store_id = {{store_id}}]]\nGROUP BY\n  f.id,\n  st.eaushadhi_store_id,\n  st.eaushadhi_store_name,\n  dist.name,\n  pk.id,\n  drug.eaushadhi_drug_id,\n  drug.name\nORDER BY\n  \"STORE_NAME\",\n  \"DRUG_ITEM_NAME\";",
+              "template-tags": [
+                {
+                  "type": "text",
+                  "name": "store_id",
+                  "id": "f9359640-c042-4ac0-bf00-a2c22a74f3aa",
+                  "display-name": "Store ID"
+                }
+              ]
+            }
+          ],
+          "lib/type": "mbql/query",
+          "database": 2
+        },
+        "dimension_mappings": null,
+        "id": 95,
+        "legacy_query": null,
+        "parameter_mappings": [],
+        "display": "table",
+        "archived_directly": false,
+        "entity_id": "74TxeX9k9FTRmJaqIlDDg",
+        "collection_preview": true,
+        "visualization_settings": {},
+        "metabase_version": "v0.63.13 (e8882cc)",
+        "parameters": [
+          {
+            "id": "f9359640-c042-4ac0-bf00-a2c22a74f3aa",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "store_id"
+              ]
+            ],
+            "name": "Store ID",
+            "slug": "store_id",
+            "isMultiSelect": false
+          }
+        ],
+        "dashboard_id": 8,
+        "created_at": "2026-11-02T10:55:15.949087Z",
+        "public_uuid": null
+      },
+      "updated_at": "2026-11-02T11:00:15.189142Z",
+      "col": 0,
+      "id": 86,
+      "parameter_mappings": [
+        {
+          "parameter_id": "1331f013",
+          "card_id": 95,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "store_id"
+            ]
+          ]
+        }
+      ],
+      "card_id": 95,
+      "entity_id": "aKKHcVtkpug2ZkQRgtEW9",
+      "visualization_settings": {},
+      "size_y": 7,
+      "dashboard_id": 8,
+      "created_at": "2026-11-02T10:55:15.997488Z",
+      "row": 35
+    },
+    {
+      "size_x": 24,
+      "dashboard_tab_id": null,
+      "series": [],
+      "inline_parameters": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "card": {
+        "cache_invalidated_at": null,
+        "description": null,
+        "archived": false,
+        "view_count": 8,
+        "collection_position": null,
+        "source_card_id": null,
+        "table_id": null,
+        "result_metadata": null,
+        "embedding_type": null,
+        "initially_published_at": null,
+        "can_write": true,
+        "card_schema": 23,
+        "database_id": 1,
+        "enable_embedding": false,
+        "collection_id": 17,
+        "query_type": "native",
+        "download_perms": "full",
+        "name": "Drug Receipt, Patient Dispensing and Available Inventory",
+        "document_id": null,
+        "last_used_at": "2026-11-02T10:55:46.059131Z",
+        "type": "question",
+        "dimensions": null,
+        "query_average_duration": 171,
+        "creator_id": 13,
+        "moderation_reviews": [],
+        "updated_at": "2026-11-02T10:55:46.059131Z",
+        "made_public_by_id": null,
+        "embedding_params": null,
+        "cache_ttl": null,
+        "dataset_query": {
+          "stages": [
+            {
+              "native": "-- KPI 6: Drug Receipt, Patient Dispensing and Available Inventory\nWITH\n  product_drug AS (\n    -- Each CARE product's DVDMS drug for the institute, most used mapping first\n    -- (as _find_product_mapping), so a product is counted under one drug only\n    SELECT DISTINCT ON (pm.institute_id, pm.product_knowledge_id)\n      pm.institute_id,\n      pm.product_knowledge_id,\n      pm.eaushadhi_drug_id,\n      dr.name\n    FROM\n      care_dvdms_dvdmsproductmapping pm\n      JOIN care_dvdms_dvdmsdrug dr ON dr.id = pm.drug_id\n    WHERE\n      pm.deleted = FALSE\n    ORDER BY\n      pm.institute_id,\n      pm.product_knowledge_id,\n      pm.usage_count DESC,\n      pm.modified_date DESC\n  ),\n  received AS (\n    SELECT\n      ir.institute_id,\n      iir.drug_id AS eaushadhi_drug_id,\n      MIN(iir.drug_name) AS drug_name,\n      SUM(rid.quantity_accepted) AS quantity\n    FROM\n      care_dvdms_dvdmsrecorditemdelivery rid\n      JOIN care_dvdms_dvdmsrecorddelivery rd ON rd.id = rid.record_delivery_id\n      AND rd.deleted = FALSE\n      AND rd.status IN ('received', 'acknowledged', 'acknowledgement_failed')\n      JOIN care_dvdms_dvdmsinwarditemrecord iir ON iir.id = rid.inward_record_item_id\n      AND iir.deleted = FALSE\n      JOIN care_dvdms_dvdmsinwardrecord ir ON ir.id = iir.inward_record_id\n      AND ir.deleted = FALSE\n    WHERE\n      rid.deleted = FALSE\n      AND rid.status <> 'REVERSED'\n    GROUP BY\n      ir.institute_id,\n      iir.drug_id\n  ),\n  issued AS (\n    SELECT\n      pd.institute_id,\n      pd.eaushadhi_drug_id,\n      SUM(md.quantity) AS quantity\n    FROM\n      emr_medicationdispense md\n      JOIN emr_facilitylocation l ON l.id = md.location_id\n      JOIN care_dvdms_dvdmsinstitute inst ON inst.facility_id = l.facility_id\n      AND inst.deleted = FALSE\n      JOIN emr_inventoryitem ii ON ii.id = md.item_id\n      JOIN emr_product pr ON pr.id = ii.product_id\n      JOIN product_drug pd ON pd.institute_id = inst.id\n      AND pd.product_knowledge_id = pr.product_knowledge_id\n    WHERE\n      md.deleted = FALSE\n      AND md.status NOT IN ('cancelled', 'entered_in_error', 'stopped', 'declined')\n    GROUP BY\n      pd.institute_id,\n      pd.eaushadhi_drug_id\n  ),\n  in_care AS (\n    SELECT\n      pd.institute_id,\n      pd.eaushadhi_drug_id,\n      SUM(ii.net_content) AS quantity\n    FROM\n      emr_inventoryitem ii\n      JOIN emr_facilitylocation l ON l.id = ii.location_id\n      JOIN care_dvdms_dvdmsinstitute inst ON inst.facility_id = l.facility_id\n      AND inst.deleted = FALSE\n      JOIN emr_product pr ON pr.id = ii.product_id\n      JOIN product_drug pd ON pd.institute_id = inst.id\n      AND pd.product_knowledge_id = pr.product_knowledge_id\n    WHERE\n      ii.deleted = FALSE\n    GROUP BY\n      pd.institute_id,\n      pd.eaushadhi_drug_id\n  ),\n  drugs AS (\n    SELECT institute_id, eaushadhi_drug_id FROM received\n    UNION\n    SELECT institute_id, eaushadhi_drug_id FROM issued\n    UNION\n    SELECT institute_id, eaushadhi_drug_id FROM in_care\n  )\nSELECT\n  st.eaushadhi_store_id AS \"STORE_ID\",\n  st.eaushadhi_store_name AS \"STORE_NAME\",\n  sp.eaushadhi_warehouse_id AS \"PARENT_STORE_ID\",\n  sp.eaushadhi_warehouse_name AS \"PARENT_STORE_NAME\",\n  d.eaushadhi_drug_id AS \"DRUG_ID\",\n  COALESCE(pd.name, r.drug_name) AS \"DRUG_NAME\",\n  COALESCE(r.quantity, 0) AS \"QUANTITY_RECEIVED_FROM_DVDMS\",\n  COALESCE(i.quantity, 0) AS \"QUANTITY_ISSUED_TO_PATIENTS\",\n  COALESCE(c.quantity, 0) AS \"AVAILABLE_QUANTITY_IN_CARE\"\nFROM\n  drugs d\n  JOIN care_dvdms_dvdmsinstitute inst ON inst.id = d.institute_id\n  AND inst.deleted = FALSE\n  JOIN facility_facility f ON f.id = inst.facility_id\n  AND f.deleted = FALSE\n  AND f.is_active = TRUE\n  AND f.is_public = TRUE\n  LEFT JOIN received r ON r.institute_id = d.institute_id\n  AND r.eaushadhi_drug_id = d.eaushadhi_drug_id\n  LEFT JOIN issued i ON i.institute_id = d.institute_id\n  AND i.eaushadhi_drug_id = d.eaushadhi_drug_id\n  LEFT JOIN in_care c ON c.institute_id = d.institute_id\n  AND c.eaushadhi_drug_id = d.eaushadhi_drug_id\n  -- At most one: a drug ID is mapped once per institute\n  LEFT JOIN product_drug pd ON pd.institute_id = d.institute_id\n  AND pd.eaushadhi_drug_id = d.eaushadhi_drug_id\n  -- Default store and supplier, as in KPI 1\n  LEFT JOIN LATERAL (\n    SELECT\n      s2.eaushadhi_store_id,\n      s2.eaushadhi_store_name\n    FROM\n      care_dvdms_dvdmsstore s2\n    WHERE\n      s2.institute_id = inst.id\n      AND s2.deleted = FALSE\n    ORDER BY\n      s2.is_default DESC,\n      s2.id\n    LIMIT\n      1\n  ) st ON TRUE\n  LEFT JOIN LATERAL (\n    SELECT\n      p2.eaushadhi_warehouse_id,\n      p2.eaushadhi_warehouse_name\n    FROM\n      care_dvdms_dvdmssupplier p2\n    WHERE\n      p2.institute_id = inst.id\n      AND p2.deleted = FALSE\n    ORDER BY\n      p2.is_default DESC,\n      p2.id\n    LIMIT\n      1\n  ) sp ON TRUE\nWHERE\n  TRUE\n  [[AND st.eaushadhi_store_id = {{store_id}}]]\nORDER BY\n  \"STORE_NAME\",\n  \"DRUG_NAME\";\n",
+              "lib/type": "mbql.stage/native",
+              "template-tags": [
+                {
+                  "name": "store_id",
+                  "id": "ec83d64b-1511-4a81-8f2c-195b5ede4bd7",
+                  "type": "text",
+                  "display-name": "Store ID"
+                }
+              ]
+            }
+          ],
+          "lib/type": "mbql/query",
+          "database": 1
+        },
+        "dimension_mappings": null,
+        "id": 96,
+        "legacy_query": null,
+        "parameter_mappings": [],
+        "display": "table",
+        "archived_directly": false,
+        "entity_id": "CY50CIBx4AUhEjNlz2DO8",
+        "collection_preview": true,
+        "visualization_settings": {},
+        "metabase_version": "v0.63.13 (e8882cc)",
+        "parameters": [
+          {
+            "id": "ec83d64b-1511-4a81-8f2c-195b5ede4bd7",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "store_id"
+              ]
+            ],
+            "name": "Store ID",
+            "slug": "store_id",
+            "isMultiSelect": false
+          }
+        ],
+        "dashboard_id": 8,
+        "created_at": "2026-11-02T10:55:46.059131Z",
+        "public_uuid": null
+      },
+      "updated_at": "2026-11-02T11:00:15.189142Z",
+      "col": 0,
+      "id": 87,
+      "parameter_mappings": [
+        {
+          "parameter_id": "1331f013",
+          "card_id": 96,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "store_id"
+            ]
+          ]
+        }
+      ],
+      "card_id": 96,
+      "entity_id": "W1BCwLjw1dwFWlRnTGFGJ",
+      "visualization_settings": {},
+      "size_y": 8,
+      "dashboard_id": 8,
+      "created_at": "2026-11-02T10:55:46.104559Z",
+      "row": 42
+    },
+    {
+      "size_x": 24,
+      "dashboard_tab_id": null,
+      "series": [],
+      "inline_parameters": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "card": {
+        "cache_invalidated_at": null,
+        "description": null,
+        "archived": false,
+        "view_count": 6,
+        "collection_position": null,
+        "source_card_id": null,
+        "table_id": null,
+        "result_metadata": [
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "STORE_ID",
+            "lib/original-name": "STORE_ID",
+            "name": "STORE_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "STORE_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "STORE_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "STORE_ID",
+            "display_name": "STORE_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "date",
+            "semantic_type": null,
+            "lib/deduplicated-name": "TRANSFER_DATE",
+            "lib/original-name": "TRANSFER_DATE",
+            "name": "TRANSFER_DATE",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "TRANSFER_DATE",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "TRANSFER_DATE",
+              {
+                "base-type": "type/Date"
+              }
+            ],
+            "effective_type": "type/Date",
+            "lib/desired-column-alias": "TRANSFER_DATE",
+            "display_name": "TRANSFER_DATE",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/DateTime": {
+                  "earliest": null,
+                  "latest": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Date"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "FROM_STORE",
+            "lib/original-name": "FROM_STORE",
+            "name": "FROM_STORE",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "FROM_STORE",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "FROM_STORE",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "FROM_STORE",
+            "display_name": "FROM_STORE",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "TO_STORE",
+            "lib/original-name": "TO_STORE",
+            "name": "TO_STORE",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "TO_STORE",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "TO_STORE",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "TO_STORE",
+            "display_name": "TO_STORE",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "PRODUCT",
+            "lib/original-name": "PRODUCT",
+            "name": "PRODUCT",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "PRODUCT",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "PRODUCT",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "PRODUCT",
+            "display_name": "PRODUCT",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "DRUG_NAME",
+            "lib/original-name": "DRUG_NAME",
+            "name": "DRUG_NAME",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "DRUG_NAME",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "DRUG_NAME",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "DRUG_NAME",
+            "display_name": "DRUG_NAME",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "QUANTITY",
+            "lib/original-name": "QUANTITY",
+            "name": "QUANTITY",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "QUANTITY",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "QUANTITY",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "QUANTITY",
+            "display_name": "QUANTITY",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          },
+          {
+            "database_type": "text",
+            "semantic_type": null,
+            "lib/deduplicated-name": "BATCH_NO",
+            "lib/original-name": "BATCH_NO",
+            "name": "BATCH_NO",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "BATCH_NO",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "BATCH_NO",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "BATCH_NO",
+            "display_name": "BATCH_NO",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "date",
+            "semantic_type": null,
+            "lib/deduplicated-name": "EXPIRY",
+            "lib/original-name": "EXPIRY",
+            "name": "EXPIRY",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "EXPIRY",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "EXPIRY",
+              {
+                "base-type": "type/Date"
+              }
+            ],
+            "effective_type": "type/Date",
+            "lib/desired-column-alias": "EXPIRY",
+            "display_name": "EXPIRY",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/DateTime": {
+                  "earliest": null,
+                  "latest": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Date"
+          },
+          {
+            "database_type": "varchar",
+            "semantic_type": null,
+            "lib/deduplicated-name": "DRUG_ID",
+            "lib/original-name": "DRUG_ID",
+            "name": "DRUG_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "DRUG_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "DRUG_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "DRUG_ID",
+            "display_name": "DRUG_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "text",
+            "semantic_type": null,
+            "lib/deduplicated-name": "DRUG_BRAND_ID",
+            "lib/original-name": "DRUG_BRAND_ID",
+            "name": "DRUG_BRAND_ID",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "DRUG_BRAND_ID",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "DRUG_BRAND_ID",
+              {
+                "base-type": "type/Text"
+              }
+            ],
+            "effective_type": "type/Text",
+            "lib/desired-column-alias": "DRUG_BRAND_ID",
+            "display_name": "DRUG_BRAND_ID",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Text": {
+                  "percent-json": null,
+                  "percent-url": null,
+                  "percent-email": null,
+                  "percent-state": null,
+                  "percent-blank": null,
+                  "average-length": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null
+                }
+              }
+            },
+            "base_type": "type/Text"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "FROM_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION",
+            "lib/original-name": "FROM_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION",
+            "name": "FROM_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "FROM_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "FROM_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "FROM_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION",
+            "display_name": "FROM_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "FROM_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION",
+            "lib/original-name": "FROM_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION",
+            "name": "FROM_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "FROM_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "FROM_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "FROM_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION",
+            "display_name": "FROM_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "TO_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION",
+            "lib/original-name": "TO_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION",
+            "name": "TO_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "TO_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "TO_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "TO_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION",
+            "display_name": "TO_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          },
+          {
+            "database_type": "numeric",
+            "semantic_type": null,
+            "lib/deduplicated-name": "TO_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION",
+            "lib/original-name": "TO_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION",
+            "name": "TO_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION",
+            "lib/source": "source/native",
+            "lib/source-column-alias": "TO_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION",
+            "source": "native",
+            "field_ref": [
+              "field",
+              "TO_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION",
+              {
+                "base-type": "type/Decimal"
+              }
+            ],
+            "effective_type": "type/Decimal",
+            "lib/desired-column-alias": "TO_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION",
+            "display_name": "TO_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION",
+            "fingerprint": {
+              "global": {
+                "distinct-count": 0,
+                "nil%": null
+              },
+              "type": {
+                "type/Number": {
+                  "skewness": null,
+                  "min": null,
+                  "q1": null,
+                  "q3": null,
+                  "excess-kurtosis": null,
+                  "zero-fraction": null,
+                  "mode-fraction": null,
+                  "top-3-fraction": null,
+                  "max": null,
+                  "sd": null,
+                  "avg": null
+                }
+              }
+            },
+            "base_type": "type/Decimal"
+          }
+        ],
+        "embedding_type": null,
+        "initially_published_at": null,
+        "can_write": true,
+        "card_schema": 23,
+        "database_id": 2,
+        "enable_embedding": false,
+        "collection_id": 17,
+        "query_type": "native",
+        "download_perms": "full",
+        "name": "Internal Transfers",
+        "document_id": null,
+        "last_used_at": "2026-11-02T11:29:14.214193Z",
+        "type": "question",
+        "dimensions": null,
+        "query_average_duration": 229,
+        "creator_id": 13,
+        "moderation_reviews": [],
+        "updated_at": "2026-11-02T10:56:25.87651Z",
+        "made_public_by_id": null,
+        "embedding_params": null,
+        "cache_ttl": null,
+        "dataset_query": {
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "-- KPI 7: Internal Transfers\nWITH\n  stock_movements AS (\n    -- Deliveries into a location\n    SELECT\n      o.destination_id AS location_id,\n      pr.product_knowledge_id,\n      sd.supplied_item_quantity AS quantity,\n      sd.created_date AS moved_at,\n      'delivery_in' AS movement,\n      sd.id AS ref_id\n    FROM\n      emr_supplydelivery sd\n      JOIN emr_deliveryorder o ON o.id = sd.order_id\n      LEFT JOIN emr_inventoryitem sii ON sii.id = sd.supplied_inventory_item_id\n      JOIN emr_product pr ON pr.id = COALESCE(sd.supplied_item_id, sii.product_id)\n    WHERE\n      sd.deleted = FALSE\n      AND sd.status = 'completed'\n    UNION ALL\n    -- Deliveries out of a location\n    SELECT\n      o.origin_id,\n      pr.product_knowledge_id,\n      -sd.supplied_item_quantity,\n      sd.created_date,\n      'delivery_out',\n      sd.id\n    FROM\n      emr_supplydelivery sd\n      JOIN emr_deliveryorder o ON o.id = sd.order_id\n      LEFT JOIN emr_inventoryitem sii ON sii.id = sd.supplied_inventory_item_id\n      JOIN emr_product pr ON pr.id = COALESCE(sd.supplied_item_id, sii.product_id)\n    WHERE\n      sd.deleted = FALSE\n      AND sd.status = 'completed'\n      AND o.origin_id IS NOT NULL\n    UNION ALL\n    -- Dispenses from a location\n    SELECT\n      md.location_id,\n      pr.product_knowledge_id,\n      -md.quantity,\n      COALESCE(md.when_handed_over, md.when_prepared, md.created_date),\n      'dispense',\n      md.id\n    FROM\n      emr_medicationdispense md\n      JOIN emr_inventoryitem ii ON ii.id = md.item_id\n      JOIN emr_product pr ON pr.id = ii.product_id\n    WHERE\n      md.deleted = FALSE\n      AND md.status NOT IN ('cancelled', 'entered_in_error', 'stopped', 'declined')\n  ),\n  current_stock AS (\n    SELECT\n      ii.location_id,\n      pr.product_knowledge_id,\n      SUM(ii.net_content) AS quantity\n    FROM\n      emr_inventoryitem ii\n      JOIN emr_product pr ON pr.id = ii.product_id\n    WHERE\n      ii.deleted = FALSE\n    GROUP BY\n      ii.location_id,\n      pr.product_knowledge_id\n  ),\n  stock_ledger AS (\n    -- Opening stock is not always recorded as a delivery, so instead of summing up from\n    -- zero, start at today's stock and undo every movement after the row; that gives\n    -- the location's stock just after the row's movement\n    SELECT\n      m.ref_id,\n      m.movement,\n      COALESCE(cs.quantity, 0) - COALESCE(\n        SUM(m.quantity) OVER (\n          PARTITION BY\n            m.location_id,\n            m.product_knowledge_id\n          ORDER BY\n            m.moved_at,\n            m.movement,\n            m.ref_id ROWS BETWEEN 1 FOLLOWING AND UNBOUNDED FOLLOWING\n        ),\n        0\n      ) AS stock_after\n    FROM\n      stock_movements m\n      LEFT JOIN current_stock cs ON cs.location_id = m.location_id\n      AND cs.product_knowledge_id = m.product_knowledge_id\n  )\nSELECT\n  st.eaushadhi_store_id AS \"STORE_ID\",\n  sd.created_date::DATE AS \"TRANSFER_DATE\",\n  fl.name AS \"FROM_STORE\",\n  tl.name AS \"TO_STORE\",\n  pk.name AS \"PRODUCT\",\n  drug.name AS \"DRUG_NAME\",\n  sd.supplied_item_quantity AS \"QUANTITY\",\n  pr.batch ->> 'lot_number' AS \"BATCH_NO\",\n  (pr.expiration_date AT TIME ZONE 'Asia/Kolkata')::DATE AS \"EXPIRY\",\n  drug.eaushadhi_drug_id AS \"DRUG_ID\",\n  NULLIF(drug.brand_id, '') AS \"DRUG_BRAND_ID\",\n  slo.stock_after + sd.supplied_item_quantity AS \"FROM_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION\",\n  slo.stock_after AS \"FROM_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION\",\n  sli.stock_after - sd.supplied_item_quantity AS \"TO_STORE_INVENTORY_STOCK_COUNT_BEFORE_TRANSACTION\",\n  sli.stock_after AS \"TO_STORE_INVENTORY_STOCK_COUNT_AFTER_TRANSACTION\"\nFROM\n  emr_supplydelivery sd\n  JOIN emr_deliveryorder o ON o.id = sd.order_id\n  AND o.deleted = FALSE\n  JOIN emr_facilitylocation fl ON fl.id = o.origin_id\n  -- A transfer: origin and destination both in the same facility\n  JOIN emr_facilitylocation tl ON tl.id = o.destination_id\n  AND tl.facility_id = fl.facility_id\n  JOIN facility_facility f ON f.id = fl.facility_id\n  AND f.deleted = FALSE\n  AND f.is_active = TRUE\n  AND f.is_public = TRUE\n  JOIN care_dvdms_dvdmsinstitute inst ON inst.facility_id = f.id\n  AND inst.deleted = FALSE\n  -- The facility's store (default first), as in KPI 1\n  JOIN LATERAL (\n    SELECT\n      s2.eaushadhi_store_id\n    FROM\n      care_dvdms_dvdmsstore s2\n    WHERE\n      s2.institute_id = inst.id\n      AND s2.deleted = FALSE\n    ORDER BY\n      s2.is_default DESC,\n      s2.id\n    LIMIT\n      1\n  ) st ON TRUE\n  LEFT JOIN emr_inventoryitem sii ON sii.id = sd.supplied_inventory_item_id\n  JOIN emr_product pr ON pr.id = COALESCE(sd.supplied_item_id, sii.product_id)\n  JOIN emr_productknowledge pk ON pk.id = pr.product_knowledge_id\n  LEFT JOIN stock_ledger slo ON slo.ref_id = sd.id\n  AND slo.movement = 'delivery_out'\n  LEFT JOIN stock_ledger sli ON sli.ref_id = sd.id\n  AND sli.movement = 'delivery_in'\n  -- Drug: the institute's mapping for the product, most used first (as _find_product_mapping)\n  LEFT JOIN LATERAL (\n    SELECT\n      pm.eaushadhi_drug_id,\n      dr.name,\n      dr.brand_id\n    FROM\n      care_dvdms_dvdmsproductmapping pm\n      JOIN care_dvdms_dvdmsdrug dr ON dr.id = pm.drug_id\n    WHERE\n      pm.institute_id = inst.id\n      AND pm.product_knowledge_id = pr.product_knowledge_id\n      AND pm.deleted = FALSE\n    ORDER BY\n      pm.usage_count DESC,\n      pm.modified_date DESC\n    LIMIT\n      1\n  ) drug ON TRUE\nWHERE\n  sd.deleted = FALSE\n  AND sd.status = 'completed'\n  [[AND st.eaushadhi_store_id = {{store_id}}]]\n  [[AND sd.created_date::DATE = {{transfer_date}}]]\n  -- Matches either side of the transfer, as in the existing card\n  [[AND {{location_name}} IN (fl.name, tl.name)]]\nORDER BY\n  sd.created_date DESC,\n  sd.id DESC;\n",
+              "template-tags": [
+                {
+                  "type": "text",
+                  "name": "store_id",
+                  "id": "995b2b15-9436-430f-98bd-0bf0ab96b2f1",
+                  "display-name": "Store ID"
+                },
+                {
+                  "type": "text",
+                  "name": "transfer_date",
+                  "id": "d9282c6d-a50b-48bc-baae-580fbcb4dc21",
+                  "display-name": "Transfer Date"
+                },
+                {
+                  "type": "text",
+                  "name": "location_name",
+                  "id": "ee77b6b5-71e3-4e74-8dd5-41a200d0c8aa",
+                  "display-name": "Location Name"
+                }
+              ]
+            }
+          ],
+          "lib/type": "mbql/query",
+          "database": 2
+        },
+        "dimension_mappings": null,
+        "id": 97,
+        "legacy_query": null,
+        "parameter_mappings": [],
+        "display": "table",
+        "archived_directly": false,
+        "entity_id": "7Gcm48cRAXHkRPFJIapbL",
+        "collection_preview": true,
+        "visualization_settings": {},
+        "metabase_version": "v0.63.13 (e8882cc)",
+        "parameters": [
+          {
+            "id": "995b2b15-9436-430f-98bd-0bf0ab96b2f1",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "store_id"
+              ]
+            ],
+            "name": "Store ID",
+            "slug": "store_id",
+            "isMultiSelect": false
+          },
+          {
+            "id": "d9282c6d-a50b-48bc-baae-580fbcb4dc21",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "transfer_date"
+              ]
+            ],
+            "name": "Transfer Date",
+            "slug": "transfer_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "ee77b6b5-71e3-4e74-8dd5-41a200d0c8aa",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "location_name"
+              ]
+            ],
+            "name": "Location Name",
+            "slug": "location_name",
+            "isMultiSelect": false
+          }
+        ],
+        "dashboard_id": 8,
+        "created_at": "2026-11-02T10:56:25.87651Z",
+        "public_uuid": null
+      },
+      "updated_at": "2026-11-02T11:00:15.189142Z",
+      "col": 0,
+      "id": 88,
+      "parameter_mappings": [
+        {
+          "parameter_id": "1331f013",
+          "card_id": 97,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "store_id"
+            ]
+          ]
+        }
+      ],
+      "card_id": 97,
+      "entity_id": "jLmf17zSyedKYUjwsWdVX",
+      "visualization_settings": {},
+      "size_y": 9,
+      "dashboard_id": 8,
+      "created_at": "2026-11-02T10:56:25.958071Z",
+      "row": 50
+    }
+  ],
+  "embedding_type": null,
+  "initially_published_at": null,
+  "can_write": true,
+  "can_set_cache_policy": true,
+  "tabs": [],
+  "enable_embedding": false,
+  "collection_id": 17,
+  "show_in_getting_started": false,
+  "name": "DVDMS Stock Kpis",
+  "is_remote_synced": false,
+  "width": "fixed",
+  "caveats": null,
+  "collection_authority_level": null,
+  "creator_id": 13,
+  "can_restore": false,
+  "moderation_reviews": [],
+  "updated_at": "2026-11-02T11:00:15.189142Z",
+  "made_public_by_id": null,
+  "embedding_params": null,
+  "cache_ttl": null,
+  "last_used_param_values": {},
+  "id": 8,
+  "last_viewed_at": "2026-11-02T11:29:13.88955Z",
+  "position": null,
+  "archived_directly": false,
+  "entity_id": "ogYSmfGNkjzGvcBJwwL5l",
+  "param_fields": {},
+  "last-edit-info": {
+    "id": 13,
+    "email": "jagan.kumar@egovernments.org",
+    "first_name": "Jagan",
+    "last_name": "Kumar",
+    "timestamp": "2026-11-02T11:00:15.517286Z"
+  },
+  "collection": {
+    "authority_level": null,
+    "description": null,
+    "archived": false,
+    "slug": "dvdms",
+    "archive_operation_id": null,
+    "name": "DVDMS",
+    "is_remote_synced": false,
+    "personal_owner_id": null,
+    "type": null,
+    "is_sample": false,
+    "effective_location": "/7/",
+    "id": 17,
+    "archived_directly": null,
+    "entity_id": "XMXYTO4r9l_-OliaSY5fl",
+    "location": "/7/",
+    "namespace": null,
+    "is_personal": false,
+    "created_at": "2026-10-23T09:09:38.107875Z"
+  },
+  "parameters": [
+    {
+      "name": "Store ID",
+      "slug": "store_id",
+      "id": "1331f013",
+      "type": "string/=",
+      "sectionId": "string",
+      "values_query_type": "none",
+      "isMultiSelect": false
+    },
+    {
+      "name": "Date",
+      "slug": "date",
+      "id": "d03b79ac",
+      "type": "date/single",
+      "sectionId": "date"
+    },
+    {
+      "name": "Location",
+      "slug": "location",
+      "id": "d1c9107f",
+      "type": "string/=",
+      "sectionId": "string",
+      "values_query_type": "none",
+      "isMultiSelect": false
+    }
+  ],
+  "auto_apply_filters": true,
+  "created_at": "2026-11-02T10:49:24.879231Z",
+  "public_uuid": null,
+  "points_of_interest": null,
+  "can_delete": false
+}
