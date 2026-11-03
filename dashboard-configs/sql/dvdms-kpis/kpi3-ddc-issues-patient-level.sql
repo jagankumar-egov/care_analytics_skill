@@ -118,6 +118,23 @@ SELECT
   (COALESCE(md.when_handed_over, md.when_prepared, md.created_date) AT TIME ZONE 'Asia/Kolkata')::DATE AS "DISPENSE_DATE",
   uhid.value AS "PATIENT_UHID",
   ab.abha_number AS "ABHA_ID",
+  p.gender AS "PATIENT_GENDER",
+  -- Completed years AT THE TIME OF THE DISPENSE, not today, so a report run for a past
+  -- date stays stable. Mirrors Patient.age in care/emr/models/patient.py: start at
+  -- date_of_birth, else 1 Jan of year_of_birth; stop at date of death if there is one
+  -- (LEAST ignores NULLs, so a living patient just uses the dispense date). NULL when
+  -- neither date_of_birth nor year_of_birth is recorded.
+  EXTRACT(
+    YEAR
+    FROM
+      AGE(
+        LEAST(
+          (COALESCE(md.when_handed_over, md.when_prepared, md.created_date) AT TIME ZONE 'Asia/Kolkata')::DATE,
+          (p.deceased_datetime AT TIME ZONE 'Asia/Kolkata')::DATE
+        ),
+        COALESCE(p.date_of_birth, MAKE_DATE(p.year_of_birth, 1, 1))
+      )
+  )::INT AS "PATIENT_AGE",
   drug.eaushadhi_drug_id AS "DRUG_ID",
   CONCAT_WS(' / ', drug.name, NULLIF(drug.brand_id, '')) AS "DRUG_NAME_BRAND_DETAILS",
   qp.quantity AS "QUANTITY_PRESCRIBED",
