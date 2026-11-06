@@ -9,7 +9,7 @@ SELECT
   -- until that mapping writes the type into meta.
   st.meta ->> 'store_type' AS "STORE_TYPE",
   -- The DDC counter the dispense happened at, as in KPI 2
-  l.name AS "LOCATION_NAME",
+  l.name AS "DDC_NAME",
   mrp.meta ->> 'eaushadhi_prescription_id' AS "PRESCRIPTION_ID",
   (MIN(COALESCE(mr.authored_on, mrp.created_date)) AT TIME ZONE 'Asia/Kolkata')::DATE AS "PRESCRIPTION_DATE",
   (COALESCE(md.when_handed_over, md.when_prepared, md.created_date) AT TIME ZONE 'Asia/Kolkata')::DATE AS "DISPENSE_DATE",
