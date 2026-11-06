@@ -33,6 +33,16 @@ SELECT
     ),
     0
   ) AS "AVAILABLE_MAIN_STORE_QTY",
+  -- Every other location of the facility, i.e. the substores / DDCs. DVDMSStore.location
+  -- is NOT NULL, so every row falls on exactly one side of this split and the two
+  -- columns always add up to AVAILABLE_INHAND_QTY.
+  COALESCE(
+    SUM(ls.quantity) FILTER (
+      WHERE
+        ls.location_id <> st.location_id
+    ),
+    0
+  ) AS "AVAILABLE_SUBSTORE_QTY",
   SUM(ls.quantity) AS "AVAILABLE_INHAND_QTY"
 FROM
   facility_facility f
