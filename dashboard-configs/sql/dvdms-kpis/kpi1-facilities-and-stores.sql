@@ -101,6 +101,7 @@ WITH
   )
 SELECT
   f.name AS "FACILITY_NAME",
+  dist.name AS "DISTRICT_NAME",
   inst.eaushadhi_institute_name AS "INSTITUTE_NAME",
   hf.hf_id AS "HOSPITAL_UNIQUE_ID",
   CASE
@@ -194,6 +195,20 @@ FROM
     LIMIT
       1
   ) sp ON TRUE
+  -- District: the facility's geo organization or one of its parents, as in KPI 5
+  LEFT JOIN LATERAL (
+    SELECT
+      o.name
+    FROM
+      emr_organization o
+    WHERE
+      o.id = ANY (f.geo_organization_cache)
+      AND o.org_type = 'govt'
+      AND o.metadata ->> 'govt_org_type' = 'district'
+      AND o.deleted = FALSE
+    LIMIT
+      1
+  ) dist ON TRUE
 WHERE
   f.deleted = FALSE
   AND f.is_active = TRUE
