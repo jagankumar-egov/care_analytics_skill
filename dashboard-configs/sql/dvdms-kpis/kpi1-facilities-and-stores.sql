@@ -85,7 +85,7 @@ WITH
   ),
   ddc_counts AS (
     -- Facility-wide: a DDC is a location and locations carry no store mapping, so
-    -- these counts are not narrowed by {{store_id}}.
+    -- these counts are not narrowed by the store_id filter.
     SELECT
       d.facility_id,
       COUNT(*) AS total_ddc_count,
