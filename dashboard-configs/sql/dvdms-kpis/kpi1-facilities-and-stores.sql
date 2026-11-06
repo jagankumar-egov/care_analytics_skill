@@ -195,17 +195,47 @@ FROM
     LIMIT
       1
   ) sp ON TRUE
-  -- District: the facility's geo organization or one of its parents, as in KPI 5
+  -- District: walk UP the geo tree from the facility's own org by parent_id.
+  -- Deliberately NOT geo_organization_cache. That cache is built as
+  -- [*geo_organization.parent_cache, geo_organization.id] in facility.py, so when an
+  -- org's own parent_cache is empty it collapses to just the leaf and every ancestor --
+  -- the district included -- becomes unreachable. Observed on deployed data: a facility
+  -- whose org sits at level_cache 2 had a one-element cache holding only the local_body.
+  -- Walking parent_id needs no cache to be correct. ORDER BY hops takes the nearest
+  -- district ancestor; the hops guard stops a cyclic tree from looping forever.
   LEFT JOIN LATERAL (
+    WITH RECURSIVE up AS (
+      SELECT
+        o.id,
+        o.parent_id,
+        0 AS hops
+      FROM
+        emr_organization o
+      WHERE
+        o.id = f.geo_organization_id
+        AND o.deleted = FALSE
+      UNION ALL
+      SELECT
+        p.id,
+        p.parent_id,
+        u.hops + 1
+      FROM
+        up u
+        JOIN emr_organization p ON p.id = u.parent_id
+        AND p.deleted = FALSE
+      WHERE
+        u.hops < 10
+    )
     SELECT
       o.name
     FROM
-      emr_organization o
+      up u
+      JOIN emr_organization o ON o.id = u.id
     WHERE
-      o.id = ANY (f.geo_organization_cache)
-      AND o.org_type = 'govt'
+      o.org_type = 'govt'
       AND o.metadata ->> 'govt_org_type' = 'district'
-      AND o.deleted = FALSE
+    ORDER BY
+      u.hops
     LIMIT
       1
   ) dist ON TRUE
