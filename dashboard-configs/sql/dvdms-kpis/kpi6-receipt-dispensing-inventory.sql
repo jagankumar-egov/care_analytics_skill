@@ -12,9 +12,11 @@
 -- COLUMN GRAIN -- read before comparing the three quantity columns:
 --   QUANTITY_RECEIVED_FROM_DVDMS  cumulative, on/before report_date
 --   QUANTITY_ISSUED_TO_PATIENTS   cumulative, on/before report_date
---   AVAILABLE_QUANTITY_IN_CARE    LIVE current stock -- does NOT move with the date
---   They only reconcile when report_date is today. CARE stores no stock history,
---   so the available column cannot be rewound (see the in_care CTE below).
+--   AVAILABLE_QUANTITY_IN_CARE    position at the close of report_date
+--   All three move with report_date. net_content holds CURRENT stock, but
+--   sync_inventory_item recomputes it from scratch out of timestamped movements with no
+--   opening balance, so the available column is rewound to the reporting day rather than
+--   read live (see the ledger CTEs below).
 --
 --   Received is sourced straight from DVDMS inward records; issued and available are
 --   restricted to products that have a DVDMS product mapping. Products with no mapping
@@ -38,6 +40,109 @@ WITH
       pm.product_knowledge_id,
       pm.usage_count DESC,
       pm.modified_date DESC
+  ),
+  bounds AS (
+    SELECT
+      ({{report_date}}::DATE + 1)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata' AS day_end
+  ),
+  -- NOTE: the ledger CTEs below deliberately mirror
+  -- care/emr/resources/inventory/inventory_item/sync_inventory_item.py, which is what
+  -- computes emr_inventoryitem.net_content. Do NOT add `deleted = FALSE` filters or
+  -- change the status predicates in isolation: current_stock is anchored on net_content,
+  -- so any rule that differs from sync_inventory_item makes every position wrong.
+  stock_movements AS (
+    -- Deliveries into a location
+    SELECT
+      o.destination_id AS location_id,
+      pr.product_knowledge_id,
+      COALESCE(sd.supplied_item_quantity, 0) AS quantity,
+      sd.created_date AS moved_at
+    FROM
+      emr_supplydelivery sd
+      JOIN emr_deliveryorder o ON o.id = sd.order_id
+      LEFT JOIN emr_inventoryitem sii ON sii.id = sd.supplied_inventory_item_id
+      JOIN emr_product pr ON pr.id = COALESCE(sd.supplied_item_id, sii.product_id)
+    WHERE
+      sd.deleted = FALSE
+      AND sd.status = 'completed'
+    UNION ALL
+    -- Deliveries out of a location
+    SELECT
+      o.origin_id,
+      pr.product_knowledge_id,
+      -COALESCE(sd.supplied_item_quantity, 0),
+      sd.created_date
+    FROM
+      emr_supplydelivery sd
+      JOIN emr_deliveryorder o ON o.id = sd.order_id
+      LEFT JOIN emr_inventoryitem sii ON sii.id = sd.supplied_inventory_item_id
+      JOIN emr_product pr ON pr.id = COALESCE(sd.supplied_item_id, sii.product_id)
+    WHERE
+      sd.deleted = FALSE
+      -- sync_inventory_item subtracts outgoing stock at in_progress AND completed,
+      -- so net_content already reflects in-flight transfers out of the origin.
+      AND sd.status IN ('in_progress', 'completed')
+      AND o.origin_id IS NOT NULL
+    UNION ALL
+    -- Dispenses from a location
+    SELECT
+      md.location_id,
+      pr.product_knowledge_id,
+      -md.quantity,
+      COALESCE(md.when_handed_over, md.when_prepared, md.created_date)
+    FROM
+      emr_medicationdispense md
+      JOIN emr_inventoryitem ii ON ii.id = md.item_id
+      JOIN emr_product pr ON pr.id = ii.product_id
+    WHERE
+      md.deleted = FALSE
+      AND md.status NOT IN ('cancelled', 'entered_in_error', 'stopped', 'declined')
+  ),
+  current_stock AS (
+    SELECT
+      ii.location_id,
+      pr.product_knowledge_id,
+      SUM(ii.net_content) AS quantity
+    FROM
+      emr_inventoryitem ii
+      JOIN emr_product pr ON pr.id = ii.product_id
+      AND pr.deleted = FALSE
+    WHERE
+      ii.deleted = FALSE
+    GROUP BY
+      ii.location_id,
+      pr.product_knowledge_id
+  ),
+  movements_after AS (
+    SELECT
+      m.location_id,
+      m.product_knowledge_id,
+      SUM(m.quantity) AS quantity
+    FROM
+      stock_movements m
+      CROSS JOIN bounds b
+    WHERE
+      m.moved_at >= b.day_end
+    GROUP BY
+      m.location_id,
+      m.product_knowledge_id
+  ),
+  location_stock AS (
+    -- Position at the close of the reporting day: undo every movement after day_end.
+    -- Caveat: deliveries are timestamped by created_date, while sync_inventory_item
+    -- counts an outgoing delivery from the moment it turns in_progress. A delivery
+    -- created before the reporting day but only dispatched after it is treated as
+    -- already gone. Same approximation KPI 3, 4, 5 and 7 make.
+    SELECT
+      l.facility_id,
+      cs.product_knowledge_id,
+      cs.quantity - COALESCE(ma.quantity, 0) AS quantity
+    FROM
+      current_stock cs
+      JOIN emr_facilitylocation l ON l.id = cs.location_id
+      AND l.deleted = FALSE
+      LEFT JOIN movements_after ma ON ma.location_id = cs.location_id
+      AND ma.product_knowledge_id = cs.product_knowledge_id
   ),
   received AS (
     SELECT
@@ -89,26 +194,17 @@ WITH
       pd.institute_id,
       pd.eaushadhi_drug_id
   ),
-  -- LIVE, not as-of: net_content is current stock and CARE keeps no history, so this
-  -- column does NOT move with {{report_date}} while RECEIVED and ISSUED above do. The
-  -- three columns are only on the same grain when the reporting day is today.
   in_care AS (
     SELECT
       pd.institute_id,
       pd.eaushadhi_drug_id,
-      SUM(ii.net_content) AS quantity
+      SUM(ls.quantity) AS quantity
     FROM
-      emr_inventoryitem ii
-      JOIN emr_facilitylocation l ON l.id = ii.location_id
-      AND l.deleted = FALSE
-      JOIN care_dvdms_dvdmsinstitute inst ON inst.facility_id = l.facility_id
+      location_stock ls
+      JOIN care_dvdms_dvdmsinstitute inst ON inst.facility_id = ls.facility_id
       AND inst.deleted = FALSE
-      JOIN emr_product pr ON pr.id = ii.product_id
-      AND pr.deleted = FALSE
       JOIN product_drug pd ON pd.institute_id = inst.id
-      AND pd.product_knowledge_id = pr.product_knowledge_id
-    WHERE
-      ii.deleted = FALSE
+      AND pd.product_knowledge_id = ls.product_knowledge_id
     GROUP BY
       pd.institute_id,
       pd.eaushadhi_drug_id
