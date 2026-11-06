@@ -10,7 +10,6 @@ SELECT
   st.meta ->> 'store_type' AS "STORE_TYPE",
   -- The DDC counter the dispense happened at, as in KPI 2
   l.name AS "LOCATION_NAME",
-  dist.name AS "DISTRICT_NAME",
   mrp.meta ->> 'eaushadhi_prescription_id' AS "PRESCRIPTION_ID",
   (MIN(COALESCE(mr.authored_on, mrp.created_date)) AT TIME ZONE 'Asia/Kolkata')::DATE AS "PRESCRIPTION_DATE",
   (COALESCE(md.when_handed_over, md.when_prepared, md.created_date) AT TIME ZONE 'Asia/Kolkata')::DATE AS "DISPENSE_DATE",
@@ -76,20 +75,6 @@ FROM
   AND mrp.deleted = FALSE
   LEFT JOIN abdm_abhanumber ab ON ab.patient_id = p.id
   AND ab.deleted = FALSE
-  -- District: the facility's geo organization or one of its parents
-  LEFT JOIN LATERAL (
-    SELECT
-      o.name
-    FROM
-      emr_organization o
-    WHERE
-      o.id = ANY (f.geo_organization_cache)
-      AND o.org_type = 'govt'
-      AND o.metadata ->> 'govt_org_type' = 'district'
-      AND o.deleted = FALSE
-    LIMIT
-      1
-  ) dist ON TRUE
   -- UHID: identifier whose config display is "UHID", as get_patient_uhid in care_radiology.
   -- Read from PatientIdentifier, which backs both Patient.instance_identifiers and
   -- Patient.facility_identifiers, so a UHID configured for the facility is found too
@@ -129,7 +114,6 @@ GROUP BY
   st.meta,
   -- l.id is the PK, so l.name comes along by functional dependency
   l.id,
-  dist.name,
   mrp.id,
   p.id,
   uhid.value,
