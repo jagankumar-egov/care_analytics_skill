@@ -102,7 +102,6 @@ WITH
 SELECT
   f.name AS "FACILITY_NAME",
   inst.eaushadhi_institute_name AS "INSTITUTE_NAME",
-  sp.eaushadhi_warehouse_id AS "PARENT_ID",
   hf.hf_id AS "HOSPITAL_UNIQUE_ID",
   CASE
     WHEN fa.facility_id IS NULL THEN 'Inactive'
@@ -146,6 +145,7 @@ SELECT
     ) THEN 'Active'
     ELSE 'Inactive'
   END AS "STORE_ACTIVE_STATUS",
+  sp.eaushadhi_warehouse_id AS "PARENT_ID",
   sp.eaushadhi_warehouse_name AS "PARENT_STORE_NAME",
   st.meta ->> 'parent_store_type' AS "PARENT_STORE_TYPE",
   COALESCE(dc.active_ddc_count, 0) AS "ACTIVE_DDC_COUNT",
