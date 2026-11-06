@@ -75,7 +75,7 @@ SELECT
   d.eaushadhi_store_id AS "STORE_ID",
   d.eaushadhi_store_name AS "STORE_NAME",
   d.store_type AS "STORE_TYPE",
-  d.location_name AS "LOCATION_NAME",
+  d.location_name AS "DDC_NAME",
   u.username AS "USER_ID",
   -- Falls back to the username for accounts with no first/last name
   COALESCE(NULLIF(TRIM(CONCAT_WS(' ', u.first_name, u.last_name)), ''), u.username) AS "USER_NAME",
@@ -102,6 +102,6 @@ GROUP BY
   d.dispense_date
 ORDER BY
   "STORE_NAME",
-  "LOCATION_NAME",
+  "DDC_NAME",
   "DISPENSE_DATE" DESC,
   "USER_NAME";

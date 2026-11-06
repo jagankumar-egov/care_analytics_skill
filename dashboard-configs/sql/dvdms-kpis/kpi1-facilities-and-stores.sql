@@ -145,7 +145,7 @@ SELECT
     ) THEN 'Active'
     ELSE 'Inactive'
   END AS "STORE_ACTIVE_STATUS",
-  sp.eaushadhi_warehouse_id AS "PARENT_ID",
+  sp.eaushadhi_warehouse_id AS "PARENT_STORE_ID",
   sp.eaushadhi_warehouse_name AS "PARENT_STORE_NAME",
   st.meta ->> 'parent_store_type' AS "PARENT_STORE_TYPE",
   COALESCE(dc.active_ddc_count, 0) AS "ACTIVE_DDC_COUNT",
@@ -198,5 +198,10 @@ WHERE
   f.deleted = FALSE
   AND f.is_active = TRUE
   AND f.is_public = TRUE [[AND st.eaushadhi_store_id = {{store_id}}]]
+  -- Optional: true keeps only facilities that have an active DVDMS institute mapping
+  -- (inst is LEFT JOINed with deleted = FALSE, so a row here means a live mapping).
+  -- false, or leaving the parameter unset, shows every facility. KPI 2-7 all INNER JOIN
+  -- the institute, so they are already mapped-only and need no such switch.
+  [[AND ({{institute_mapped}}::BOOLEAN IS NOT TRUE OR inst.id IS NOT NULL)]]
 ORDER BY
   f.name;
