@@ -113,6 +113,8 @@ SELECT
   -- the store picker; the store mapping never persists it, so STORE_TYPE stays NULL
   -- until that mapping writes the type into meta.
   st.meta ->> 'store_type' AS "STORE_TYPE",
+  -- The DDC counter the dispense happened at, as in KPI 2
+  l.name AS "LOCATION_NAME",
   mrp.meta ->> 'eaushadhi_prescription_id' AS "PRESCRIPTION_ID",
   (COALESCE(md.when_handed_over, md.when_prepared, md.created_date) AT TIME ZONE 'Asia/Kolkata')::DATE AS "DISPENSE_DATE",
   uhid.value AS "PATIENT_UHID",
@@ -243,6 +245,8 @@ WHERE
   [[AND st.eaushadhi_store_id = {{store_id}}]]
   -- Mandatory: no [[ ]], so Metabase requires the parameter.
   AND (COALESCE(md.when_handed_over, md.when_prepared, md.created_date) AT TIME ZONE 'Asia/Kolkata')::DATE = {{dispense_date}}
+  -- Optional: the DDC counter, matched by name as in KPI 7
+  [[AND l.name = {{location_name}}]]
 ORDER BY
   md.patient_id,
   pk.name,
