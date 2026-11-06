@@ -2,17 +2,14 @@
 WITH
   -- The reporting day, in IST. day_end is the exclusive upper bound, so every window
   -- below ends at midnight IST after the selected date and the card is reproducible
-  -- for any past date instead of drifting with NOW(). KPI 2 derives its DDC counts
-  -- the same way, so both cards agree for the same report_date.
+  -- for any past date instead of drifting with NOW().
   bounds AS (
     SELECT
       ({{report_date}}::DATE)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata' AS day_start,
       ({{report_date}}::DATE + 1)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata' AS day_end
   ),
   activity AS (
-    -- Facility-scoped EMR writes in the 7 days up to the reporting day. 7 days is
-    -- the one "active" window on this card: STORE_ACTIVE_STATUS and ACTIVE_DDC_COUNT
-    -- use it too, so every status on a row means the same thing.
+    -- Facility-scoped EMR writes in the last 30 days
     SELECT
       e.facility_id
     FROM
@@ -20,7 +17,7 @@ WITH
       CROSS JOIN bounds b
     WHERE
       e.deleted = FALSE
-      AND e.created_date >= b.day_end - INTERVAL '7 days'
+      AND e.created_date >= b.day_end - INTERVAL '30 days'
       AND e.created_date < b.day_end
     UNION ALL
     SELECT
@@ -32,7 +29,7 @@ WITH
       AND l.deleted = FALSE
     WHERE
       md.deleted = FALSE
-      AND md.created_date >= b.day_end - INTERVAL '7 days'
+      AND md.created_date >= b.day_end - INTERVAL '30 days'
       AND md.created_date < b.day_end
     UNION ALL
     SELECT
@@ -44,7 +41,7 @@ WITH
       AND l.deleted = FALSE
     WHERE
       d.deleted = FALSE
-      AND d.created_date >= b.day_end - INTERVAL '7 days'
+      AND d.created_date >= b.day_end - INTERVAL '30 days'
       AND d.created_date < b.day_end
     UNION ALL
     SELECT
@@ -56,7 +53,7 @@ WITH
       AND l.deleted = FALSE
     WHERE
       r.deleted = FALSE
-      AND r.created_date >= b.day_end - INTERVAL '7 days'
+      AND r.created_date >= b.day_end - INTERVAL '30 days'
       AND r.created_date < b.day_end
   ),
   facility_activity AS (
@@ -87,8 +84,8 @@ WITH
       md.location_id
   ),
   ddc_counts AS (
-    -- Counts are facility-wide. They are NOT narrowed by {{store_id}}: a DDC is a
-    -- location, and locations carry no store mapping.
+    -- Facility-wide: a DDC is a location and locations carry no store mapping, so
+    -- these counts are not narrowed by {{store_id}}.
     SELECT
       d.facility_id,
       COUNT(*) AS total_ddc_count,
@@ -114,8 +111,8 @@ SELECT
   st.eaushadhi_store_id AS "STORE_ID",
   st.eaushadhi_store_name AS "STORE_NAME",
   -- eAushadhi's store type (sststrTypeName) is only read from the lookup API to group
-  -- the store picker; the store mapping never persists it, so these two columns are
-  -- NULL today. They light up as soon as the mapping writes the type into meta.
+  -- the store picker; the store mapping never persists it, so STORE_TYPE and
+  -- PARENT_STORE_TYPE stay NULL until that mapping writes the type into meta.
   st.meta ->> 'store_type' AS "STORE_TYPE",
   CASE
     WHEN st.id IS NULL THEN NULL
@@ -126,7 +123,6 @@ SELECT
       FROM
         care_dvdms_dvdmsoutwardrecordorder o
         JOIN care_dvdms_dvdmsrecordorder ro ON ro.id = o.record_order_id
-        AND ro.deleted = FALSE
       WHERE
         ro.institute_store_id = st.id
         AND o.deleted = FALSE
@@ -135,15 +131,15 @@ SELECT
         AND o.modified_date < b.day_end
     )
     OR EXISTS (
-      -- Issue received. Inward records are institute-scoped and only some of them
-      -- carry an outward record, so match on the institute - one store is reported
-      -- per institute here, so the two are the same thing.
+      -- Issue received; inward records with no outward_record can't be tied to a store
       SELECT
         1
       FROM
         care_dvdms_dvdmsinwardrecord i
+        JOIN care_dvdms_dvdmsoutwardrecordorder o ON o.id = i.outward_record_id
+        JOIN care_dvdms_dvdmsrecordorder ro ON ro.id = o.record_order_id
       WHERE
-        i.institute_id = inst.id
+        ro.institute_store_id = st.id
         AND i.deleted = FALSE
         AND i.created_date >= b.day_end - INTERVAL '7 days'
         AND i.created_date < b.day_end
@@ -164,9 +160,8 @@ FROM
   LEFT JOIN ddc_counts dc ON dc.facility_id = f.id
   LEFT JOIN care_dvdms_dvdmsinstitute inst ON inst.facility_id = f.id
   AND inst.deleted = FALSE
-  -- The database allows several stores / suppliers per institute (only the default
-  -- is unique). LATERAL + LIMIT 1 keeps one row per facility, preferring the default;
-  -- the store_id filter is repeated inside so picking a non-default store still works.
+  -- One store / one supplier per institute is enforced in the UI, not in the
+  -- database. LATERAL + LIMIT 1 keeps one row per facility, preferring the default.
   LEFT JOIN LATERAL (
     SELECT
       s2.id,
@@ -177,7 +172,7 @@ FROM
       care_dvdms_dvdmsstore s2
     WHERE
       s2.institute_id = inst.id
-      AND s2.deleted = FALSE [[AND s2.eaushadhi_store_id = {{store_id}}]]
+      AND s2.deleted = FALSE
     ORDER BY
       s2.is_default DESC,
       s2.id
