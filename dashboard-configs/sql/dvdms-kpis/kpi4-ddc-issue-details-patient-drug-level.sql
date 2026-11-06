@@ -109,29 +109,19 @@ WITH
   )
 SELECT
   st.eaushadhi_store_id AS "STORE_ID",
+  -- eAushadhi's store type (sststrTypeName) is only read from the lookup API to group
+  -- the store picker; the store mapping never persists it, so STORE_TYPE stays NULL
+  -- until that mapping writes the type into meta.
+  st.meta ->> 'store_type' AS "STORE_TYPE",
+  mrp.meta ->> 'eaushadhi_prescription_id' AS "PRESCRIPTION_ID",
   (COALESCE(md.when_handed_over, md.when_prepared, md.created_date) AT TIME ZONE 'Asia/Kolkata')::DATE AS "DISPENSE_DATE",
   uhid.value AS "PATIENT_UHID",
   ab.abha_number AS "ABHA_ID",
-  p.gender AS "PATIENT_GENDER",
-  -- Completed years AT THE TIME OF THE DISPENSE, not today, so a report run for a past
-  -- date stays stable. Mirrors Patient.age in care/emr/models/patient.py: start at
-  -- date_of_birth, else 1 Jan of year_of_birth; stop at date of death if there is one
-  -- (LEAST ignores NULLs, so a living patient just uses the dispense date). NULL when
-  -- neither date_of_birth nor year_of_birth is recorded.
-  EXTRACT(
-    YEAR
-    FROM
-      AGE(
-        LEAST(
-          (COALESCE(md.when_handed_over, md.when_prepared, md.created_date) AT TIME ZONE 'Asia/Kolkata')::DATE,
-          (p.deceased_datetime AT TIME ZONE 'Asia/Kolkata')::DATE
-        ),
-        COALESCE(p.date_of_birth, MAKE_DATE(p.year_of_birth, 1, 1))
-      )
-  )::INT AS "PATIENT_AGE",
   drug.eaushadhi_drug_id AS "DRUG_ID",
   pk.name AS "PATIENT_WISE_DRUG_SENT",
   NULLIF(drug.brand_id, '') AS "DRUG_BRAND_DETAILS",
+  pr.batch ->> 'lot_number' AS "BATCH_NUMBER",
+  (pr.expiration_date AT TIME ZONE 'Asia/Kolkata')::DATE AS "EXPIRY_DATE",
   -- Times this drug was sent to this patient, within the filtered rows
   COUNT(*) OVER (
     PARTITION BY
@@ -157,7 +147,8 @@ FROM
   JOIN LATERAL (
     SELECT
       s2.eaushadhi_store_id,
-      s2.eaushadhi_store_name
+      s2.eaushadhi_store_name,
+      s2.meta
     FROM
       care_dvdms_dvdmsstore s2
     WHERE
@@ -179,6 +170,8 @@ FROM
   AND p.deleted = FALSE
   LEFT JOIN emr_medicationrequest mr ON mr.id = md.authorizing_request_id
   AND mr.deleted = FALSE
+  LEFT JOIN emr_medicationrequestprescription mrp ON mrp.id = mr.prescription_id
+  AND mrp.deleted = FALSE
   LEFT JOIN abdm_abhanumber ab ON ab.patient_id = p.id
   AND ab.deleted = FALSE
   LEFT JOIN stock_ledger sl ON sl.dispense_id = md.id
