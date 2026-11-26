@@ -2,6 +2,15 @@
 
 One line per table. Details: `tables/<db_table>.md`. JSONB shapes: `jsonb/<db_table>.md`. Inherited columns: `_base_models.md`. Enum values: `_enums.md`. SQL rules: `_conventions.md`.
 
+## care_radiology
+
+- `care_radiology_accessionsequence` (AccessionSequence) 4 declared cols | FK: emr_resourcecategory, facility_facility
+- `care_radiology_dicomstudy` (DicomStudy) 8 declared cols, 2 jsonb | FK: care_radiology_imagingstudy, users_user
+- `care_radiology_imagingstudy` (ImagingStudy) 5 declared cols | FK: emr_encounter, emr_patient, emr_servicerequest
+- `care_radiology_observationtemplate` (ObservationTemplate) 5 declared cols, 2 jsonb | FK: emr_activitydefinition, emr_observationdefinition, facility_facility
+- `care_radiology_observationtemplatedata` (ObservationTemplateData) 4 declared cols | FK: care_radiology_observationtemplate
+- `care_radiology_radiologywebhooklogs` (RadiologyWebhookLogs) 2 declared cols, 3 jsonb
+
 ## emr
 
 - `emr_account` (Account) 18 declared cols, 6 jsonb | FK: emr_encounter, emr_patient, facility_facility

@@ -2,6 +2,14 @@
 
 Every enum-ish class and choices constant found in the scanned source, grouped by file. Values listed are the **stored database values**. Columns whose shard shows a bare `choices=Symbol` (unresolved), and spec-layer enums for columns with no `choices=` at all (common on EMR status/category columns), can be looked up here by name — prefer the definition whose file matches the column's `source:` or resource module.
 
+## app/care_radiology/src/care_radiology/api/specs/modality.py
+
+- `ModalityCodeChoices`: AR, BMD, BDUS, EPS, CR, CT, DX, ECG, ES, XC, GM, HD, IO, IVOCT, IVUS, KER, LEN, MR, MG, NM, OAM, OCT, OPM, OP, OPR, OPT, OPV, OSS, PX, PT, RF, RG, SM, SRF, US, VA, XA
+
+## app/care_radiology/src/care_radiology/models/imaging_study.py
+
+- `ImagingStudyStatus`: ACTIVE, IN_PROGRESS, COMPLETED, CANCELLED
+
 ## care/emr/resources/account/spec.py
 
 - `AccountStatusOptions`: active, inactive, entered_in_error, on_hold

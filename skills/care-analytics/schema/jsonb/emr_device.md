@@ -8,7 +8,7 @@ Distilled from Pydantic API specs — strong hints, not guarantees; custom seria
 
 ## meta
 
-- dict, optional — DeviceCreateSpec, DeviceListSpec, DeviceRetrieveSpec, DeviceSpecBase +1
+- dict, optional — DeviceCreateSpec, DeviceListSpec, DeviceRetrieveSpec, DeviceSpecBase +2
 
 ## contact
 

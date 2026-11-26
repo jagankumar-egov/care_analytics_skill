@@ -14,12 +14,12 @@ Generated from the Care source tree. These files are static catalogs for AI-assi
 
 ## Current Coverage
 
-- Physical tables: 89
-- Pydantic/spec classes read for JSONB inference: 423
-- JSONB columns: 278
-- JSONB columns with Pydantic spec matches: 175
+- Physical tables: 95
+- Pydantic/spec classes read for JSONB inference: 450
+- JSONB columns: 285
+- JSONB columns with Pydantic spec matches: 177
 - JSONB columns with JSON schema validators: 0
-- JSONB columns with only default-shape hints: 103
+- JSONB columns with only default-shape hints: 108
 
 ## Analytics Notes
 

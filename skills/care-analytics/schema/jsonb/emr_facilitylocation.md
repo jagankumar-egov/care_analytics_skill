@@ -8,7 +8,7 @@ Distilled from Pydantic API specs — strong hints, not guarantees; custom seria
 
 ## meta
 
-- dict, optional — FacilityLocationBaseSpec, FacilityLocationListSpec, FacilityLocationMinimalListSpec, FacilityLocationRetrieveSpec +3
+- dict, optional — FacilityLocationBaseSpec, FacilityLocationListSpec, FacilityLocationMinimalListSpec, FacilityLocationRetrieveSpec +4
 
 ## location_type
 

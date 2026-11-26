@@ -1,0 +1,2056 @@
+{
+  "id": 101,
+  "name": "Radiology Operations",
+  "description": "Go-live and steady-state metrics for the care_radiology plugin: rollout readiness, imaging volume, the order-to-report funnel, turnaround times, open backlog, PACS growth, and the integration/data-quality exceptions that fail silently. SQL sources: dashboard-configs/sql/radiology-kpis/.",
+  "entity_id": "IxIMXKR2L_8CKJt_b_r12",
+  "collection_id": 4,
+  "collection_position": null,
+  "collection_authority_level": null,
+  "collection": null,
+  "creator_id": 1,
+  "created_at": "2026-11-26T00:00:00Z",
+  "updated_at": "2026-11-26T00:00:00Z",
+  "last_viewed_at": "2026-11-26T00:00:00Z",
+  "last-edit-info": null,
+  "width": "full",
+  "auto_apply_filters": false,
+  "archived": false,
+  "archived_directly": false,
+  "can_write": true,
+  "can_delete": true,
+  "can_restore": false,
+  "can_set_cache_policy": true,
+  "cache_ttl": null,
+  "enable_embedding": false,
+  "embedding_params": null,
+  "embedding_type": null,
+  "made_public_by_id": null,
+  "public_uuid": null,
+  "public_uuid_prefix": null,
+  "initially_published_at": null,
+  "is_remote_synced": false,
+  "moderation_reviews": [],
+  "param_fields": {},
+  "last_used_param_values": {},
+  "points_of_interest": null,
+  "caveats": "Scan start/end come from the MPPS webhook log, which records that an event was accepted -- not that it was applied. Report timestamps use DiagnosticReport.modified_date; there is no finalised_at column. Device volume is room volume: CARE stores no study-to-device link.",
+  "show_in_getting_started": false,
+  "position": null,
+  "view_count": 0,
+  "tabs": [
+    {
+      "id": 1,
+      "dashboard_id": 101,
+      "name": "Rollout & Usage",
+      "position": 0,
+      "entity_id": "XKcQugFouRKXYhukiCXKw",
+      "created_at": "2026-11-26T00:00:00Z",
+      "updated_at": "2026-11-26T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "dashboard_id": 101,
+      "name": "Turnaround & Backlog",
+      "position": 1,
+      "entity_id": "dytR5z5fHrH8z-pGqpnLQ",
+      "created_at": "2026-11-26T00:00:00Z",
+      "updated_at": "2026-11-26T00:00:00Z"
+    },
+    {
+      "id": 3,
+      "dashboard_id": 101,
+      "name": "Operations & Data Quality",
+      "position": 2,
+      "entity_id": "UUnEI6_S2SKXSsWuOSXqd",
+      "created_at": "2026-11-26T00:00:00Z",
+      "updated_at": "2026-11-26T00:00:00Z"
+    }
+  ],
+  "parameters": [
+    {
+      "id": "cc60a661",
+      "name": "Start Date",
+      "slug": "start_date",
+      "type": "string/=",
+      "sectionId": "string",
+      "values_query_type": "none",
+      "isMultiSelect": false,
+      "default": [
+        "past30days"
+      ]
+    },
+    {
+      "id": "5ec0a90d",
+      "name": "End Date",
+      "slug": "end_date",
+      "type": "string/=",
+      "sectionId": "string",
+      "values_query_type": "none",
+      "isMultiSelect": false
+    },
+    {
+      "id": "2fdb0b7e",
+      "name": "Facility ID",
+      "slug": "facility_id",
+      "type": "string/=",
+      "sectionId": "id",
+      "values_query_type": "none",
+      "isMultiSelect": false
+    },
+    {
+      "id": "cd414e1e",
+      "name": "Min Age (hrs)",
+      "slug": "min_age_hours",
+      "type": "string/=",
+      "sectionId": "string",
+      "values_query_type": "none",
+      "isMultiSelect": false
+    }
+  ],
+  "dashcards": [
+    {
+      "id": 2000,
+      "card_id": 1000,
+      "card": {
+        "id": 1000,
+        "name": "Radiology Readiness & Adoption by Facility",
+        "description": "Configuration completeness and usage per facility. ROLLOUT_STAGE and GAPS are the go-live checklist.",
+        "entity_id": "aVt6RcZmWdNPEouf4rrDc",
+        "type": "question",
+        "display": "table",
+        "query_type": "native",
+        "database_id": 2,
+        "collection_id": 4,
+        "table_id": null,
+        "source_card_id": null,
+        "dashboard_id": null,
+        "document_id": null,
+        "card_schema": 23,
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "dataset_query": {
+          "database": 2,
+          "lib/type": "mbql/query",
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "-- KPI 1: Radiology Readiness & Adoption by Facility\n--\n-- Go-live card. One row per active facility, answering \"is radiology actually\n-- switched on here, and is anyone using it?\". Everything to the left of\n-- IMAGING_ORDERS_TOTAL is configuration; everything to the right is usage.\n--\n-- Parameters: {{start_date}}, {{end_date}} (IST dates, inclusive), {{facility_id}} (optional)\nWITH\n  -- Reporting window in IST. period_end is the exclusive upper bound, so the card is\n  -- reproducible for any past window instead of drifting with NOW().\n  bounds AS (\n    SELECT\n      ({{start_date}}::DATE)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata'     AS period_start,\n      ({{end_date}}::DATE + 1)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata'   AS period_end\n  ),\n  -- Radiology procedures are ActivityDefinitions with classification 'imaging'; the\n  -- same literal the plugin matches ServiceRequest.category against\n  -- (CARE_RADIOLOGY_RADIOLOGY_CATEGORY, default \"imaging\").\n  imaging_defs AS (\n    SELECT\n      ad.facility_id,\n      COUNT(*) FILTER (WHERE ad.status = 'active' AND ad.latest)                        AS active_procedures,\n      COUNT(DISTINCT ad.category_id) FILTER (WHERE ad.status = 'active' AND ad.latest)  AS procedure_categories,\n      -- A procedure with no locations never appears in any modality worklist.\n      COUNT(*) FILTER (\n        WHERE ad.status = 'active' AND ad.latest AND COALESCE(ARRAY_LENGTH(ad.locations, 1), 0) = 0\n      )                                                                                 AS procedures_without_location\n    FROM emr_activitydefinition ad\n    WHERE ad.deleted = FALSE\n      AND ad.classification = 'imaging'\n    GROUP BY ad.facility_id\n  ),\n  devices AS (\n    SELECT\n      d.facility_id,\n      COUNT(*) FILTER (WHERE d.care_type = 'dicom-enabler')                             AS dicom_enablers,\n      COUNT(*) FILTER (WHERE d.care_type = 'dicom')                                     AS modality_devices,\n      COUNT(*) FILTER (\n        WHERE d.care_type = 'dicom' AND d.metadata ->> 'assignment_status' = 'assigned'\n      )                                                                                 AS assigned_modalities,\n      -- worklist_devices(): active + available + placed in a room. Anything short of\n      -- this is invisible to the DICOM Enabler.\n      COUNT(*) FILTER (\n        WHERE d.care_type = 'dicom'\n          AND d.status = 'active'\n          AND d.availability_status = 'available'\n          AND d.current_location_id IS NOT NULL\n      )                                                                                 AS worklist_ready_modalities,\n      -- Guarded cast: last_synced_at is free-form JSON, so a non-ISO value reads as\n      -- \"never synced\" instead of aborting the card.\n      MAX(\n        CASE WHEN d.care_type = 'dicom' AND d.metadata ->> 'last_synced_at' ~ '^\\d{4}-\\d{2}-\\d{2}'\n             THEN (d.metadata ->> 'last_synced_at')::TIMESTAMPTZ END\n      )                                                                                 AS last_modality_sync_at\n    FROM emr_device d\n    WHERE d.deleted = FALSE\n      AND d.care_type IN ('dicom', 'dicom-enabler')\n    GROUP BY d.facility_id\n  ),\n  templates AS (\n    SELECT t.facility_id, COUNT(*) AS report_templates\n    FROM care_radiology_observationtemplate t\n    WHERE t.deleted = FALSE\n    GROUP BY t.facility_id\n  ),\n  -- The three tag displays process_mpps_webhook() looks up. A facility missing them\n  -- still works, but scan progress never lands on the service request.\n  mpps_tags AS (\n    SELECT tc.facility_id, COUNT(DISTINCT tc.display) AS mpps_tags_configured\n    FROM emr_tagconfig tc\n    WHERE tc.deleted = FALSE\n      AND tc.status = 'active'\n      AND tc.display IN ('Scan Started', 'Scan Completed', 'Scan Cancelled')\n      AND tc.facility_id IS NOT NULL\n    GROUP BY tc.facility_id\n  ),\n  studies AS (\n    SELECT\n      COALESCE(sr.facility_id, e.facility_id)                                           AS facility_id,\n      COUNT(*)                                                                          AS imaging_orders_total,\n      COUNT(*) FILTER (WHERE ist.created_date >= b.period_start AND ist.created_date < b.period_end)\n                                                                                        AS imaging_orders_in_period,\n      COUNT(DISTINCT ist.patient_id)                                                    AS patients_imaged_total,\n      MIN(ist.created_date)                                                             AS first_order_at,\n      MAX(ist.created_date)                                                             AS last_order_at\n    FROM care_radiology_imagingstudy ist\n    CROSS JOIN bounds b\n    LEFT JOIN emr_servicerequest sr ON sr.id = ist.service_request_id AND sr.deleted = FALSE\n    JOIN emr_encounter e ON e.id = ist.encounter_id\n    WHERE ist.deleted = FALSE\n    GROUP BY 1\n  ),\n  images AS (\n    SELECT\n      COALESCE(sr.facility_id, e.facility_id)                                           AS facility_id,\n      COUNT(DISTINCT ds.id) FILTER (WHERE ds.is_archived = FALSE)                       AS dicom_studies_live\n    FROM care_radiology_dicomstudy ds\n    JOIN care_radiology_imagingstudy ist ON ist.id = ds.imaging_study_id AND ist.deleted = FALSE\n    LEFT JOIN emr_servicerequest sr ON sr.id = ist.service_request_id AND sr.deleted = FALSE\n    JOIN emr_encounter e ON e.id = ist.encounter_id\n    WHERE ds.deleted = FALSE\n    GROUP BY 1\n  )\nSELECT\n  f.external_id                                              AS \"FACILITY_ID\",\n  f.name                                                     AS \"FACILITY_NAME\",\n  geo.name                                                   AS \"GEO_ORGANIZATION\",\n  COALESCE(idf.active_procedures, 0)                         AS \"IMAGING_PROCEDURES\",\n  COALESCE(idf.procedures_without_location, 0)               AS \"PROCEDURES_WITHOUT_ROOM\",\n  COALESCE(dv.dicom_enablers, 0)                             AS \"DICOM_ENABLERS\",\n  COALESCE(dv.modality_devices, 0)                           AS \"MODALITIES\",\n  COALESCE(dv.worklist_ready_modalities, 0)                  AS \"MODALITIES_ON_WORKLIST\",\n  COALESCE(dv.assigned_modalities, 0)                        AS \"MODALITIES_ASSIGNED\",\n  dv.last_modality_sync_at                                   AS \"LAST_MODALITY_SYNC\",\n  COALESCE(tpl.report_templates, 0)                          AS \"REPORT_TEMPLATES\",\n  COALESCE(tg.mpps_tags_configured, 0)                       AS \"MPPS_TAGS_OF_3\",\n  COALESCE(s.imaging_orders_total, 0)                        AS \"IMAGING_ORDERS_TOTAL\",\n  COALESCE(s.imaging_orders_in_period, 0)                    AS \"IMAGING_ORDERS_IN_PERIOD\",\n  COALESCE(s.patients_imaged_total, 0)                       AS \"PATIENTS_IMAGED\",\n  COALESCE(im.dicom_studies_live, 0)                         AS \"DICOM_STUDIES_LIVE\",\n  (s.first_order_at AT TIME ZONE 'Asia/Kolkata')::DATE       AS \"FIRST_ORDER_DATE\",\n  (s.last_order_at AT TIME ZONE 'Asia/Kolkata')::DATE        AS \"LAST_ORDER_DATE\",\n  CASE\n    WHEN COALESCE(s.imaging_orders_in_period, 0) > 0 AND COALESCE(im.dicom_studies_live, 0) > 0\n      THEN 'Live'\n    WHEN COALESCE(s.imaging_orders_total, 0) > 0\n      THEN 'Piloting'\n    WHEN COALESCE(idf.active_procedures, 0) > 0 AND COALESCE(dv.worklist_ready_modalities, 0) > 0\n      THEN 'Configured, no orders'\n    WHEN COALESCE(idf.active_procedures, 0) > 0 OR COALESCE(dv.modality_devices, 0) > 0\n      THEN 'Partially configured'\n    ELSE 'Not onboarded'\n  END                                                        AS \"ROLLOUT_STAGE\",\n  -- Blockers worth chasing before a facility is called live.\n  NULLIF(\n    CONCAT_WS(\n      '; ',\n      CASE WHEN COALESCE(idf.active_procedures, 0) = 0 THEN 'no imaging procedures' END,\n      CASE WHEN COALESCE(idf.procedures_without_location, 0) > 0 THEN 'procedures with no room' END,\n      CASE WHEN COALESCE(dv.worklist_ready_modalities, 0) = 0 THEN 'no worklist-ready modality' END,\n      CASE WHEN COALESCE(dv.dicom_enablers, 0) = 0 THEN 'no DICOM enabler' END,\n      CASE WHEN COALESCE(tpl.report_templates, 0) = 0 THEN 'no report template' END,\n      CASE WHEN COALESCE(tg.mpps_tags_configured, 0) < 3 THEN 'MPPS tags incomplete' END\n    ),\n    ''\n  )                                                          AS \"GAPS\"\nFROM facility_facility f\nLEFT JOIN emr_organization geo ON geo.id = f.geo_organization_id AND geo.deleted = FALSE\nLEFT JOIN imaging_defs idf ON idf.facility_id = f.id\nLEFT JOIN devices dv       ON dv.facility_id = f.id\nLEFT JOIN templates tpl    ON tpl.facility_id = f.id\nLEFT JOIN mpps_tags tg     ON tg.facility_id = f.id\nLEFT JOIN studies s        ON s.facility_id = f.id\nLEFT JOIN images im        ON im.facility_id = f.id\nWHERE f.deleted = FALSE\n  AND f.is_active = TRUE\n  [[AND f.external_id::TEXT = {{facility_id}}]]\n  -- Facilities with no radiology footprint at all are noise on a rollout card.\n  AND (\n    COALESCE(idf.active_procedures, 0) > 0\n    OR COALESCE(dv.modality_devices, 0) > 0\n    OR COALESCE(dv.dicom_enablers, 0) > 0\n    OR COALESCE(s.imaging_orders_total, 0) > 0\n  )\nORDER BY \"IMAGING_ORDERS_IN_PERIOD\" DESC, \"FACILITY_NAME\";\n",
+              "template-tags": [
+                {
+                  "id": "4af613e2-e76a-8dbe-f356-b52e04f89584",
+                  "type": "text",
+                  "name": "start_date",
+                  "display-name": "Start Date"
+                },
+                {
+                  "id": "4dec726d-9393-131a-f5bc-91d96d3f89e1",
+                  "type": "text",
+                  "name": "end_date",
+                  "display-name": "End Date"
+                },
+                {
+                  "id": "43091401-c275-3693-a978-cefc7ffcb286",
+                  "type": "text",
+                  "name": "facility_id",
+                  "display-name": "Facility ID"
+                }
+              ]
+            }
+          ]
+        },
+        "parameters": [
+          {
+            "id": "4af613e2-e76a-8dbe-f356-b52e04f89584",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "start_date"
+              ]
+            ],
+            "name": "Start Date",
+            "slug": "start_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "4dec726d-9393-131a-f5bc-91d96d3f89e1",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "end_date"
+              ]
+            ],
+            "name": "End Date",
+            "slug": "end_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "43091401-c275-3693-a978-cefc7ffcb286",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "facility_id"
+              ]
+            ],
+            "name": "Facility ID",
+            "slug": "facility_id",
+            "isMultiSelect": false
+          }
+        ],
+        "parameter_mappings": [],
+        "visualization_settings": {
+          "table.cell_column": "IMAGING_ORDERS_IN_PERIOD",
+          "table.pivot_column": "ROLLOUT_STAGE"
+        },
+        "result_metadata": [],
+        "dimension_mappings": null,
+        "dimensions": null,
+        "legacy_query": null,
+        "archived": false,
+        "archived_directly": false,
+        "collection_position": null,
+        "collection_preview": true,
+        "cache_ttl": null,
+        "cache_invalidated_at": null,
+        "enable_embedding": false,
+        "embedding_params": null,
+        "embedding_type": null,
+        "made_public_by_id": null,
+        "public_uuid": null,
+        "public_uuid_prefix": null,
+        "initially_published_at": null,
+        "moderation_reviews": [],
+        "download_perms": "full",
+        "can_write": true,
+        "creator_id": 1,
+        "created_at": "2026-11-26T00:00:00Z",
+        "updated_at": "2026-11-26T00:00:00Z",
+        "last_used_at": "2026-11-26T00:00:00Z",
+        "query_average_duration": null,
+        "view_count": 0
+      },
+      "dashboard_id": 101,
+      "dashboard_tab_id": 1,
+      "entity_id": "5iW2HVMw75TL44Px1lGWn",
+      "row": 0,
+      "col": 0,
+      "size_x": 24,
+      "size_y": 9,
+      "parameter_mappings": [
+        {
+          "parameter_id": "cc60a661",
+          "card_id": 1000,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "start_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "5ec0a90d",
+          "card_id": 1000,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "end_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "2fdb0b7e",
+          "card_id": 1000,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "facility_id"
+            ]
+          ]
+        }
+      ],
+      "inline_parameters": [],
+      "visualization_settings": {},
+      "series": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "created_at": "2026-11-26T00:00:00Z",
+      "updated_at": "2026-11-26T00:00:00Z"
+    },
+    {
+      "id": 2001,
+      "card_id": 1001,
+      "card": {
+        "id": 1001,
+        "name": "Imaging Order Volume (daily)",
+        "description": "Orders per facility, day and procedure, with the lifecycle status mix.",
+        "entity_id": "jyU2cERIB1w7ehtjSTRVJ",
+        "type": "question",
+        "display": "bar",
+        "query_type": "native",
+        "database_id": 2,
+        "collection_id": 4,
+        "table_id": null,
+        "source_card_id": null,
+        "dashboard_id": null,
+        "document_id": null,
+        "card_schema": 23,
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "dataset_query": {
+          "database": 2,
+          "lib/type": "mbql/query",
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "-- KPI 2: Imaging Order Volume (daily, by facility and procedure)\n--\n-- The \"is it being used, and is usage growing?\" trend card. One row per\n-- facility x day x procedure, with the lifecycle status mix for that bucket.\n--\n-- Parameters: {{start_date}}, {{end_date}} (IST dates, inclusive), {{facility_id}} (optional)\nWITH\n  bounds AS (\n    SELECT\n      ({{start_date}}::DATE)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata'   AS period_start,\n      ({{end_date}}::DATE + 1)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata' AS period_end\n  ),\n  orders AS (\n    SELECT\n      COALESCE(sr.facility_id, e.facility_id)                                   AS facility_id,\n      (ist.created_date AT TIME ZONE 'Asia/Kolkata')::DATE                      AS order_date,\n      COALESCE(ad.title, sr.title, 'Unspecified procedure')                     AS procedure_title,\n      COALESCE(rc.title, 'Uncategorised')                                       AS procedure_category,\n      ist.status                                                                AS study_status,\n      sr.priority                                                               AS priority,\n      e.encounter_class                                                         AS encounter_class,\n      ist.id                                                                    AS imaging_study_pk,\n      ist.patient_id,\n      ist.accession_number,\n      EXISTS (\n        SELECT 1 FROM care_radiology_dicomstudy ds\n        WHERE ds.imaging_study_id = ist.id AND ds.deleted = FALSE AND ds.is_archived = FALSE\n      )                                                                         AS has_images,\n      EXISTS (\n        SELECT 1 FROM emr_diagnosticreport dr\n        WHERE dr.service_request_id = ist.service_request_id\n          AND dr.deleted = FALSE AND dr.status = 'final'\n      )                                                                         AS has_final_report\n    FROM care_radiology_imagingstudy ist\n    CROSS JOIN bounds b\n    LEFT JOIN emr_servicerequest sr      ON sr.id = ist.service_request_id AND sr.deleted = FALSE\n    JOIN emr_encounter e                 ON e.id = ist.encounter_id\n    LEFT JOIN emr_activitydefinition ad  ON ad.id = sr.activity_definition_id AND ad.deleted = FALSE\n    LEFT JOIN emr_resourcecategory rc    ON rc.id = ad.category_id AND rc.deleted = FALSE\n    WHERE ist.deleted = FALSE\n      AND ist.created_date >= b.period_start\n      AND ist.created_date <  b.period_end\n  )\nSELECT\n  f.external_id                                                         AS \"FACILITY_ID\",\n  f.name                                                                AS \"FACILITY_NAME\",\n  o.order_date                                                          AS \"ORDER_DATE\",\n  o.procedure_category                                                  AS \"PROCEDURE_CATEGORY\",\n  o.procedure_title                                                     AS \"PROCEDURE\",\n  COUNT(*)                                                              AS \"ORDERS\",\n  COUNT(DISTINCT o.patient_id)                                          AS \"PATIENTS\",\n  COUNT(*) FILTER (WHERE o.encounter_class = 'amb')                     AS \"OUTPATIENT_ORDERS\",\n  COUNT(*) FILTER (WHERE o.priority IN ('urgent', 'asap', 'stat'))      AS \"URGENT_ORDERS\",\n  COUNT(*) FILTER (WHERE o.study_status = 'ACTIVE')                     AS \"STATUS_ACTIVE\",\n  COUNT(*) FILTER (WHERE o.study_status = 'IN_PROGRESS')                AS \"STATUS_IN_PROGRESS\",\n  COUNT(*) FILTER (WHERE o.study_status = 'COMPLETED')                  AS \"STATUS_COMPLETED\",\n  COUNT(*) FILTER (WHERE o.study_status = 'CANCELLED')                  AS \"STATUS_CANCELLED\",\n  COUNT(*) FILTER (WHERE o.has_images)                                  AS \"WITH_IMAGES\",\n  COUNT(*) FILTER (WHERE o.has_final_report)                            AS \"WITH_FINAL_REPORT\",\n  COUNT(*) FILTER (WHERE o.accession_number IS NULL)                    AS \"MISSING_ACCESSION\",\n  ROUND(100.0 * COUNT(*) FILTER (WHERE o.has_images) / NULLIF(COUNT(*), 0), 1)\n                                                                        AS \"IMAGED_PCT\",\n  ROUND(100.0 * COUNT(*) FILTER (WHERE o.has_final_report) / NULLIF(COUNT(*), 0), 1)\n                                                                        AS \"REPORTED_PCT\"\nFROM orders o\nJOIN facility_facility f ON f.id = o.facility_id AND f.deleted = FALSE\nWHERE TRUE\n  [[AND f.external_id::TEXT = {{facility_id}}]]\nGROUP BY\n  f.external_id, f.name, o.order_date, o.procedure_category, o.procedure_title\nORDER BY\n  \"ORDER_DATE\" DESC, \"ORDERS\" DESC, \"FACILITY_NAME\";\n",
+              "template-tags": [
+                {
+                  "id": "4b429d43-e1d8-8fb0-733f-66d1f1cd06ac",
+                  "type": "text",
+                  "name": "start_date",
+                  "display-name": "Start Date"
+                },
+                {
+                  "id": "5661ddd0-1b5c-7585-647b-b92b5d686d6c",
+                  "type": "text",
+                  "name": "end_date",
+                  "display-name": "End Date"
+                },
+                {
+                  "id": "1360c268-caa1-a240-80b7-706a954552e4",
+                  "type": "text",
+                  "name": "facility_id",
+                  "display-name": "Facility ID"
+                }
+              ]
+            }
+          ]
+        },
+        "parameters": [
+          {
+            "id": "4b429d43-e1d8-8fb0-733f-66d1f1cd06ac",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "start_date"
+              ]
+            ],
+            "name": "Start Date",
+            "slug": "start_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "5661ddd0-1b5c-7585-647b-b92b5d686d6c",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "end_date"
+              ]
+            ],
+            "name": "End Date",
+            "slug": "end_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "1360c268-caa1-a240-80b7-706a954552e4",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "facility_id"
+              ]
+            ],
+            "name": "Facility ID",
+            "slug": "facility_id",
+            "isMultiSelect": false
+          }
+        ],
+        "parameter_mappings": [],
+        "visualization_settings": {
+          "graph.dimensions": [
+            "ORDER_DATE",
+            "PROCEDURE_CATEGORY"
+          ],
+          "graph.metrics": [
+            "ORDERS"
+          ],
+          "stackable.stack_type": "stacked",
+          "graph.x_axis.title_text": "Order date",
+          "graph.y_axis.title_text": "Imaging orders"
+        },
+        "result_metadata": [],
+        "dimension_mappings": null,
+        "dimensions": null,
+        "legacy_query": null,
+        "archived": false,
+        "archived_directly": false,
+        "collection_position": null,
+        "collection_preview": true,
+        "cache_ttl": null,
+        "cache_invalidated_at": null,
+        "enable_embedding": false,
+        "embedding_params": null,
+        "embedding_type": null,
+        "made_public_by_id": null,
+        "public_uuid": null,
+        "public_uuid_prefix": null,
+        "initially_published_at": null,
+        "moderation_reviews": [],
+        "download_perms": "full",
+        "can_write": true,
+        "creator_id": 1,
+        "created_at": "2026-11-26T00:00:00Z",
+        "updated_at": "2026-11-26T00:00:00Z",
+        "last_used_at": "2026-11-26T00:00:00Z",
+        "query_average_duration": null,
+        "view_count": 0
+      },
+      "dashboard_id": 101,
+      "dashboard_tab_id": 1,
+      "entity_id": "GgeUhEYjXRc4TgWJnRpyc",
+      "row": 9,
+      "col": 0,
+      "size_x": 12,
+      "size_y": 9,
+      "parameter_mappings": [
+        {
+          "parameter_id": "cc60a661",
+          "card_id": 1001,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "start_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "5ec0a90d",
+          "card_id": 1001,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "end_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "2fdb0b7e",
+          "card_id": 1001,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "facility_id"
+            ]
+          ]
+        }
+      ],
+      "inline_parameters": [],
+      "visualization_settings": {},
+      "series": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "created_at": "2026-11-26T00:00:00Z",
+      "updated_at": "2026-11-26T00:00:00Z"
+    },
+    {
+      "id": 2002,
+      "card_id": 1002,
+      "card": {
+        "id": 1002,
+        "name": "Imaging Study Funnel",
+        "description": "Order -> accession -> scan -> images -> report, with the drop-off at each stage.",
+        "entity_id": "huYHxkaZFu6M_dC6rCisp",
+        "type": "question",
+        "display": "table",
+        "query_type": "native",
+        "database_id": 2,
+        "collection_id": 4,
+        "table_id": null,
+        "source_card_id": null,
+        "dashboard_id": null,
+        "document_id": null,
+        "card_schema": 23,
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "dataset_query": {
+          "database": 2,
+          "lib/type": "mbql/query",
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "-- KPI 3: Imaging Study Funnel (order -> accession -> scan -> images -> report)\n--\n-- Where orders fall out of the pipeline, per facility. Each stage is a subset of\n-- the one before it, so the drop between two columns is the leak to investigate.\n--\n-- Stage sources:\n--   ORDERED        care_radiology_imagingstudy row (created by the ServiceRequest post_save signal)\n--   ACCESSIONED    accession_number set by the assign_accession_number Celery task\n--   SCAN_STARTED   MPPS webhook log with study_status IN_PROGRESS, or a study past ACTIVE\n--   IMAGES_STORED  at least one non-archived care_radiology_dicomstudy\n--   REPORT_DRAFTED emr_diagnosticreport in any status\n--   REPORT_FINAL   emr_diagnosticreport with status 'final'\n--\n-- Parameters: {{start_date}}, {{end_date}} (IST dates, inclusive), {{facility_id}} (optional)\nWITH\n  bounds AS (\n    SELECT\n      ({{start_date}}::DATE)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata'   AS period_start,\n      ({{end_date}}::DATE + 1)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata' AS period_end\n  ),\n  -- The MPPS webhook log is the only record of when a scan started or finished:\n  -- ImagingStudy keeps a single status column with no per-transition timestamp.\n  -- Joined on text, not ::uuid, so a malformed payload cannot abort the query.\n  mpps AS (\n    SELECT\n      LOWER(w.raw_data ->> 'service_request_id')                                        AS sr_external_id,\n      BOOL_OR(w.raw_data ->> 'study_status' = 'IN_PROGRESS')                            AS scan_started,\n      BOOL_OR(w.raw_data ->> 'study_status' = 'COMPLETED')                              AS scan_completed\n    FROM care_radiology_radiologywebhooklogs w\n    WHERE w.deleted = FALSE\n      AND w.type = 'MPPS'\n      AND w.raw_data ? 'service_request_id'\n    GROUP BY 1\n  ),\n  studies AS (\n    SELECT\n      COALESCE(sr.facility_id, e.facility_id)                                           AS facility_id,\n      COALESCE(rc.title, 'Uncategorised')                                               AS procedure_category,\n      ist.id,\n      ist.status,\n      ist.accession_number IS NOT NULL                                                  AS accessioned,\n      COALESCE(m.scan_started, FALSE)\n        OR ist.status IN ('IN_PROGRESS', 'COMPLETED')                                   AS scan_started,\n      COALESCE(m.scan_completed, FALSE)\n        OR ist.status = 'COMPLETED'                                                     AS scan_completed,\n      EXISTS (\n        SELECT 1 FROM care_radiology_dicomstudy ds\n        WHERE ds.imaging_study_id = ist.id AND ds.deleted = FALSE AND ds.is_archived = FALSE\n      )                                                                                 AS images_stored,\n      EXISTS (\n        SELECT 1 FROM emr_diagnosticreport dr\n        WHERE dr.service_request_id = ist.service_request_id AND dr.deleted = FALSE\n      )                                                                                 AS report_drafted,\n      EXISTS (\n        SELECT 1 FROM emr_diagnosticreport dr\n        WHERE dr.service_request_id = ist.service_request_id\n          AND dr.deleted = FALSE AND dr.status = 'final'\n      )                                                                                 AS report_final\n    FROM care_radiology_imagingstudy ist\n    CROSS JOIN bounds b\n    LEFT JOIN emr_servicerequest sr      ON sr.id = ist.service_request_id AND sr.deleted = FALSE\n    JOIN emr_encounter e                 ON e.id = ist.encounter_id\n    LEFT JOIN emr_activitydefinition ad  ON ad.id = sr.activity_definition_id AND ad.deleted = FALSE\n    LEFT JOIN emr_resourcecategory rc    ON rc.id = ad.category_id AND rc.deleted = FALSE\n    LEFT JOIN mpps m                     ON m.sr_external_id = sr.external_id::TEXT\n    WHERE ist.deleted = FALSE\n      AND ist.created_date >= b.period_start\n      AND ist.created_date <  b.period_end\n  )\nSELECT\n  f.external_id                                                     AS \"FACILITY_ID\",\n  f.name                                                            AS \"FACILITY_NAME\",\n  s.procedure_category                                              AS \"PROCEDURE_CATEGORY\",\n  COUNT(*)                                                          AS \"ORDERED\",\n  COUNT(*) FILTER (WHERE s.accessioned)                             AS \"ACCESSIONED\",\n  COUNT(*) FILTER (WHERE s.scan_started)                            AS \"SCAN_STARTED\",\n  COUNT(*) FILTER (WHERE s.scan_completed)                          AS \"SCAN_COMPLETED\",\n  COUNT(*) FILTER (WHERE s.images_stored)                           AS \"IMAGES_STORED\",\n  COUNT(*) FILTER (WHERE s.report_drafted)                          AS \"REPORT_DRAFTED\",\n  COUNT(*) FILTER (WHERE s.report_final)                            AS \"REPORT_FINAL\",\n  COUNT(*) FILTER (WHERE s.status = 'CANCELLED')                    AS \"CANCELLED\",\n  ROUND(100.0 * COUNT(*) FILTER (WHERE s.images_stored) / NULLIF(COUNT(*), 0), 1)\n                                                                    AS \"ORDER_TO_IMAGE_PCT\",\n  ROUND(100.0 * COUNT(*) FILTER (WHERE s.report_final)\n        / NULLIF(COUNT(*) FILTER (WHERE s.images_stored), 0), 1)    AS \"IMAGE_TO_REPORT_PCT\",\n  ROUND(100.0 * COUNT(*) FILTER (WHERE s.report_final) / NULLIF(COUNT(*), 0), 1)\n                                                                    AS \"END_TO_END_PCT\",\n  -- Scanned but nothing in the PACS: the usual sign of a DICOM Enabler or\n  -- accession-number mismatch rather than a clinical delay.\n  COUNT(*) FILTER (WHERE s.scan_completed AND NOT s.images_stored)  AS \"SCANNED_NO_IMAGES\",\n  COUNT(*) FILTER (WHERE s.images_stored AND NOT s.report_drafted)  AS \"IMAGED_NOT_REPORTED\"\nFROM studies s\nJOIN facility_facility f ON f.id = s.facility_id AND f.deleted = FALSE\nWHERE TRUE\n  [[AND f.external_id::TEXT = {{facility_id}}]]\nGROUP BY f.external_id, f.name, s.procedure_category\nORDER BY \"ORDERED\" DESC, \"FACILITY_NAME\";\n",
+              "template-tags": [
+                {
+                  "id": "0ba60494-d76d-cb8d-7c2a-75c7d4eb1ad3",
+                  "type": "text",
+                  "name": "start_date",
+                  "display-name": "Start Date"
+                },
+                {
+                  "id": "3ee221c3-01ef-5320-8bee-27787c09a4fb",
+                  "type": "text",
+                  "name": "end_date",
+                  "display-name": "End Date"
+                },
+                {
+                  "id": "a12f9b50-8f13-0d55-e0a8-ba834a0ce4ef",
+                  "type": "text",
+                  "name": "facility_id",
+                  "display-name": "Facility ID"
+                }
+              ]
+            }
+          ]
+        },
+        "parameters": [
+          {
+            "id": "0ba60494-d76d-cb8d-7c2a-75c7d4eb1ad3",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "start_date"
+              ]
+            ],
+            "name": "Start Date",
+            "slug": "start_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "3ee221c3-01ef-5320-8bee-27787c09a4fb",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "end_date"
+              ]
+            ],
+            "name": "End Date",
+            "slug": "end_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "a12f9b50-8f13-0d55-e0a8-ba834a0ce4ef",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "facility_id"
+              ]
+            ],
+            "name": "Facility ID",
+            "slug": "facility_id",
+            "isMultiSelect": false
+          }
+        ],
+        "parameter_mappings": [],
+        "visualization_settings": {
+          "table.cell_column": "END_TO_END_PCT"
+        },
+        "result_metadata": [],
+        "dimension_mappings": null,
+        "dimensions": null,
+        "legacy_query": null,
+        "archived": false,
+        "archived_directly": false,
+        "collection_position": null,
+        "collection_preview": true,
+        "cache_ttl": null,
+        "cache_invalidated_at": null,
+        "enable_embedding": false,
+        "embedding_params": null,
+        "embedding_type": null,
+        "made_public_by_id": null,
+        "public_uuid": null,
+        "public_uuid_prefix": null,
+        "initially_published_at": null,
+        "moderation_reviews": [],
+        "download_perms": "full",
+        "can_write": true,
+        "creator_id": 1,
+        "created_at": "2026-11-26T00:00:00Z",
+        "updated_at": "2026-11-26T00:00:00Z",
+        "last_used_at": "2026-11-26T00:00:00Z",
+        "query_average_duration": null,
+        "view_count": 0
+      },
+      "dashboard_id": 101,
+      "dashboard_tab_id": 1,
+      "entity_id": "Y4PPx8t18ASLQC6qgEu51",
+      "row": 9,
+      "col": 12,
+      "size_x": 12,
+      "size_y": 9,
+      "parameter_mappings": [
+        {
+          "parameter_id": "cc60a661",
+          "card_id": 1002,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "start_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "5ec0a90d",
+          "card_id": 1002,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "end_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "2fdb0b7e",
+          "card_id": 1002,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "facility_id"
+            ]
+          ]
+        }
+      ],
+      "inline_parameters": [],
+      "visualization_settings": {},
+      "series": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "created_at": "2026-11-26T00:00:00Z",
+      "updated_at": "2026-11-26T00:00:00Z"
+    },
+    {
+      "id": 2003,
+      "card_id": 1003,
+      "card": {
+        "id": 1003,
+        "name": "Turnaround Time Summary (p50 / p90)",
+        "description": "Median and p90 hours per leg. The *_N columns say how many studies each percentile is based on.",
+        "entity_id": "38ul-F3lI9DpkLfbWGAFB",
+        "type": "question",
+        "display": "table",
+        "query_type": "native",
+        "database_id": 2,
+        "collection_id": 4,
+        "table_id": null,
+        "source_card_id": null,
+        "dashboard_id": null,
+        "document_id": null,
+        "card_schema": 23,
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "dataset_query": {
+          "database": 2,
+          "lib/type": "mbql/query",
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "-- KPI 5: Turnaround Time Summary (median / p90 per facility and procedure)\n--\n-- The headline SLA card. Same clocks as KPI 4 -- read its header for what each\n-- timestamp actually measures before quoting these numbers to anyone.\n-- Percentiles are computed only over studies that reached the stage, so the\n-- *_N columns are there to tell a fast median from a thin one.\n--\n-- Parameters: {{start_date}}, {{end_date}} (IST dates, inclusive), {{facility_id}} (optional)\nWITH\n  bounds AS (\n    SELECT\n      ({{start_date}}::DATE)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata'   AS period_start,\n      ({{end_date}}::DATE + 1)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata' AS period_end\n  ),\n  mpps AS (\n    SELECT\n      LOWER(w.raw_data ->> 'service_request_id')                                       AS sr_external_id,\n      MIN(w.created_date) FILTER (WHERE w.raw_data ->> 'study_status' = 'IN_PROGRESS') AS scan_started_at,\n      MIN(w.created_date) FILTER (WHERE w.raw_data ->> 'study_status' = 'COMPLETED')   AS scan_ended_at\n    FROM care_radiology_radiologywebhooklogs w\n    WHERE w.deleted = FALSE\n      AND w.type = 'MPPS'\n      AND w.raw_data ? 'service_request_id'\n    GROUP BY 1\n  ),\n  images AS (\n    SELECT ds.imaging_study_id, MIN(ds.created_date) AS first_image_at\n    FROM care_radiology_dicomstudy ds\n    WHERE ds.deleted = FALSE\n    GROUP BY ds.imaging_study_id\n  ),\n  reports AS (\n    SELECT DISTINCT ON (dr.service_request_id)\n      dr.service_request_id,\n      dr.modified_date AS report_final_at\n    FROM emr_diagnosticreport dr\n    WHERE dr.deleted = FALSE AND dr.status = 'final'\n    ORDER BY dr.service_request_id, dr.modified_date\n  ),\n  legs AS (\n    SELECT\n      COALESCE(sr.facility_id, e.facility_id)                                     AS facility_id,\n      COALESCE(rc.title, 'Uncategorised')                                         AS procedure_category,\n      sr.priority                                                                 AS priority,\n      ist.status                                                                  AS study_status,\n      EXTRACT(EPOCH FROM (m.scan_started_at - ist.created_date)) / 3600.0         AS order_to_scan_hrs,\n      EXTRACT(EPOCH FROM (im.first_image_at\n                          - COALESCE(m.scan_ended_at, m.scan_started_at, ist.created_date))) / 3600.0\n                                                                                  AS scan_to_images_hrs,\n      EXTRACT(EPOCH FROM (r.report_final_at - im.first_image_at)) / 3600.0        AS images_to_report_hrs,\n      EXTRACT(EPOCH FROM (r.report_final_at - ist.created_date)) / 3600.0         AS total_tat_hrs\n    FROM care_radiology_imagingstudy ist\n    CROSS JOIN bounds b\n    LEFT JOIN emr_servicerequest sr      ON sr.id = ist.service_request_id AND sr.deleted = FALSE\n    JOIN emr_encounter e                 ON e.id = ist.encounter_id\n    LEFT JOIN emr_activitydefinition ad  ON ad.id = sr.activity_definition_id AND ad.deleted = FALSE\n    LEFT JOIN emr_resourcecategory rc    ON rc.id = ad.category_id AND rc.deleted = FALSE\n    LEFT JOIN mpps m                     ON m.sr_external_id = sr.external_id::TEXT\n    LEFT JOIN images im                  ON im.imaging_study_id = ist.id\n    LEFT JOIN reports r                  ON r.service_request_id = ist.service_request_id\n    WHERE ist.deleted = FALSE\n      AND ist.status <> 'CANCELLED'\n      AND ist.created_date >= b.period_start\n      AND ist.created_date <  b.period_end\n  )\nSELECT\n  f.external_id                                                                 AS \"FACILITY_ID\",\n  f.name                                                                        AS \"FACILITY_NAME\",\n  l.procedure_category                                                          AS \"PROCEDURE_CATEGORY\",\n  COUNT(*)                                                                      AS \"STUDIES\",\n  COUNT(*) FILTER (WHERE l.priority IN ('urgent', 'asap', 'stat'))              AS \"URGENT_STUDIES\",\n\n  COUNT(l.order_to_scan_hrs)                                                    AS \"ORDER_TO_SCAN_N\",\n  ROUND(PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY l.order_to_scan_hrs)::NUMERIC, 2)\n                                                                                AS \"ORDER_TO_SCAN_P50_HRS\",\n  ROUND(PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY l.order_to_scan_hrs)::NUMERIC, 2)\n                                                                                AS \"ORDER_TO_SCAN_P90_HRS\",\n\n  COUNT(l.scan_to_images_hrs)                                                   AS \"SCAN_TO_IMAGES_N\",\n  ROUND(PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY l.scan_to_images_hrs)::NUMERIC, 2)\n                                                                                AS \"SCAN_TO_IMAGES_P50_HRS\",\n  ROUND(PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY l.scan_to_images_hrs)::NUMERIC, 2)\n                                                                                AS \"SCAN_TO_IMAGES_P90_HRS\",\n\n  COUNT(l.images_to_report_hrs)                                                 AS \"IMAGES_TO_REPORT_N\",\n  ROUND(PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY l.images_to_report_hrs)::NUMERIC, 2)\n                                                                                AS \"IMAGES_TO_REPORT_P50_HRS\",\n  ROUND(PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY l.images_to_report_hrs)::NUMERIC, 2)\n                                                                                AS \"IMAGES_TO_REPORT_P90_HRS\",\n\n  COUNT(l.total_tat_hrs)                                                        AS \"TOTAL_TAT_N\",\n  ROUND(PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY l.total_tat_hrs)::NUMERIC, 2)\n                                                                                AS \"TOTAL_TAT_P50_HRS\",\n  ROUND(PERCENTILE_CONT(0.9) WITHIN GROUP (ORDER BY l.total_tat_hrs)::NUMERIC, 2)\n                                                                                AS \"TOTAL_TAT_P90_HRS\",\n  -- Share of studies reported within a day of the order being raised.\n  ROUND(100.0 * COUNT(*) FILTER (WHERE l.total_tat_hrs <= 24) / NULLIF(COUNT(*), 0), 1)\n                                                                                AS \"REPORTED_WITHIN_24H_PCT\"\nFROM legs l\nJOIN facility_facility f ON f.id = l.facility_id AND f.deleted = FALSE\nWHERE TRUE\n  [[AND f.external_id::TEXT = {{facility_id}}]]\nGROUP BY f.external_id, f.name, l.procedure_category\nORDER BY \"STUDIES\" DESC, \"FACILITY_NAME\";\n",
+              "template-tags": [
+                {
+                  "id": "76654401-9dd0-a28b-6fec-cfd7237488a0",
+                  "type": "text",
+                  "name": "start_date",
+                  "display-name": "Start Date"
+                },
+                {
+                  "id": "53ba2be4-1d26-8785-fcd4-33db73756630",
+                  "type": "text",
+                  "name": "end_date",
+                  "display-name": "End Date"
+                },
+                {
+                  "id": "dbbba922-9a15-084e-f713-5859ace1487d",
+                  "type": "text",
+                  "name": "facility_id",
+                  "display-name": "Facility ID"
+                }
+              ]
+            }
+          ]
+        },
+        "parameters": [
+          {
+            "id": "76654401-9dd0-a28b-6fec-cfd7237488a0",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "start_date"
+              ]
+            ],
+            "name": "Start Date",
+            "slug": "start_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "53ba2be4-1d26-8785-fcd4-33db73756630",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "end_date"
+              ]
+            ],
+            "name": "End Date",
+            "slug": "end_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "dbbba922-9a15-084e-f713-5859ace1487d",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "facility_id"
+              ]
+            ],
+            "name": "Facility ID",
+            "slug": "facility_id",
+            "isMultiSelect": false
+          }
+        ],
+        "parameter_mappings": [],
+        "visualization_settings": {
+          "table.cell_column": "TOTAL_TAT_P50_HRS"
+        },
+        "result_metadata": [],
+        "dimension_mappings": null,
+        "dimensions": null,
+        "legacy_query": null,
+        "archived": false,
+        "archived_directly": false,
+        "collection_position": null,
+        "collection_preview": true,
+        "cache_ttl": null,
+        "cache_invalidated_at": null,
+        "enable_embedding": false,
+        "embedding_params": null,
+        "embedding_type": null,
+        "made_public_by_id": null,
+        "public_uuid": null,
+        "public_uuid_prefix": null,
+        "initially_published_at": null,
+        "moderation_reviews": [],
+        "download_perms": "full",
+        "can_write": true,
+        "creator_id": 1,
+        "created_at": "2026-11-26T00:00:00Z",
+        "updated_at": "2026-11-26T00:00:00Z",
+        "last_used_at": "2026-11-26T00:00:00Z",
+        "query_average_duration": null,
+        "view_count": 0
+      },
+      "dashboard_id": 101,
+      "dashboard_tab_id": 2,
+      "entity_id": "a4jAeUTlikY9usqgyWk0Z",
+      "row": 0,
+      "col": 0,
+      "size_x": 24,
+      "size_y": 8,
+      "parameter_mappings": [
+        {
+          "parameter_id": "cc60a661",
+          "card_id": 1003,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "start_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "5ec0a90d",
+          "card_id": 1003,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "end_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "2fdb0b7e",
+          "card_id": 1003,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "facility_id"
+            ]
+          ]
+        }
+      ],
+      "inline_parameters": [],
+      "visualization_settings": {},
+      "series": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "created_at": "2026-11-26T00:00:00Z",
+      "updated_at": "2026-11-26T00:00:00Z"
+    },
+    {
+      "id": 2004,
+      "card_id": 1004,
+      "card": {
+        "id": 1004,
+        "name": "Turnaround Time by Study",
+        "description": "Study-level drill-through behind the TAT summary. Filter CURRENT_STAGE to isolate a queue.",
+        "entity_id": "DSK8cY_d2_tfPthxBUn7Q",
+        "type": "question",
+        "display": "table",
+        "query_type": "native",
+        "database_id": 2,
+        "collection_id": 4,
+        "table_id": null,
+        "source_card_id": null,
+        "dashboard_id": null,
+        "document_id": null,
+        "card_schema": 23,
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "dataset_query": {
+          "database": 2,
+          "lib/type": "mbql/query",
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "-- KPI 4: Radiology Turnaround Time (study level)\n--\n-- One row per imaging study with each leg of the journey in hours. This is the\n-- drill-through table behind the TAT summary; export it to chase outliers.\n--\n-- Clock sources, and what each really measures:\n--   ORDERED_AT       care_radiology_imagingstudy.created_date  (order placed in CARE)\n--   SCAN_STARTED_AT  first MPPS webhook log with study_status IN_PROGRESS\n--   SCAN_ENDED_AT    first MPPS webhook log with study_status COMPLETED\n--   IMAGES_AT        earliest care_radiology_dicomstudy.created_date -- when the upload\n--                    landed in CARE, NOT the DICOM acquisition time (that lives in the\n--                    PACS, which CARE never copies into its own tables)\n--   REPORT_FINAL_AT  emr_diagnosticreport.modified_date of the first report that reached\n--                    status 'final'. DiagnosticReport carries no finalised_at column, so\n--                    a report edited after finalisation reports its last edit instead.\n--\n-- Parameters: {{start_date}}, {{end_date}} (IST dates, inclusive), {{facility_id}} (optional)\nWITH\n  bounds AS (\n    SELECT\n      ({{start_date}}::DATE)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata'   AS period_start,\n      ({{end_date}}::DATE + 1)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata' AS period_end\n  ),\n  mpps AS (\n    SELECT\n      LOWER(w.raw_data ->> 'service_request_id')                                     AS sr_external_id,\n      MIN(w.created_date) FILTER (WHERE w.raw_data ->> 'study_status' = 'IN_PROGRESS') AS scan_started_at,\n      MIN(w.created_date) FILTER (WHERE w.raw_data ->> 'study_status' = 'COMPLETED')   AS scan_ended_at,\n      COUNT(*)                                                                       AS mpps_events\n    FROM care_radiology_radiologywebhooklogs w\n    WHERE w.deleted = FALSE\n      AND w.type = 'MPPS'\n      AND w.raw_data ? 'service_request_id'\n    GROUP BY 1\n  ),\n  images AS (\n    SELECT\n      ds.imaging_study_id,\n      MIN(ds.created_date)                            AS first_image_at,\n      MAX(ds.created_date)                            AS last_image_at,\n      COUNT(*) FILTER (WHERE ds.is_archived = FALSE)  AS live_studies,\n      SUM(ds.number_of_series)                        AS series,\n      SUM(ds.number_of_instances)                     AS instances\n    FROM care_radiology_dicomstudy ds\n    WHERE ds.deleted = FALSE\n    GROUP BY ds.imaging_study_id\n  ),\n  reports AS (\n    SELECT DISTINCT ON (dr.service_request_id)\n      dr.service_request_id,\n      dr.modified_date      AS report_final_at,\n      dr.created_date       AS report_started_at,\n      dr.updated_by_id      AS reporter_id\n    FROM emr_diagnosticreport dr\n    WHERE dr.deleted = FALSE\n      AND dr.status = 'final'\n    ORDER BY dr.service_request_id, dr.modified_date\n  )\nSELECT\n  f.external_id                                                     AS \"FACILITY_ID\",\n  f.name                                                            AS \"FACILITY_NAME\",\n  ist.external_id                                                   AS \"IMAGING_STUDY_ID\",\n  ist.accession_number                                              AS \"ACCESSION_NUMBER\",\n  p.external_id                                                     AS \"PATIENT_ID\",\n  COALESCE(ad.title, sr.title)                                      AS \"PROCEDURE\",\n  COALESCE(rc.title, 'Uncategorised')                               AS \"PROCEDURE_CATEGORY\",\n  sr.priority                                                       AS \"PRIORITY\",\n  e.encounter_class                                                 AS \"ENCOUNTER_CLASS\",\n  ist.status                                                        AS \"STUDY_STATUS\",\n  ist.created_date                                                  AS \"ORDERED_AT\",\n  m.scan_started_at                                                 AS \"SCAN_STARTED_AT\",\n  m.scan_ended_at                                                   AS \"SCAN_ENDED_AT\",\n  im.first_image_at                                                 AS \"IMAGES_AT\",\n  r.report_final_at                                                 AS \"REPORT_FINAL_AT\",\n  ROUND(EXTRACT(EPOCH FROM (m.scan_started_at - ist.created_date)) / 3600.0, 2)\n                                                                    AS \"ORDER_TO_SCAN_HRS\",\n  ROUND(EXTRACT(EPOCH FROM (m.scan_ended_at - m.scan_started_at)) / 3600.0, 2)\n                                                                    AS \"SCAN_DURATION_HRS\",\n  ROUND(EXTRACT(EPOCH FROM (im.first_image_at - COALESCE(m.scan_ended_at, m.scan_started_at, ist.created_date))) / 3600.0, 2)\n                                                                    AS \"SCAN_TO_IMAGES_HRS\",\n  ROUND(EXTRACT(EPOCH FROM (r.report_final_at - im.first_image_at)) / 3600.0, 2)\n                                                                    AS \"IMAGES_TO_REPORT_HRS\",\n  ROUND(EXTRACT(EPOCH FROM (r.report_final_at - ist.created_date)) / 3600.0, 2)\n                                                                    AS \"TOTAL_TAT_HRS\",\n  COALESCE(im.live_studies, 0)                                      AS \"DICOM_STUDIES\",\n  im.series                                                         AS \"SERIES\",\n  im.instances                                                      AS \"INSTANCES\",\n  COALESCE(NULLIF(TRIM(CONCAT_WS(' ', ru.first_name, ru.last_name)), ''), ru.username)\n                                                                    AS \"REPORTED_BY\",\n  COALESCE(NULLIF(TRIM(CONCAT_WS(' ', qu.first_name, qu.last_name)), ''), qu.username)\n                                                                    AS \"ORDERED_BY\",\n  COALESCE(m.mpps_events, 0)                                        AS \"MPPS_EVENTS\",\n  -- The stage a study is sitting in, for filtering the table down to a queue.\n  CASE\n    WHEN ist.status = 'CANCELLED'          THEN 'Cancelled'\n    WHEN r.report_final_at IS NOT NULL     THEN 'Reported'\n    WHEN im.first_image_at IS NOT NULL     THEN 'Awaiting report'\n    WHEN m.scan_ended_at IS NOT NULL       THEN 'Awaiting images'\n    WHEN m.scan_started_at IS NOT NULL     THEN 'Scan in progress'\n    WHEN ist.accession_number IS NOT NULL  THEN 'Awaiting scan'\n    ELSE 'Awaiting accession number'\n  END                                                               AS \"CURRENT_STAGE\"\nFROM care_radiology_imagingstudy ist\nCROSS JOIN bounds b\nLEFT JOIN emr_servicerequest sr      ON sr.id = ist.service_request_id AND sr.deleted = FALSE\nJOIN emr_encounter e                 ON e.id = ist.encounter_id\nJOIN emr_patient p                   ON p.id = ist.patient_id\nJOIN facility_facility f             ON f.id = COALESCE(sr.facility_id, e.facility_id) AND f.deleted = FALSE\nLEFT JOIN emr_activitydefinition ad  ON ad.id = sr.activity_definition_id AND ad.deleted = FALSE\nLEFT JOIN emr_resourcecategory rc    ON rc.id = ad.category_id AND rc.deleted = FALSE\nLEFT JOIN users_user qu              ON qu.id = sr.requester_id\nLEFT JOIN mpps m                     ON m.sr_external_id = sr.external_id::TEXT\nLEFT JOIN images im                  ON im.imaging_study_id = ist.id\nLEFT JOIN reports r                  ON r.service_request_id = ist.service_request_id\nLEFT JOIN users_user ru              ON ru.id = r.reporter_id\nWHERE ist.deleted = FALSE\n  AND ist.created_date >= b.period_start\n  AND ist.created_date <  b.period_end\n  [[AND f.external_id::TEXT = {{facility_id}}]]\nORDER BY ist.created_date DESC;\n",
+              "template-tags": [
+                {
+                  "id": "d600667b-4468-14a3-c7d9-42d150e78e9f",
+                  "type": "text",
+                  "name": "start_date",
+                  "display-name": "Start Date"
+                },
+                {
+                  "id": "eb564e84-aa25-4f1d-bfae-5249420585a9",
+                  "type": "text",
+                  "name": "end_date",
+                  "display-name": "End Date"
+                },
+                {
+                  "id": "7b9fe1fc-4dc4-8c07-4158-78b2cd3506a7",
+                  "type": "text",
+                  "name": "facility_id",
+                  "display-name": "Facility ID"
+                }
+              ]
+            }
+          ]
+        },
+        "parameters": [
+          {
+            "id": "d600667b-4468-14a3-c7d9-42d150e78e9f",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "start_date"
+              ]
+            ],
+            "name": "Start Date",
+            "slug": "start_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "eb564e84-aa25-4f1d-bfae-5249420585a9",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "end_date"
+              ]
+            ],
+            "name": "End Date",
+            "slug": "end_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "7b9fe1fc-4dc4-8c07-4158-78b2cd3506a7",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "facility_id"
+              ]
+            ],
+            "name": "Facility ID",
+            "slug": "facility_id",
+            "isMultiSelect": false
+          }
+        ],
+        "parameter_mappings": [],
+        "visualization_settings": {
+          "table.cell_column": "TOTAL_TAT_HRS"
+        },
+        "result_metadata": [],
+        "dimension_mappings": null,
+        "dimensions": null,
+        "legacy_query": null,
+        "archived": false,
+        "archived_directly": false,
+        "collection_position": null,
+        "collection_preview": true,
+        "cache_ttl": null,
+        "cache_invalidated_at": null,
+        "enable_embedding": false,
+        "embedding_params": null,
+        "embedding_type": null,
+        "made_public_by_id": null,
+        "public_uuid": null,
+        "public_uuid_prefix": null,
+        "initially_published_at": null,
+        "moderation_reviews": [],
+        "download_perms": "full",
+        "can_write": true,
+        "creator_id": 1,
+        "created_at": "2026-11-26T00:00:00Z",
+        "updated_at": "2026-11-26T00:00:00Z",
+        "last_used_at": "2026-11-26T00:00:00Z",
+        "query_average_duration": null,
+        "view_count": 0
+      },
+      "dashboard_id": 101,
+      "dashboard_tab_id": 2,
+      "entity_id": "6yHqnp79bxz1atwXoZTkE",
+      "row": 8,
+      "col": 0,
+      "size_x": 24,
+      "size_y": 10,
+      "parameter_mappings": [
+        {
+          "parameter_id": "cc60a661",
+          "card_id": 1004,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "start_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "5ec0a90d",
+          "card_id": 1004,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "end_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "2fdb0b7e",
+          "card_id": 1004,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "facility_id"
+            ]
+          ]
+        }
+      ],
+      "inline_parameters": [],
+      "visualization_settings": {},
+      "series": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "created_at": "2026-11-26T00:00:00Z",
+      "updated_at": "2026-11-26T00:00:00Z"
+    },
+    {
+      "id": 2005,
+      "card_id": 1005,
+      "card": {
+        "id": 1005,
+        "name": "Open Backlog & Aging",
+        "description": "Every open study with its age and blocking stage. Ignores the date filter on purpose.",
+        "entity_id": "n32R-BANLq4zV9bZpXMZS",
+        "type": "question",
+        "display": "table",
+        "query_type": "native",
+        "database_id": 2,
+        "collection_id": 4,
+        "table_id": null,
+        "source_card_id": null,
+        "dashboard_id": null,
+        "document_id": null,
+        "card_schema": 23,
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "dataset_query": {
+          "database": 2,
+          "lib/type": "mbql/query",
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "-- KPI 6: Open Radiology Backlog & Aging\n--\n-- The daily ops queue: every non-cancelled, non-reported study with how long it\n-- has been sitting and which stage it is stuck at. Unlike the other cards this\n-- one ignores {{start_date}}/{{end_date}} on purpose -- a backlog is about what\n-- is open *now*, and the oldest items are the ones that matter most.\n--\n-- Parameters: {{facility_id}} (optional), {{min_age_hours}} (optional, default 0)\nWITH\n  mpps AS (\n    SELECT\n      LOWER(w.raw_data ->> 'service_request_id')                                       AS sr_external_id,\n      MIN(w.created_date) FILTER (WHERE w.raw_data ->> 'study_status' = 'IN_PROGRESS') AS scan_started_at,\n      MIN(w.created_date) FILTER (WHERE w.raw_data ->> 'study_status' = 'COMPLETED')   AS scan_ended_at\n    FROM care_radiology_radiologywebhooklogs w\n    WHERE w.deleted = FALSE\n      AND w.type = 'MPPS'\n      AND w.raw_data ? 'service_request_id'\n    GROUP BY 1\n  ),\n  images AS (\n    SELECT ds.imaging_study_id, MIN(ds.created_date) AS first_image_at, COUNT(*) AS dicom_studies\n    FROM care_radiology_dicomstudy ds\n    WHERE ds.deleted = FALSE AND ds.is_archived = FALSE\n    GROUP BY ds.imaging_study_id\n  ),\n  open_studies AS (\n    SELECT\n      COALESCE(sr.facility_id, e.facility_id)                     AS facility_id,\n      ist.external_id                                             AS imaging_study_id,\n      ist.accession_number,\n      ist.status                                                  AS study_status,\n      ist.created_date                                            AS ordered_at,\n      sr.status                                                   AS service_request_status,\n      sr.priority,\n      p.name                                                      AS patient_name,\n      p.external_id                                               AS patient_external_id,\n      e.encounter_class,\n      COALESCE(ad.title, sr.title)                                AS procedure_title,\n      COALESCE(rc.title, 'Uncategorised')                         AS procedure_category,\n      m.scan_started_at,\n      m.scan_ended_at,\n      im.first_image_at,\n      COALESCE(im.dicom_studies, 0)                               AS dicom_studies,\n      COALESCE(NULLIF(TRIM(CONCAT_WS(' ', qu.first_name, qu.last_name)), ''), qu.username)\n                                                                  AS ordered_by,\n      EXTRACT(EPOCH FROM (NOW() - ist.created_date)) / 3600.0     AS age_hours\n    FROM care_radiology_imagingstudy ist\n    LEFT JOIN emr_servicerequest sr      ON sr.id = ist.service_request_id AND sr.deleted = FALSE\n    JOIN emr_encounter e                 ON e.id = ist.encounter_id\n    JOIN emr_patient p                   ON p.id = ist.patient_id\n    LEFT JOIN emr_activitydefinition ad  ON ad.id = sr.activity_definition_id AND ad.deleted = FALSE\n    LEFT JOIN emr_resourcecategory rc    ON rc.id = ad.category_id AND rc.deleted = FALSE\n    LEFT JOIN users_user qu              ON qu.id = sr.requester_id\n    LEFT JOIN mpps m                     ON m.sr_external_id = sr.external_id::TEXT\n    LEFT JOIN images im                  ON im.imaging_study_id = ist.id\n    WHERE ist.deleted = FALSE\n      AND ist.status <> 'CANCELLED'\n      -- Not yet closed out clinically.\n      AND NOT EXISTS (\n        SELECT 1 FROM emr_diagnosticreport dr\n        WHERE dr.service_request_id = ist.service_request_id\n          AND dr.deleted = FALSE AND dr.status = 'final'\n      )\n  )\nSELECT\n  f.external_id                                   AS \"FACILITY_ID\",\n  f.name                                          AS \"FACILITY_NAME\",\n  o.imaging_study_id                              AS \"IMAGING_STUDY_ID\",\n  o.accession_number                              AS \"ACCESSION_NUMBER\",\n  o.patient_external_id                           AS \"PATIENT_ID\",\n  o.patient_name                                  AS \"PATIENT_NAME\",\n  o.procedure_category                            AS \"PROCEDURE_CATEGORY\",\n  o.procedure_title                               AS \"PROCEDURE\",\n  o.priority                                      AS \"PRIORITY\",\n  o.encounter_class                               AS \"ENCOUNTER_CLASS\",\n  o.study_status                                  AS \"STUDY_STATUS\",\n  o.service_request_status                        AS \"ORDER_STATUS\",\n  o.ordered_by                                    AS \"ORDERED_BY\",\n  o.ordered_at                                    AS \"ORDERED_AT\",\n  ROUND(o.age_hours::NUMERIC, 1)                  AS \"AGE_HOURS\",\n  CASE\n    WHEN o.age_hours < 4    THEN '0-4h'\n    WHEN o.age_hours < 24   THEN '4-24h'\n    WHEN o.age_hours < 72   THEN '1-3d'\n    WHEN o.age_hours < 168  THEN '3-7d'\n    ELSE '7d+'\n  END                                             AS \"AGE_BUCKET\",\n  CASE\n    WHEN o.accession_number IS NULL   THEN 'Awaiting accession number'\n    WHEN o.first_image_at IS NOT NULL THEN 'Awaiting report'\n    WHEN o.scan_ended_at IS NOT NULL  THEN 'Awaiting images'\n    WHEN o.scan_started_at IS NOT NULL THEN 'Scan in progress'\n    ELSE 'Awaiting scan'\n  END                                             AS \"BLOCKED_AT\",\n  o.dicom_studies                                 AS \"DICOM_STUDIES\"\nFROM open_studies o\nJOIN facility_facility f ON f.id = o.facility_id AND f.deleted = FALSE\nWHERE TRUE\n  [[AND o.age_hours >= {{min_age_hours}}::NUMERIC]]\n  [[AND f.external_id::TEXT = {{facility_id}}]]\nORDER BY\n  CASE WHEN o.priority IN ('stat', 'asap') THEN 0 WHEN o.priority = 'urgent' THEN 1 ELSE 2 END,\n  o.age_hours DESC;\n",
+              "template-tags": [
+                {
+                  "id": "17e2298d-1730-1c19-1c67-c8f3a02d65a2",
+                  "type": "text",
+                  "name": "start_date",
+                  "display-name": "Start Date"
+                },
+                {
+                  "id": "71f3e61a-682d-1638-7eb0-e93a812a4363",
+                  "type": "text",
+                  "name": "end_date",
+                  "display-name": "End Date"
+                },
+                {
+                  "id": "ab251cea-f4c5-63b2-72e7-b99fdd4f8a59",
+                  "type": "text",
+                  "name": "facility_id",
+                  "display-name": "Facility ID"
+                },
+                {
+                  "id": "c23be7a3-8320-9037-88cc-84b6d2a7cddd",
+                  "type": "text",
+                  "name": "min_age_hours",
+                  "display-name": "Min Age (hrs)"
+                }
+              ]
+            }
+          ]
+        },
+        "parameters": [
+          {
+            "id": "17e2298d-1730-1c19-1c67-c8f3a02d65a2",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "start_date"
+              ]
+            ],
+            "name": "Start Date",
+            "slug": "start_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "71f3e61a-682d-1638-7eb0-e93a812a4363",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "end_date"
+              ]
+            ],
+            "name": "End Date",
+            "slug": "end_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "ab251cea-f4c5-63b2-72e7-b99fdd4f8a59",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "facility_id"
+              ]
+            ],
+            "name": "Facility ID",
+            "slug": "facility_id",
+            "isMultiSelect": false
+          },
+          {
+            "id": "c23be7a3-8320-9037-88cc-84b6d2a7cddd",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "min_age_hours"
+              ]
+            ],
+            "name": "Min Age (hrs)",
+            "slug": "min_age_hours",
+            "isMultiSelect": false
+          }
+        ],
+        "parameter_mappings": [],
+        "visualization_settings": {
+          "table.cell_column": "AGE_HOURS",
+          "table.pivot_column": "BLOCKED_AT"
+        },
+        "result_metadata": [],
+        "dimension_mappings": null,
+        "dimensions": null,
+        "legacy_query": null,
+        "archived": false,
+        "archived_directly": false,
+        "collection_position": null,
+        "collection_preview": true,
+        "cache_ttl": null,
+        "cache_invalidated_at": null,
+        "enable_embedding": false,
+        "embedding_params": null,
+        "embedding_type": null,
+        "made_public_by_id": null,
+        "public_uuid": null,
+        "public_uuid_prefix": null,
+        "initially_published_at": null,
+        "moderation_reviews": [],
+        "download_perms": "full",
+        "can_write": true,
+        "creator_id": 1,
+        "created_at": "2026-11-26T00:00:00Z",
+        "updated_at": "2026-11-26T00:00:00Z",
+        "last_used_at": "2026-11-26T00:00:00Z",
+        "query_average_duration": null,
+        "view_count": 0
+      },
+      "dashboard_id": 101,
+      "dashboard_tab_id": 2,
+      "entity_id": "YnBkgNv9w5G0wCTSlvx-z",
+      "row": 18,
+      "col": 0,
+      "size_x": 24,
+      "size_y": 10,
+      "parameter_mappings": [
+        {
+          "parameter_id": "cc60a661",
+          "card_id": 1005,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "start_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "5ec0a90d",
+          "card_id": 1005,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "end_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "2fdb0b7e",
+          "card_id": 1005,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "facility_id"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "cd414e1e",
+          "card_id": 1005,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "min_age_hours"
+            ]
+          ]
+        }
+      ],
+      "inline_parameters": [],
+      "visualization_settings": {},
+      "series": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "created_at": "2026-11-26T00:00:00Z",
+      "updated_at": "2026-11-26T00:00:00Z"
+    },
+    {
+      "id": 2006,
+      "card_id": 1006,
+      "card": {
+        "id": 1006,
+        "name": "MPPS Webhook Volume (daily)",
+        "description": "Modality -> CARE integration heartbeat. A gap here freezes every study at ACTIVE.",
+        "entity_id": "z7Ww3OPRGhHOJdh_ZgqnX",
+        "type": "question",
+        "display": "bar",
+        "query_type": "native",
+        "database_id": 2,
+        "collection_id": 4,
+        "table_id": null,
+        "source_card_id": null,
+        "dashboard_id": null,
+        "document_id": null,
+        "card_schema": 23,
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "dataset_query": {
+          "database": 2,
+          "lib/type": "mbql/query",
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "-- KPI 11: MPPS Webhook Volume (daily)\n--\n-- The modality -> CARE integration heartbeat. A day with orders but no MPPS\n-- events means the DICOM Enabler stopped calling, which silently freezes every\n-- study at ACTIVE and makes the TAT cards look like a reporting problem.\n--\n-- The log row is written after payload validation but BEFORE the status is\n-- applied, so LOGGED is \"accepted\", not \"applied\" -- compare it with APPLIED.\n--\n-- Parameters: {{start_date}}, {{end_date}} (IST dates, inclusive)\nWITH\n  bounds AS (\n    SELECT\n      ({{start_date}}::DATE)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata'   AS period_start,\n      ({{end_date}}::DATE + 1)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata' AS period_end\n  ),\n  events AS (\n    SELECT\n      (w.created_date AT TIME ZONE 'Asia/Kolkata')::DATE          AS event_date,\n      w.type                                                      AS webhook_type,\n      w.raw_data ->> 'study_status'                               AS study_status,\n      LOWER(w.raw_data ->> 'service_request_id')                  AS sr_external_id,\n      w.created_by_id,\n      w.id\n    FROM care_radiology_radiologywebhooklogs w\n    CROSS JOIN bounds b\n    WHERE w.deleted = FALSE\n      AND w.created_date >= b.period_start\n      AND w.created_date <  b.period_end\n  )\nSELECT\n  e.event_date                                                                  AS \"EVENT_DATE\",\n  e.webhook_type                                                                AS \"WEBHOOK_TYPE\",\n  COUNT(*)                                                                      AS \"LOGGED\",\n  COUNT(DISTINCT e.sr_external_id)                                              AS \"DISTINCT_ORDERS\",\n  COUNT(*) FILTER (WHERE e.study_status = 'IN_PROGRESS')                        AS \"SCAN_STARTED\",\n  COUNT(*) FILTER (WHERE e.study_status = 'COMPLETED')                          AS \"SCAN_COMPLETED\",\n  COUNT(*) FILTER (WHERE e.study_status = 'CANCELLED')                          AS \"SCAN_CANCELLED\",\n  COUNT(DISTINCT e.created_by_id)                                               AS \"SERVICE_ACCOUNTS\",\n  COUNT(*) FILTER (WHERE ist.id IS NOT NULL)                                    AS \"MATCHED_TO_STUDY\",\n  COUNT(*) FILTER (WHERE ist.id IS NULL)                                        AS \"UNMATCHED\",\n  -- Applied = the study actually carries (or has moved past) the status sent.\n  COUNT(*) FILTER (\n    WHERE ist.status = e.study_status\n       OR (e.study_status = 'IN_PROGRESS' AND ist.status IN ('COMPLETED', 'CANCELLED'))\n  )                                                                             AS \"APPLIED\"\nFROM events e\nLEFT JOIN emr_servicerequest sr       ON sr.external_id::TEXT = e.sr_external_id AND sr.deleted = FALSE\nLEFT JOIN care_radiology_imagingstudy ist\n                                      ON ist.service_request_id = sr.id AND ist.deleted = FALSE\nGROUP BY e.event_date, e.webhook_type\nORDER BY \"EVENT_DATE\" DESC;\n",
+              "template-tags": [
+                {
+                  "id": "0b9813f1-5899-392a-2e58-dd660496a3fd",
+                  "type": "text",
+                  "name": "start_date",
+                  "display-name": "Start Date"
+                },
+                {
+                  "id": "791b6714-7e6e-ddf5-59d0-4f7cd7ccb21e",
+                  "type": "text",
+                  "name": "end_date",
+                  "display-name": "End Date"
+                }
+              ]
+            }
+          ]
+        },
+        "parameters": [
+          {
+            "id": "0b9813f1-5899-392a-2e58-dd660496a3fd",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "start_date"
+              ]
+            ],
+            "name": "Start Date",
+            "slug": "start_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "791b6714-7e6e-ddf5-59d0-4f7cd7ccb21e",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "end_date"
+              ]
+            ],
+            "name": "End Date",
+            "slug": "end_date",
+            "isMultiSelect": false
+          }
+        ],
+        "parameter_mappings": [],
+        "visualization_settings": {
+          "graph.dimensions": [
+            "EVENT_DATE"
+          ],
+          "graph.metrics": [
+            "SCAN_STARTED",
+            "SCAN_COMPLETED",
+            "SCAN_CANCELLED"
+          ],
+          "stackable.stack_type": "stacked",
+          "graph.x_axis.title_text": "Date",
+          "graph.y_axis.title_text": "MPPS events"
+        },
+        "result_metadata": [],
+        "dimension_mappings": null,
+        "dimensions": null,
+        "legacy_query": null,
+        "archived": false,
+        "archived_directly": false,
+        "collection_position": null,
+        "collection_preview": true,
+        "cache_ttl": null,
+        "cache_invalidated_at": null,
+        "enable_embedding": false,
+        "embedding_params": null,
+        "embedding_type": null,
+        "made_public_by_id": null,
+        "public_uuid": null,
+        "public_uuid_prefix": null,
+        "initially_published_at": null,
+        "moderation_reviews": [],
+        "download_perms": "full",
+        "can_write": true,
+        "creator_id": 1,
+        "created_at": "2026-11-26T00:00:00Z",
+        "updated_at": "2026-11-26T00:00:00Z",
+        "last_used_at": "2026-11-26T00:00:00Z",
+        "query_average_duration": null,
+        "view_count": 0
+      },
+      "dashboard_id": 101,
+      "dashboard_tab_id": 3,
+      "entity_id": "1xuWqWZcUzJrAKXX-3KRS",
+      "row": 0,
+      "col": 0,
+      "size_x": 12,
+      "size_y": 7,
+      "parameter_mappings": [
+        {
+          "parameter_id": "cc60a661",
+          "card_id": 1006,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "start_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "5ec0a90d",
+          "card_id": 1006,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "end_date"
+            ]
+          ]
+        }
+      ],
+      "inline_parameters": [],
+      "visualization_settings": {},
+      "series": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "created_at": "2026-11-26T00:00:00Z",
+      "updated_at": "2026-11-26T00:00:00Z"
+    },
+    {
+      "id": 2007,
+      "card_id": 1007,
+      "card": {
+        "id": 1007,
+        "name": "Integration & Data-Quality Exceptions",
+        "description": "Silent failures nobody will report: missing accessions, scanned-but-no-images, unmatched webhooks.",
+        "entity_id": "2MCH8MCD6zrJ2K_DA4_fY",
+        "type": "question",
+        "display": "table",
+        "query_type": "native",
+        "database_id": 2,
+        "collection_id": 4,
+        "table_id": null,
+        "source_card_id": null,
+        "dashboard_id": null,
+        "document_id": null,
+        "card_schema": 23,
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "dataset_query": {
+          "database": 2,
+          "lib/type": "mbql/query",
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "-- KPI 10: Integration Health & Data-Quality Exceptions\n--\n-- One row per exception class per facility, with a count and the oldest example.\n-- This is the card to watch in the first weeks after go-live: everything here is\n-- a silent failure that no user will report.\n--\n-- Parameters: {{start_date}}, {{end_date}} (IST dates, inclusive), {{facility_id}} (optional)\nWITH\n  bounds AS (\n    SELECT\n      ({{start_date}}::DATE)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata'   AS period_start,\n      ({{end_date}}::DATE + 1)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata' AS period_end\n  ),\n  study_facility AS (\n    SELECT\n      ist.id,\n      ist.external_id,\n      ist.accession_number,\n      ist.status,\n      ist.created_date,\n      ist.service_request_id,\n      COALESCE(sr.facility_id, e.facility_id) AS facility_id\n    FROM care_radiology_imagingstudy ist\n    CROSS JOIN bounds b\n    LEFT JOIN emr_servicerequest sr ON sr.id = ist.service_request_id AND sr.deleted = FALSE\n    JOIN emr_encounter e            ON e.id = ist.encounter_id\n    WHERE ist.deleted = FALSE\n      AND ist.created_date >= b.period_start\n      AND ist.created_date <  b.period_end\n  ),\n  exceptions AS (\n    -- The accession-number Celery task never ran or failed: the study can never be\n    -- matched to an incoming DICOM file.\n    SELECT 'Missing accession number'                AS exception_type,\n           'Celery / assign_accession_number'        AS likely_cause,\n           s.facility_id, s.external_id AS ref, s.created_date\n    FROM study_facility s\n    WHERE s.accession_number IS NULL\n      AND s.status <> 'CANCELLED'\n\n    UNION ALL\n    -- ImagingStudy.service_request is nullable; a study without one is invisible to\n    -- the worklist and to every report join.\n    SELECT 'Imaging study with no service request', 'Order deleted or signal race',\n           s.facility_id, s.external_id, s.created_date\n    FROM study_facility s\n    WHERE s.service_request_id IS NULL\n\n    UNION ALL\n    -- Two studies sharing an accession number break DICOM linkage both ways.\n    SELECT 'Duplicate accession number', 'Sequence collision / manual edit',\n           s.facility_id, s.external_id, s.created_date\n    FROM study_facility s\n    WHERE s.accession_number IS NOT NULL\n      AND EXISTS (\n        SELECT 1 FROM care_radiology_imagingstudy o\n        WHERE o.deleted = FALSE\n          AND o.accession_number = s.accession_number\n          AND o.id <> s.id\n      )\n\n    UNION ALL\n    -- Marked COMPLETED by MPPS but nothing ever reached the PACS.\n    SELECT 'Completed with no images', 'DICOM Enabler / STOW-RS upload',\n           s.facility_id, s.external_id, s.created_date\n    FROM study_facility s\n    WHERE s.status = 'COMPLETED'\n      AND NOT EXISTS (\n        SELECT 1 FROM care_radiology_dicomstudy ds\n        WHERE ds.imaging_study_id = s.id AND ds.deleted = FALSE AND ds.is_archived = FALSE\n      )\n\n    UNION ALL\n    -- Images arrived against an order that was later revoked; usually a relink candidate.\n    SELECT 'Images on a cancelled order', 'Order cancelled after scan',\n           s.facility_id, s.external_id, s.created_date\n    FROM study_facility s\n    WHERE s.status = 'CANCELLED'\n      AND EXISTS (\n        SELECT 1 FROM care_radiology_dicomstudy ds\n        WHERE ds.imaging_study_id = s.id AND ds.deleted = FALSE AND ds.is_archived = FALSE\n      )\n\n    UNION ALL\n    -- Study metadata never synced back from DCM4CHEE: no series/instance counts,\n    -- so storage reporting under-counts and the viewer may show an empty study.\n    SELECT 'DICOM study never synced from PACS', 'DCM4CHEE metadata sync',\n           COALESCE(sr.facility_id, e.facility_id), ds.external_id, ds.created_date\n    FROM care_radiology_dicomstudy ds\n    CROSS JOIN bounds b\n    JOIN care_radiology_imagingstudy ist ON ist.id = ds.imaging_study_id AND ist.deleted = FALSE\n    LEFT JOIN emr_servicerequest sr      ON sr.id = ist.service_request_id AND sr.deleted = FALSE\n    JOIN emr_encounter e                 ON e.id = ist.encounter_id\n    WHERE ds.deleted = FALSE\n      AND ds.is_archived = FALSE\n      AND ds.number_of_instances IS NULL\n      AND ds.created_date >= b.period_start\n      AND ds.created_date <  b.period_end\n\n    UNION ALL\n    -- MPPS webhook accepted and logged, but no imaging study carries that status.\n    -- The log row is written before process_mpps_webhook() runs, so a 404 or a\n    -- tag-config failure leaves exactly this footprint.\n    SELECT 'MPPS event with no matching study', 'Webhook payload / facility mismatch',\n           NULL::BIGINT, w.external_id, w.created_date\n    FROM care_radiology_radiologywebhooklogs w\n    CROSS JOIN bounds b\n    WHERE w.deleted = FALSE\n      AND w.type = 'MPPS'\n      AND w.created_date >= b.period_start\n      AND w.created_date <  b.period_end\n      AND NOT EXISTS (\n        SELECT 1\n        FROM care_radiology_imagingstudy ist\n        JOIN emr_servicerequest sr ON sr.id = ist.service_request_id\n        WHERE ist.deleted = FALSE\n          AND sr.external_id::TEXT = LOWER(w.raw_data ->> 'service_request_id')\n      )\n  )\nSELECT\n  COALESCE(f.external_id::TEXT, '(unattributed)')  AS \"FACILITY_ID\",\n  COALESCE(f.name, '(unattributed)')               AS \"FACILITY_NAME\",\n  x.exception_type                                 AS \"EXCEPTION\",\n  x.likely_cause                                   AS \"LIKELY_CAUSE\",\n  COUNT(*)                                         AS \"COUNT\",\n  MIN(x.created_date)                              AS \"OLDEST\",\n  MAX(x.created_date)                              AS \"NEWEST\",\n  (ARRAY_AGG(x.ref ORDER BY x.created_date))[1]    AS \"OLDEST_RECORD_ID\"\nFROM exceptions x\nLEFT JOIN facility_facility f ON f.id = x.facility_id AND f.deleted = FALSE\nWHERE TRUE\n  [[AND COALESCE(f.external_id::TEXT, '') = {{facility_id}}]]\nGROUP BY f.external_id, f.name, x.exception_type, x.likely_cause\nORDER BY \"COUNT\" DESC, \"FACILITY_NAME\";\n",
+              "template-tags": [
+                {
+                  "id": "08dd19e2-7baf-c824-4a4a-72d001b59ed5",
+                  "type": "text",
+                  "name": "start_date",
+                  "display-name": "Start Date"
+                },
+                {
+                  "id": "163e66e9-0653-b84a-b43a-4b8d6cfc05df",
+                  "type": "text",
+                  "name": "end_date",
+                  "display-name": "End Date"
+                },
+                {
+                  "id": "1f917024-5983-75eb-5f41-31ad2cfc3e63",
+                  "type": "text",
+                  "name": "facility_id",
+                  "display-name": "Facility ID"
+                }
+              ]
+            }
+          ]
+        },
+        "parameters": [
+          {
+            "id": "08dd19e2-7baf-c824-4a4a-72d001b59ed5",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "start_date"
+              ]
+            ],
+            "name": "Start Date",
+            "slug": "start_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "163e66e9-0653-b84a-b43a-4b8d6cfc05df",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "end_date"
+              ]
+            ],
+            "name": "End Date",
+            "slug": "end_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "1f917024-5983-75eb-5f41-31ad2cfc3e63",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "facility_id"
+              ]
+            ],
+            "name": "Facility ID",
+            "slug": "facility_id",
+            "isMultiSelect": false
+          }
+        ],
+        "parameter_mappings": [],
+        "visualization_settings": {
+          "table.cell_column": "COUNT"
+        },
+        "result_metadata": [],
+        "dimension_mappings": null,
+        "dimensions": null,
+        "legacy_query": null,
+        "archived": false,
+        "archived_directly": false,
+        "collection_position": null,
+        "collection_preview": true,
+        "cache_ttl": null,
+        "cache_invalidated_at": null,
+        "enable_embedding": false,
+        "embedding_params": null,
+        "embedding_type": null,
+        "made_public_by_id": null,
+        "public_uuid": null,
+        "public_uuid_prefix": null,
+        "initially_published_at": null,
+        "moderation_reviews": [],
+        "download_perms": "full",
+        "can_write": true,
+        "creator_id": 1,
+        "created_at": "2026-11-26T00:00:00Z",
+        "updated_at": "2026-11-26T00:00:00Z",
+        "last_used_at": "2026-11-26T00:00:00Z",
+        "query_average_duration": null,
+        "view_count": 0
+      },
+      "dashboard_id": 101,
+      "dashboard_tab_id": 3,
+      "entity_id": "MADsQ6Q9ZGj8NxeGnuV42",
+      "row": 0,
+      "col": 12,
+      "size_x": 12,
+      "size_y": 7,
+      "parameter_mappings": [
+        {
+          "parameter_id": "cc60a661",
+          "card_id": 1007,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "start_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "5ec0a90d",
+          "card_id": 1007,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "end_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "2fdb0b7e",
+          "card_id": 1007,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "facility_id"
+            ]
+          ]
+        }
+      ],
+      "inline_parameters": [],
+      "visualization_settings": {},
+      "series": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "created_at": "2026-11-26T00:00:00Z",
+      "updated_at": "2026-11-26T00:00:00Z"
+    },
+    {
+      "id": 2008,
+      "card_id": 1008,
+      "card": {
+        "id": 1008,
+        "name": "Modality & DICOM Enabler Inventory",
+        "description": "Device roster, worklist eligibility and last sync. Volume columns are ROOM volume, not per-machine.",
+        "entity_id": "lUUy1hV3v4Pv84xirY7UY",
+        "type": "question",
+        "display": "table",
+        "query_type": "native",
+        "database_id": 2,
+        "collection_id": 4,
+        "table_id": null,
+        "source_card_id": null,
+        "dashboard_id": null,
+        "document_id": null,
+        "card_schema": 23,
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "dataset_query": {
+          "database": 2,
+          "lib/type": "mbql/query",
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "-- KPI 7: Modality & DICOM Enabler Inventory\n--\n-- Every registered imaging device, its worklist eligibility, and the volume of\n-- the room it stands in.\n--\n-- IMPORTANT: CARE stores no link from an imaging study to the device that\n-- acquired it. The worklist matches a service request to a device by room\n-- (ActivityDefinition.locations overlapping Device.current_location), so the\n-- volume columns below are ROOM volume, shared by every device in that room --\n-- not per-machine throughput. True per-machine counts need the Station Name in\n-- the PACS, which CARE does not copy into its own tables.\n--\n-- Parameters: {{start_date}}, {{end_date}} (IST dates, inclusive), {{facility_id}} (optional)\nWITH\n  bounds AS (\n    SELECT\n      ({{start_date}}::DATE)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata'   AS period_start,\n      ({{end_date}}::DATE + 1)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata' AS period_end\n  ),\n  -- Studies attributed to a room via the ordered procedure's location list.\n  room_volume AS (\n    SELECT\n      loc.id                                            AS location_id,\n      COUNT(DISTINCT ist.id)                            AS studies_in_period,\n      COUNT(DISTINCT ist.id) FILTER (\n        WHERE EXISTS (\n          SELECT 1 FROM care_radiology_dicomstudy ds\n          WHERE ds.imaging_study_id = ist.id AND ds.deleted = FALSE AND ds.is_archived = FALSE\n        )\n      )                                                 AS imaged_in_period\n    FROM care_radiology_imagingstudy ist\n    CROSS JOIN bounds b\n    JOIN emr_servicerequest sr      ON sr.id = ist.service_request_id AND sr.deleted = FALSE\n    JOIN emr_activitydefinition ad  ON ad.id = sr.activity_definition_id AND ad.deleted = FALSE\n    JOIN emr_facilitylocation loc   ON loc.id = ANY (ad.locations) AND loc.deleted = FALSE\n    WHERE ist.deleted = FALSE\n      AND ist.created_date >= b.period_start\n      AND ist.created_date <  b.period_end\n    GROUP BY loc.id\n  )\nSELECT\n  f.external_id                                                       AS \"FACILITY_ID\",\n  f.name                                                              AS \"FACILITY_NAME\",\n  d.external_id                                                       AS \"DEVICE_ID\",\n  d.care_type                                                         AS \"DEVICE_KIND\",\n  COALESCE(d.user_friendly_name, d.registered_name)                   AS \"DEVICE_NAME\",\n  d.manufacturer                                                      AS \"MANUFACTURER\",\n  d.model_number                                                      AS \"MODEL\",\n  d.metadata -> 'machine' ->> 'modality'                              AS \"MODALITY\",\n  d.metadata -> 'machine' ->> 'ae_title'                              AS \"AE_TITLE\",\n  d.metadata ->> 'ip'                                                 AS \"IP\",\n  d.status                                                            AS \"DEVICE_STATUS\",\n  d.availability_status                                               AS \"AVAILABILITY\",\n  COALESCE(d.metadata ->> 'assignment_status', 'unassigned')          AS \"ASSIGNMENT_STATUS\",\n  loc.name                                                            AS \"ROOM\",\n  enabler.registered_name                                             AS \"DICOM_ENABLER\",\n  -- Guarded cast: last_synced_at is free-form JSON, so anything that is not an\n  -- ISO timestamp is read as \"never synced\" rather than aborting the card.\n  CASE WHEN d.metadata ->> 'last_synced_at' ~ '^\\d{4}-\\d{2}-\\d{2}'\n       THEN (d.metadata ->> 'last_synced_at')::TIMESTAMPTZ END        AS \"LAST_SYNCED_AT\",\n  CASE WHEN d.metadata ->> 'last_synced_at' ~ '^\\d{4}-\\d{2}-\\d{2}'\n       THEN ROUND(EXTRACT(EPOCH FROM (NOW() - (d.metadata ->> 'last_synced_at')::TIMESTAMPTZ)) / 3600.0, 1)\n  END                                                                 AS \"HOURS_SINCE_SYNC\",\n  -- worklist_devices(): active + available + placed in a room.\n  CASE\n    WHEN d.care_type <> 'dicom' THEN 'n/a'\n    WHEN d.status = 'active' AND d.availability_status = 'available' AND d.current_location_id IS NOT NULL\n      THEN 'Yes'\n    ELSE 'No'\n  END                                                                 AS \"ON_WORKLIST\",\n  COALESCE(rv.studies_in_period, 0)                                   AS \"ROOM_STUDIES_IN_PERIOD\",\n  COALESCE(rv.imaged_in_period, 0)                                    AS \"ROOM_STUDIES_IMAGED\",\n  d.created_date                                                      AS \"REGISTERED_AT\"\nFROM emr_device d\nJOIN facility_facility f        ON f.id = d.facility_id AND f.deleted = FALSE\nLEFT JOIN emr_facilitylocation loc ON loc.id = d.current_location_id AND loc.deleted = FALSE\n-- A DICOM device points at its enabler by the enabler's external_id, held as text in metadata.\nLEFT JOIN emr_device enabler    ON enabler.external_id::TEXT = d.metadata ->> 'dicom_enabler'\n                                AND enabler.deleted = FALSE\nLEFT JOIN room_volume rv        ON rv.location_id = d.current_location_id\nWHERE d.deleted = FALSE\n  AND d.care_type IN ('dicom', 'dicom-enabler')\n  [[AND f.external_id::TEXT = {{facility_id}}]]\nORDER BY \"FACILITY_NAME\", \"DEVICE_KIND\", \"DEVICE_NAME\";\n",
+              "template-tags": [
+                {
+                  "id": "3b731751-0dea-2d0f-21da-673cd21c0db4",
+                  "type": "text",
+                  "name": "start_date",
+                  "display-name": "Start Date"
+                },
+                {
+                  "id": "3ba47b86-3fa5-6f5a-cf00-bfb922bb0a78",
+                  "type": "text",
+                  "name": "end_date",
+                  "display-name": "End Date"
+                },
+                {
+                  "id": "2ec568fd-034a-5f5e-61bc-9d40c0dc098c",
+                  "type": "text",
+                  "name": "facility_id",
+                  "display-name": "Facility ID"
+                }
+              ]
+            }
+          ]
+        },
+        "parameters": [
+          {
+            "id": "3b731751-0dea-2d0f-21da-673cd21c0db4",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "start_date"
+              ]
+            ],
+            "name": "Start Date",
+            "slug": "start_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "3ba47b86-3fa5-6f5a-cf00-bfb922bb0a78",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "end_date"
+              ]
+            ],
+            "name": "End Date",
+            "slug": "end_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "2ec568fd-034a-5f5e-61bc-9d40c0dc098c",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "facility_id"
+              ]
+            ],
+            "name": "Facility ID",
+            "slug": "facility_id",
+            "isMultiSelect": false
+          }
+        ],
+        "parameter_mappings": [],
+        "visualization_settings": {
+          "table.cell_column": "ROOM_STUDIES_IN_PERIOD",
+          "table.pivot_column": "ON_WORKLIST"
+        },
+        "result_metadata": [],
+        "dimension_mappings": null,
+        "dimensions": null,
+        "legacy_query": null,
+        "archived": false,
+        "archived_directly": false,
+        "collection_position": null,
+        "collection_preview": true,
+        "cache_ttl": null,
+        "cache_invalidated_at": null,
+        "enable_embedding": false,
+        "embedding_params": null,
+        "embedding_type": null,
+        "made_public_by_id": null,
+        "public_uuid": null,
+        "public_uuid_prefix": null,
+        "initially_published_at": null,
+        "moderation_reviews": [],
+        "download_perms": "full",
+        "can_write": true,
+        "creator_id": 1,
+        "created_at": "2026-11-26T00:00:00Z",
+        "updated_at": "2026-11-26T00:00:00Z",
+        "last_used_at": "2026-11-26T00:00:00Z",
+        "query_average_duration": null,
+        "view_count": 0
+      },
+      "dashboard_id": 101,
+      "dashboard_tab_id": 3,
+      "entity_id": "HNvKt8PtsYImDdnH2RWXn",
+      "row": 7,
+      "col": 0,
+      "size_x": 24,
+      "size_y": 9,
+      "parameter_mappings": [
+        {
+          "parameter_id": "cc60a661",
+          "card_id": 1008,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "start_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "5ec0a90d",
+          "card_id": 1008,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "end_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "2fdb0b7e",
+          "card_id": 1008,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "facility_id"
+            ]
+          ]
+        }
+      ],
+      "inline_parameters": [],
+      "visualization_settings": {},
+      "series": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "created_at": "2026-11-26T00:00:00Z",
+      "updated_at": "2026-11-26T00:00:00Z"
+    },
+    {
+      "id": 2009,
+      "card_id": 1009,
+      "card": {
+        "id": 1009,
+        "name": "PACS Storage Growth & Archival",
+        "description": "DICOM instances accumulating per facility per month, with archival and unsynced studies.",
+        "entity_id": "FLRH0kZeeRsS9eyb7RhVu",
+        "type": "question",
+        "display": "line",
+        "query_type": "native",
+        "database_id": 2,
+        "collection_id": 4,
+        "table_id": null,
+        "source_card_id": null,
+        "dashboard_id": null,
+        "document_id": null,
+        "card_schema": 23,
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "dataset_query": {
+          "database": 2,
+          "lib/type": "mbql/query",
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "-- KPI 8: PACS Storage Growth & Archival\n--\n-- How much imaging is accumulating, per facility per month, and how much of it\n-- has been archived out of the PACS.\n--\n-- NOTE: number_of_series / number_of_instances are written when CARE syncs a\n-- study's metadata from DCM4CHEE; a study never synced leaves them NULL, which\n-- is why UNSYNCED_STUDIES is on this card. Byte-level size is not kept in CARE\n-- at all -- instance counts are the proxy.\n--\n-- Parameters: {{start_date}}, {{end_date}} (IST dates, inclusive), {{facility_id}} (optional)\nWITH\n  bounds AS (\n    SELECT\n      ({{start_date}}::DATE)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata'   AS period_start,\n      ({{end_date}}::DATE + 1)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata' AS period_end\n  ),\n  studies AS (\n    SELECT\n      COALESCE(sr.facility_id, e.facility_id)                                    AS facility_id,\n      DATE_TRUNC('month', ds.created_date AT TIME ZONE 'Asia/Kolkata')::DATE     AS month,\n      COALESCE(rc.title, 'Uncategorised')                                        AS procedure_category,\n      ds.is_archived,\n      ds.number_of_series,\n      ds.number_of_instances,\n      ds.archived_datetime,\n      ds.id\n    FROM care_radiology_dicomstudy ds\n    CROSS JOIN bounds b\n    JOIN care_radiology_imagingstudy ist ON ist.id = ds.imaging_study_id AND ist.deleted = FALSE\n    LEFT JOIN emr_servicerequest sr      ON sr.id = ist.service_request_id AND sr.deleted = FALSE\n    JOIN emr_encounter e                 ON e.id = ist.encounter_id\n    LEFT JOIN emr_activitydefinition ad  ON ad.id = sr.activity_definition_id AND ad.deleted = FALSE\n    LEFT JOIN emr_resourcecategory rc    ON rc.id = ad.category_id AND rc.deleted = FALSE\n    WHERE ds.deleted = FALSE\n      AND ds.created_date >= b.period_start\n      AND ds.created_date <  b.period_end\n  )\nSELECT\n  f.external_id                                                         AS \"FACILITY_ID\",\n  f.name                                                                AS \"FACILITY_NAME\",\n  s.month                                                               AS \"MONTH\",\n  s.procedure_category                                                  AS \"PROCEDURE_CATEGORY\",\n  COUNT(*)                                                              AS \"DICOM_STUDIES\",\n  COUNT(*) FILTER (WHERE NOT s.is_archived)                             AS \"LIVE_STUDIES\",\n  COUNT(*) FILTER (WHERE s.is_archived)                                 AS \"ARCHIVED_STUDIES\",\n  COUNT(*) FILTER (WHERE s.number_of_instances IS NULL)                 AS \"UNSYNCED_STUDIES\",\n  COALESCE(SUM(s.number_of_series), 0)                                  AS \"SERIES\",\n  COALESCE(SUM(s.number_of_instances), 0)                               AS \"INSTANCES\",\n  COALESCE(SUM(s.number_of_instances) FILTER (WHERE NOT s.is_archived), 0)\n                                                                        AS \"LIVE_INSTANCES\",\n  ROUND(AVG(s.number_of_instances)::NUMERIC, 1)                         AS \"AVG_INSTANCES_PER_STUDY\",\n  MAX(s.number_of_instances)                                            AS \"MAX_INSTANCES_IN_A_STUDY\",\n  -- Running total within a facility+category series, so the card doubles as a\n  -- capacity-planning line chart. Partitioned by category because that is part\n  -- of the grain -- summing across categories here would depend on row order.\n  SUM(COALESCE(SUM(s.number_of_instances) FILTER (WHERE NOT s.is_archived), 0))\n    OVER (PARTITION BY f.external_id, s.procedure_category ORDER BY s.month)\n                                                                        AS \"CUMULATIVE_LIVE_INSTANCES\"\nFROM studies s\nJOIN facility_facility f ON f.id = s.facility_id AND f.deleted = FALSE\nWHERE TRUE\n  [[AND f.external_id::TEXT = {{facility_id}}]]\nGROUP BY f.external_id, f.name, s.month, s.procedure_category\nORDER BY \"MONTH\" DESC, \"INSTANCES\" DESC;\n",
+              "template-tags": [
+                {
+                  "id": "4e7d81d7-8db2-c839-50a7-e36eec0be890",
+                  "type": "text",
+                  "name": "start_date",
+                  "display-name": "Start Date"
+                },
+                {
+                  "id": "45c0c4b7-67c7-b638-48a2-8f5129d06e34",
+                  "type": "text",
+                  "name": "end_date",
+                  "display-name": "End Date"
+                },
+                {
+                  "id": "e0dbd66f-76f6-ffab-6d73-f393d8aeb1ad",
+                  "type": "text",
+                  "name": "facility_id",
+                  "display-name": "Facility ID"
+                }
+              ]
+            }
+          ]
+        },
+        "parameters": [
+          {
+            "id": "4e7d81d7-8db2-c839-50a7-e36eec0be890",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "start_date"
+              ]
+            ],
+            "name": "Start Date",
+            "slug": "start_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "45c0c4b7-67c7-b638-48a2-8f5129d06e34",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "end_date"
+              ]
+            ],
+            "name": "End Date",
+            "slug": "end_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "e0dbd66f-76f6-ffab-6d73-f393d8aeb1ad",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "facility_id"
+              ]
+            ],
+            "name": "Facility ID",
+            "slug": "facility_id",
+            "isMultiSelect": false
+          }
+        ],
+        "parameter_mappings": [],
+        "visualization_settings": {
+          "graph.dimensions": [
+            "MONTH",
+            "PROCEDURE_CATEGORY"
+          ],
+          "graph.metrics": [
+            "CUMULATIVE_LIVE_INSTANCES"
+          ],
+          "graph.x_axis.title_text": "Month",
+          "graph.y_axis.title_text": "Live DICOM instances"
+        },
+        "result_metadata": [],
+        "dimension_mappings": null,
+        "dimensions": null,
+        "legacy_query": null,
+        "archived": false,
+        "archived_directly": false,
+        "collection_position": null,
+        "collection_preview": true,
+        "cache_ttl": null,
+        "cache_invalidated_at": null,
+        "enable_embedding": false,
+        "embedding_params": null,
+        "embedding_type": null,
+        "made_public_by_id": null,
+        "public_uuid": null,
+        "public_uuid_prefix": null,
+        "initially_published_at": null,
+        "moderation_reviews": [],
+        "download_perms": "full",
+        "can_write": true,
+        "creator_id": 1,
+        "created_at": "2026-11-26T00:00:00Z",
+        "updated_at": "2026-11-26T00:00:00Z",
+        "last_used_at": "2026-11-26T00:00:00Z",
+        "query_average_duration": null,
+        "view_count": 0
+      },
+      "dashboard_id": 101,
+      "dashboard_tab_id": 3,
+      "entity_id": "y9UJHMsibNWCDZ0srKOvi",
+      "row": 16,
+      "col": 0,
+      "size_x": 12,
+      "size_y": 8,
+      "parameter_mappings": [
+        {
+          "parameter_id": "cc60a661",
+          "card_id": 1009,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "start_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "5ec0a90d",
+          "card_id": 1009,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "end_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "2fdb0b7e",
+          "card_id": 1009,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "facility_id"
+            ]
+          ]
+        }
+      ],
+      "inline_parameters": [],
+      "visualization_settings": {},
+      "series": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "created_at": "2026-11-26T00:00:00Z",
+      "updated_at": "2026-11-26T00:00:00Z"
+    },
+    {
+      "id": 2010,
+      "card_id": 1010,
+      "card": {
+        "id": 1010,
+        "name": "Reporting Productivity & Template Adoption",
+        "description": "Reports finalised per radiologist, order-to-report latency, and share of templated observations.",
+        "entity_id": "JDgGAhtnEn04ABpq9xBKy",
+        "type": "question",
+        "display": "table",
+        "query_type": "native",
+        "database_id": 2,
+        "collection_id": 4,
+        "table_id": null,
+        "source_card_id": null,
+        "dashboard_id": null,
+        "document_id": null,
+        "card_schema": 23,
+        "metabase_version": "v0.63.16.8 (f4eec95)",
+        "dataset_query": {
+          "database": 2,
+          "lib/type": "mbql/query",
+          "stages": [
+            {
+              "lib/type": "mbql.stage/native",
+              "native": "-- KPI 9: Reporting Productivity & Template Adoption\n--\n-- Who is finalising radiology reports, how fast, and how much of the reporting\n-- is coming from the plugin's observation templates rather than free text.\n--\n-- Attribution: emr_diagnosticreport.updated_by_id is the user who last wrote the\n-- report, which for a finalised report is the radiologist who signed it off.\n-- There is no separate \"finalised_by\" column, so a report edited after\n-- finalisation is attributed to whoever made that last edit.\n--\n-- Parameters: {{start_date}}, {{end_date}} (IST dates, inclusive), {{facility_id}} (optional)\nWITH\n  bounds AS (\n    SELECT\n      ({{start_date}}::DATE)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata'   AS period_start,\n      ({{end_date}}::DATE + 1)::TIMESTAMP AT TIME ZONE 'Asia/Kolkata' AS period_end\n  ),\n  -- Observation definitions that a facility has wrapped in a radiology template.\n  template_defs AS (\n    SELECT DISTINCT t.facility_id, t.observation_definition_id\n    FROM care_radiology_observationtemplate t\n    WHERE t.deleted = FALSE\n  ),\n  radiology_reports AS (\n    SELECT\n      dr.id,\n      -- DiagnosticReport.facility is nullable; fall back to the order's facility so a\n      -- report with no facility set is still counted somewhere.\n      COALESCE(dr.facility_id, sr.facility_id, e.facility_id) AS facility_id,\n      dr.service_request_id,\n      dr.status,\n      dr.created_date,\n      dr.modified_date,\n      dr.updated_by_id,\n      dr.conclusion,\n      ist.created_date                                   AS ordered_at,\n      COALESCE(rc.title, 'Uncategorised')                AS procedure_category\n    FROM emr_diagnosticreport dr\n    CROSS JOIN bounds b\n    -- An imaging study on the service request is what makes this a radiology report\n    -- rather than a lab one.\n    JOIN care_radiology_imagingstudy ist  ON ist.service_request_id = dr.service_request_id\n                                         AND ist.deleted = FALSE\n    JOIN emr_encounter e                  ON e.id = ist.encounter_id\n    LEFT JOIN emr_servicerequest sr       ON sr.id = dr.service_request_id AND sr.deleted = FALSE\n    LEFT JOIN emr_activitydefinition ad   ON ad.id = sr.activity_definition_id AND ad.deleted = FALSE\n    LEFT JOIN emr_resourcecategory rc     ON rc.id = ad.category_id AND rc.deleted = FALSE\n    WHERE dr.deleted = FALSE\n      AND dr.status = 'final'\n      AND dr.modified_date >= b.period_start\n      AND dr.modified_date <  b.period_end\n  ),\n  observations AS (\n    SELECT\n      o.diagnostic_report_id,\n      COUNT(*)                                                                AS observation_count,\n      COUNT(*) FILTER (WHERE td.observation_definition_id IS NOT NULL)        AS templated_observations\n    FROM emr_observation o\n    JOIN radiology_reports rr   ON rr.id = o.diagnostic_report_id\n    LEFT JOIN template_defs td  ON td.observation_definition_id = o.observation_definition_id\n                               AND td.facility_id = rr.facility_id\n    WHERE o.deleted = FALSE\n      AND o.status <> 'entered_in_error'\n    GROUP BY o.diagnostic_report_id\n  )\nSELECT\n  f.external_id                                                           AS \"FACILITY_ID\",\n  f.name                                                                  AS \"FACILITY_NAME\",\n  u.external_id                                                           AS \"REPORTER_ID\",\n  COALESCE(NULLIF(TRIM(CONCAT_WS(' ', u.first_name, u.last_name)), ''), u.username)\n                                                                          AS \"REPORTER\",\n  u.user_type                                                             AS \"REPORTER_TYPE\",\n  r.procedure_category                                                    AS \"PROCEDURE_CATEGORY\",\n  COUNT(*)                                                                AS \"REPORTS_FINALISED\",\n  COUNT(DISTINCT (r.modified_date AT TIME ZONE 'Asia/Kolkata')::DATE)     AS \"ACTIVE_DAYS\",\n  ROUND(\n    COUNT(*)::NUMERIC / NULLIF(COUNT(DISTINCT (r.modified_date AT TIME ZONE 'Asia/Kolkata')::DATE), 0),\n    1\n  )                                                                       AS \"REPORTS_PER_ACTIVE_DAY\",\n  ROUND(PERCENTILE_CONT(0.5) WITHIN GROUP (\n    ORDER BY EXTRACT(EPOCH FROM (r.modified_date - r.ordered_at)) / 3600.0\n  )::NUMERIC, 2)                                                          AS \"ORDER_TO_REPORT_P50_HRS\",\n  ROUND(PERCENTILE_CONT(0.9) WITHIN GROUP (\n    ORDER BY EXTRACT(EPOCH FROM (r.modified_date - r.ordered_at)) / 3600.0\n  )::NUMERIC, 2)                                                          AS \"ORDER_TO_REPORT_P90_HRS\",\n  COALESCE(SUM(ob.observation_count), 0)                                  AS \"OBSERVATIONS_RECORDED\",\n  COALESCE(SUM(ob.templated_observations), 0)                             AS \"TEMPLATED_OBSERVATIONS\",\n  ROUND(\n    100.0 * COALESCE(SUM(ob.templated_observations), 0)\n    / NULLIF(SUM(ob.observation_count), 0), 1\n  )                                                                       AS \"TEMPLATE_USE_PCT\",\n  COUNT(*) FILTER (WHERE COALESCE(TRIM(r.conclusion), '') <> '')          AS \"REPORTS_WITH_CONCLUSION\",\n  MAX(r.modified_date)                                                    AS \"LAST_REPORT_AT\"\nFROM radiology_reports r\nJOIN facility_facility f  ON f.id = r.facility_id AND f.deleted = FALSE\nLEFT JOIN users_user u    ON u.id = r.updated_by_id\nLEFT JOIN observations ob ON ob.diagnostic_report_id = r.id\nWHERE TRUE\n  [[AND f.external_id::TEXT = {{facility_id}}]]\nGROUP BY f.external_id, f.name, u.external_id, u.username, u.first_name, u.last_name, u.user_type, r.procedure_category\nORDER BY \"REPORTS_FINALISED\" DESC, \"FACILITY_NAME\";\n",
+              "template-tags": [
+                {
+                  "id": "b3fb520e-706e-29eb-03ff-482906b73e58",
+                  "type": "text",
+                  "name": "start_date",
+                  "display-name": "Start Date"
+                },
+                {
+                  "id": "6515588f-79ef-7c3c-ea3b-787e5b96f9ec",
+                  "type": "text",
+                  "name": "end_date",
+                  "display-name": "End Date"
+                },
+                {
+                  "id": "dc32699c-cfa6-408b-1696-cf97923da09d",
+                  "type": "text",
+                  "name": "facility_id",
+                  "display-name": "Facility ID"
+                }
+              ]
+            }
+          ]
+        },
+        "parameters": [
+          {
+            "id": "b3fb520e-706e-29eb-03ff-482906b73e58",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "start_date"
+              ]
+            ],
+            "name": "Start Date",
+            "slug": "start_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "6515588f-79ef-7c3c-ea3b-787e5b96f9ec",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "end_date"
+              ]
+            ],
+            "name": "End Date",
+            "slug": "end_date",
+            "isMultiSelect": false
+          },
+          {
+            "id": "dc32699c-cfa6-408b-1696-cf97923da09d",
+            "type": "string/=",
+            "target": [
+              "variable",
+              [
+                "template-tag",
+                "facility_id"
+              ]
+            ],
+            "name": "Facility ID",
+            "slug": "facility_id",
+            "isMultiSelect": false
+          }
+        ],
+        "parameter_mappings": [],
+        "visualization_settings": {
+          "table.cell_column": "REPORTS_FINALISED"
+        },
+        "result_metadata": [],
+        "dimension_mappings": null,
+        "dimensions": null,
+        "legacy_query": null,
+        "archived": false,
+        "archived_directly": false,
+        "collection_position": null,
+        "collection_preview": true,
+        "cache_ttl": null,
+        "cache_invalidated_at": null,
+        "enable_embedding": false,
+        "embedding_params": null,
+        "embedding_type": null,
+        "made_public_by_id": null,
+        "public_uuid": null,
+        "public_uuid_prefix": null,
+        "initially_published_at": null,
+        "moderation_reviews": [],
+        "download_perms": "full",
+        "can_write": true,
+        "creator_id": 1,
+        "created_at": "2026-11-26T00:00:00Z",
+        "updated_at": "2026-11-26T00:00:00Z",
+        "last_used_at": "2026-11-26T00:00:00Z",
+        "query_average_duration": null,
+        "view_count": 0
+      },
+      "dashboard_id": 101,
+      "dashboard_tab_id": 3,
+      "entity_id": "U2H4Q4TW0ZE5oX8ZH79jv",
+      "row": 16,
+      "col": 12,
+      "size_x": 12,
+      "size_y": 8,
+      "parameter_mappings": [
+        {
+          "parameter_id": "cc60a661",
+          "card_id": 1010,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "start_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "5ec0a90d",
+          "card_id": 1010,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "end_date"
+            ]
+          ]
+        },
+        {
+          "parameter_id": "2fdb0b7e",
+          "card_id": 1010,
+          "target": [
+            "variable",
+            [
+              "template-tag",
+              "facility_id"
+            ]
+          ]
+        }
+      ],
+      "inline_parameters": [],
+      "visualization_settings": {},
+      "series": [],
+      "action_id": null,
+      "collection_authority_level": null,
+      "created_at": "2026-11-26T00:00:00Z",
+      "updated_at": "2026-11-26T00:00:00Z"
+    }
+  ]
+}
